@@ -1,0 +1,12 @@
+node_modules/
+unpackage/
+dist/
+.gitlab-ci.yml
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+yarn.lock
