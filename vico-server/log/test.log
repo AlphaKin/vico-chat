@@ -1,0 +1,6 @@
+2021-01-06 00:34:57 [main] WARN  ImDispatcherHandler:46 - Class not found [package org.vico.im.handler.LogoutProcessor]
+2021-01-06 00:34:57 [main] WARN  ImDispatcherHandler:46 - Class not found [package org.vico.im.handler.LogoutProcessor]
+2021-01-06 00:34:57 [main] WARN  ImDispatcherHandler:46 - Class not found [package org.vico.im.handler.KeepaliveProcessor]
+2021-01-06 00:34:57 [main] WARN  ImDispatcherHandler:46 - Class not found [package org.vico.im.handler.KeepaliveProcessor]
+2021-01-06 00:34:57 [main] WARN  ImDispatcherHandler:46 - Class not found [package org.vico.im.handler.UnrecognizedProcessor]
+2021-01-06 00:34:57 [main] INFO  ImServer:66 - SERVER RUNNING - 17ms
