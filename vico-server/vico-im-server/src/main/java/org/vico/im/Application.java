@@ -1,13 +1,13 @@
 package org.vico.im;
-import lombok.val;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.vico.im.core.ImServer;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
-
+@SpringBootApplication
+@EnableEurekaClient
 public class Application {
-
     public static void main(String[] args) {
-        val context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        ((ImServer) context.getBean("ImServer")).start(32952);
+        SpringApplication.run(Application.class, args);
     }
 }

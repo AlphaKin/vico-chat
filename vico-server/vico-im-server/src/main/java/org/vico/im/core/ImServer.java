@@ -15,6 +15,7 @@ import io.netty.handler.timeout.IdleStateHandler;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.vico.im.codec.PacketHeadDecoder;
 import org.vico.im.handler.HeartBeatHandler;
@@ -24,13 +25,19 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component(value = "ImServer")
-public class ImServer {
+public class ImServer implements CommandLineRunner {
 
     @Resource
     PacketHeadDecoder packetHeadDecoder;
 
     @Resource
     HeartBeatHandler heartBeatHandler;
+
+
+    @Override
+    public void run(String... args) throws Exception {
+        start(32952);
+    }
 
     public void start(int port) {
         val server = new ServerBootstrap();

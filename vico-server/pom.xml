@@ -10,6 +10,8 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>vico-im-server</module>
+        <module>vico-eureka-server</module>
+        <module>vico-restful-server</module>
     </modules>
 
     <properties>
@@ -22,11 +24,13 @@
         <lombok.version>1.18.16</lombok.version>
         <protobuf.version>3.14.0</protobuf.version>
         <spring.version>5.3.1</spring.version>
+        <springboot.version>2.3.7.RELEASE</springboot.version>
+        <springcloud.version>Hoxton.SR8</springcloud.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <!-- junit -->
+            <!-- 测试 -->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
@@ -34,25 +38,41 @@
                 <scope>test</scope>
             </dependency>
 
-            <!-- log4j -->
+            <!-- 日志 -->
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-slf4j-impl</artifactId>
                 <version>2.12.1</version>
             </dependency>
-
-            <!-- slf4j -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>1.7.30</version>
             </dependency>
 
-            <!-- spring -->
+
+            <!-- spring boot -->
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${spring.version}</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${springboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+
+
+            <!--  spring cloud  -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${springcloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
             <!--  netty -->
@@ -75,6 +95,23 @@
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java</artifactId>
                 <version>${protobuf.version}</version>
+            </dependency>
+
+            <!-- 数据库 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>8.0.19</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>1.1.21</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>2.1.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
