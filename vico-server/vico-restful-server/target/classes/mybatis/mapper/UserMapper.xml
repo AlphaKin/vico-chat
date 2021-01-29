@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.vico.restful.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="org.vico.restful.pojo.User">
+        <!--@mbg.generated-->
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+        <result column="user_nickname" jdbcType="VARCHAR" property="userNickName" />
+        <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+        <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+        <result column="user_sex" jdbcType="INTEGER" property="userSex" />
+        <result column="user_age" jdbcType="INTEGER" property="userAge" />
+        <result column="user_intro" jdbcType="VARCHAR" property="userIntro" />
+    </resultMap>
+
+    <select id="getFriendList" parameterType="Long" resultType="org.vico.restful.pojo.User">
+        select * from user
+        where
+              id in ( select user_b_id as friendId from friend_relation where user_a_id = #{param1} )
+           or
+              id in ( select user_a_id as friendId from friend_relation where user_b_id = #{param1} )
+    </select>
+</mapper>

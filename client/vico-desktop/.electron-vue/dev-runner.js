@@ -64,6 +64,21 @@ function startRenderer () {
       {
         contentBase: path.join(__dirname, '../'),
         quiet: true,
+        proxy: {
+          '/url': {
+            // 请求的目标服务器地址
+            target: '127.0.0.1:9001',
+            // 设置允许跨域
+            changeOrigin: true,
+            // 重写路径
+            pathRewrite: {
+              '^/url': ''
+            },
+            headers: {
+              referer: ''
+            }
+          }
+        },
         before (app, ctx) {
           app.use(hotMiddleware)
           ctx.middleware.waitUntilValid(() => {

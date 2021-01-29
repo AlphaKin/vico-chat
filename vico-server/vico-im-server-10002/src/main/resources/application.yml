@@ -1,0 +1,21 @@
+server:
+  host: 127.0.0.1
+  port: 10002
+
+spring:
+  application:
+    name: vico-im-server-10002
+  redis:
+    max-redirects: 3
+    database: 1
+    port: 6379
+    host: 47.93.97.143
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka/
+
+auth:
+  server-meta:
+    prefix: IM_SERVER_META#

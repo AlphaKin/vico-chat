@@ -1,18 +1,18 @@
 <template>
     <div id="signIn">
         <div class="header">
-            </i>Welcome To Vico<br>
+            Welcome To Vico<br>
             登陆
         </div>
         <div class="body">
             <el-form v-loading="isLoading">
                 <tr class="line">
                     <td class="icon"><i class="fa fa-user"></i></td>
-                    <td class="content"><input type="text" placeholder="用户名或手机号"/></td>
+                    <td class="content"><input v-model="loginInfo.userName" type="text" placeholder="用户名或手机号"/></td>
                 </tr>
                 <tr class="line">
                     <td class="icon"><i class="fa fa-lock"></i></td>
-                    <td class="content"><input type="password" placeholder="密码"/></td>
+                    <td class="content"><input v-model="loginInfo.userPassword" type="password" placeholder="密码"/></td>
                 </tr>
                 <tr class="line-oth">
                     <td>
@@ -25,6 +25,7 @@
                         </el-switch>
                     </td>
                 </tr>
+
             </el-form><br>
             <el-button type="primary" round @click="login()">&emsp;登陆&emsp;</el-button>
         </div>
@@ -39,27 +40,51 @@ export default {
     data(){
         return{
             isLoading: false,
-            autoLogin: false
+            autoLogin: false,
+            loginInfo: {
+                userName: 'ss3295286',
+                userPassword: '3295286'
+            }
         }
     },
     methods:{
         login(){
             this.isLoading = true;
-            this.$IM.Connect.login((event) => {
-                let response = event.data.getCommonres();
-                if(response.getCode() === 200){
-                    this.toMain();
-                }else{
-                    //等着改掉
-                    response.getMessage = '未知原因';
-                    //
-                    this.$notify.error({
-                        title: '登录失败',
-                        message: response.getMessage
-                    });
-                    this.isLoading = false;
-                }
-            });
+            this.toMain();
+            // this.$req.post('/auth/signIn/simple', this.loginInfo).apply()
+            //     .then((data) => {
+            //         this.isLoading = false;
+            //         this.$store.commit('updateuserName', data.user.userName);
+            //         this.$store.commit('updateToken', data.token);
+            //         console.log('准备连接IM服务：' + data.host + ':' + data.port);
+            //         //连接IM服务
+            //         this.$IM.connect({host: data.host, port: data.port}, (event) => {
+            //             let response = event.data.getCommonres();
+            //             if(response.getCode() === 200){
+            //                 this.toMain();
+            //                 this.$notify({
+            //                     type: 'info',
+            //                     title: '登录成功',
+            //                     message: '连接到IM服务'
+            //                 });
+            //             }else{
+            //                 //等着改掉
+            //                 response.getMessage = '未知原因';
+            //                 //
+            //                 this.$notify.error({
+            //                     title: '连接失败',
+            //                     message: response.getMessage
+            //                 }); 
+            
+            //                 this.isLoading = false;
+            //             }
+            //         });
+            //     })
+            //     .catch((data) => {
+            //         console.log(data);
+            //         this.isLoading = false;
+            //         this.$notify({ type:'warning', title: '登陆失败', message: data.msg })
+            //     });
         },
         toMain(){
             this.isLoading = false;
@@ -75,6 +100,7 @@ export default {
 </script>
 <style lang="scss" scoped>
     #signIn{
+    
         width: 100%;
         height: 100%;
         overflow: hidden;

@@ -1,15 +1,14 @@
 <template>
     <div id="left-bar">
-        <div class="head"  @click="logout()">
+        <div class="head">
             <el-avatar v-show="isAvailable" :size="40" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2280478089,3772795422&fm=26&gp=0.jpg"></el-avatar>
             <el-avatar v-show="!isAvailable" :size="40" :src="require('../../assets/pic/nonet.png')"></el-avatar>
         </div>
-        <router-link class="option-item-wrapper" :to="item.aim" v-for="(item, index) in items" :key="index" >
+        <div class="option-item-wrapper" v-for="(item, index) in items" :key="index">
             <div class="option-item" :class="{'option-item-active' : item.isActive}" @click="changeItem(index)">
                 <i class="fa" :class="item.style"></i>
-                <!-- <label style="font-size:4px; display:block;">{{item.type}}</label> -->
             </div>
-        </router-link>
+        </div>
         <div class="other" @click="changeNavDisplay" :class="{'other-active' : isShowNav}">
             <i class="fa fa-navicon"></i>
         </div>
@@ -17,10 +16,10 @@
             <div class="nav-item">
                 <i class="fa fa-user-circle"></i> &nbsp;个人中心
             </div>
-            <div class="nav-item" @click="changeView('notify-center')">
+            <div class="nav-item" @click="changeRightPlane('notify-center')">
                 <i class="fa fa-bell"></i> &nbsp;消息盒子
             </div>
-            <div class="nav-item" @click="changeView('search-user')">
+            <div class="nav-item" @click="changeRightPlane('search-user')">
                 <i class="fa fa fa-plus" ></i> &nbsp;添加好友
             </div>
             <div class="nav-item">
@@ -35,14 +34,19 @@
 <script>
     export default {
         props:{
-            toShow:{
+            showRightPlane:{
+                type: Function,
+                default: null
+            },
+            showListPlane:{
                 type: Function,
                 default: null
             }
         },
         computed: {
             isAvailable: function() {
-                return this.$store.state.common.netAvailable;
+                return true;
+                // return this.$store.state.common.netAvailable;
             }
         },
         data(){
@@ -53,19 +57,13 @@
                     {
                         type: 'CHAT',
                         style: 'fa-comments-o',
-                        aim: '/main/last-contacts',
+                        aim: 'last-list',
                         isActive: true
                     },
                     {
                         type: 'FRIEND',
                         style: 'fa-users',
-                        aim: '/main/all-contacts',
-                        isActive: false
-                    },
-                    {
-                        type: 'REMOTE',
-                        style: 'fa-mixcloud',
-                        aim: '/main/last-contacts',
+                        aim: 'all-list',
                         isActive: false
                     }
                 ]
@@ -75,25 +73,37 @@
             changeItem(idx){
                 this.items[this.nowItemIdx].isActive = false;
                 this.items[(this.nowItemIdx = idx)].isActive = true;
+                this.showListPlane && this.showListPlane(this.items[this.nowItemIdx].aim);
+                this.isShowNav = false;
             },
             changeNavDisplay(){
                 this.isShowNav = !this.isShowNav;
             },
-            changeView(aim){
-                this.toShow && this.toShow(aim);
+            changeRightPlane(aim){
+                this.showRightPlane && this.showRightPlane(aim);
                 this.isShowNav = false;
             },
 
             logout(){
-                this.$message('logout');
+                this.$IM.disconnect();
                 const { remote } = require('electron');
                 let window = remote.getCurrentWindow();
-                window.setSize(600, 420);
-                // window.setPosition(window.getPosition()[0] + 150, window.getPosition()[1] + 90);
-                this.$router.push({ path:'/'})
+                this.$req.post('/auth/logout', {userId: this.$store.state.userInfo.userId}).token().apply()
+                    .then((data) => {
+                        // window.setPosition(window.getPosition()[0] + 150, window.getPosition()[1] + 90);
+                        window.setSize(660, 480);
+                        this.$router.push({ path:'/'})
+                    })
+                    .catch((data) => {
+                        window.setSize(660, 480);
+                        this.$notify.error({
+                            title: '请求错误',
+                            message: data.msg
+                        });
+                    });
             }
         }
-    }    
+    }
 </script>
 <style lang="scss" scoped>
     $item-height: 50px;

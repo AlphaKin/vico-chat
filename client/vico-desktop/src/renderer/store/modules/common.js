@@ -1,9 +1,9 @@
 const state = {
-    netAvailable: false
+    netAvailable: true
 }
 
 const getters = {
-    isIndex: state => state.netAvailable
+    netAvailable: state => state.netAvailable
 }
 
 const mutations = {

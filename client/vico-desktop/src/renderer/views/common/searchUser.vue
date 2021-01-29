@@ -12,7 +12,7 @@
         <div class="body">
             <div class="result-wrapper">
                 <loading-cover v-show="isLoading"></loading-cover>
-                <div class="item-wrapper" v-for="(item, index) in data">
+                <div class="item-wrapper" v-for="(item, index) in data" :key="index">
                     <el-avatar :size="40" :src="item.picURL"></el-avatar>
                     <h5>
                         <i v-show="item.sex == 0" class="fa fa-venus" style="color: hotpink; font-size: 10px;"></i>

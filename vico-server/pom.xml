@@ -9,8 +9,12 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>vico-im-server</module>
+        <module>vico-im-server-10001</module>
+        <module>vico-im-server-10002</module>
         <module>vico-eureka-server</module>
+        <module>vico-auth-server</module>
+        <module>vico-gateway</module>
+        <module>vico-common</module>
         <module>vico-restful-server</module>
     </modules>
 
@@ -50,6 +54,18 @@
                 <version>1.7.30</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.mindrot</groupId>
+                <artifactId>jbcrypt</artifactId>
+                <version>0.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>3.12.0</version>
+            </dependency>
+
 
             <!-- spring boot -->
             <dependency>
@@ -64,7 +80,6 @@
                 <artifactId>spring-boot-devtools</artifactId>
                 <version>${springboot.version}</version>
             </dependency>
-
 
             <!--  spring cloud  -->
             <dependency>
@@ -97,6 +112,13 @@
                 <version>${protobuf.version}</version>
             </dependency>
 
+            <!-- json -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.73</version>
+            </dependency>
+
             <!-- 数据库 -->
             <dependency>
                 <groupId>mysql</groupId>
@@ -109,9 +131,9 @@
                 <version>1.1.21</version>
             </dependency>
             <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>2.1.1</version>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>3.3.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -2,48 +2,56 @@
     <div id="wrapper">
         <el-container class="container">
             <div class="area-left">
-                <left-bar :toShow="toShow"></left-bar>
+                <left-bar :showListPlane="showListPlane"></left-bar>
             </div>
             <div class="area-list">
-                <router-view/>
+                <last-list v-show="listPlaneViewStatus === 'last-list'"></last-list>
+                <all-list v-show="listPlaneViewStatus === 'all-list'"></all-list>
             </div>
             <div class="area-chat">
-                <empty-view v-show="viewStatus === 'empty-view'"></empty-view>
-                <chat-view v-show="viewStatus === 'chat-view'"></chat-view>
-                <search-user v-show="viewStatus === 'search-user'"></search-user>
-                <notify-center v-show="viewStatus === 'notify-center'"></notify-center>
+                <empty-view v-show="rightPlaneViewStatus === 'empty-view'"></empty-view>
+                <chat-view v-show="rightPlaneViewStatus === 'chat-view'"></chat-view>
+                <search-user v-show="rightPlaneViewStatus === 'search-user'"></search-user>
+                <notify-center v-show="rightPlaneViewStatus === 'notify-center'"></notify-center>
             </div>
         </el-container>
+        <div class="user-info-wrapper">
+            <user-info-plane></user-info-plane>
+        </div>
     </div>
 </template>
 <script>
-import leftBar from '../common/leftBar'
-import lastContactsListWrapper from '../list/lastContactsListWrapper'
-import allContactsListWrapper from '../list/allContactsListWrapper'
-import chatView from '../common/chatView'
-import emptyView from '../common/emptyView'
-import searchUser from '../common/searchUser'
+import leftBar from '../common/leftBar';
+import lastContactsList from '../list/lastContactsListWrapper';
+import allContactsList from '../list/allContactsListWrapper';
+import chatView from '../common/chatView';
+import emptyView from '../common/emptyView';
+import searchUser from '../common/searchUser';
 import notifyCenter from "../common/notifyCenter";
+import userInfoPlane from '../common/userInfoPlane';
 export default {
     components:{
         'left-bar': leftBar,
-        'last-list-wrapper': lastContactsListWrapper,
-        'all-list-wrapper': allContactsListWrapper,
+        'last-list': lastContactsList,
+        'all-list': allContactsList,
         'empty-view': emptyView,
         'chat-view': chatView,
         'search-user': searchUser,
-        'notify-center': notifyCenter
+        'notify-center': notifyCenter,
+        'user-info-plane': userInfoPlane
     },
     data(){
         return{
-            //search-user
-            //chat-view
-            viewStatus: 'empty-view'
+            listPlaneViewStatus: 'last-list',
+            rightPlaneViewStatus: 'empty-view'
         }
     },
     methods:{
-        toShow(aim){
-            this.viewStatus = aim;
+        showRightPlane(aim){
+            this.rightPlaneViewStatus = aim;
+        },
+        showListPlane(aim){
+            this.listPlaneViewStatus = aim;
         }
     }
 }
@@ -82,6 +90,15 @@ export default {
                 height: 100%;
                 // background: limegreen;
             }
+        }
+
+        .user-info-wrapper{
+            position: fixed;
+            width: 300px;
+            height: 400px;
+
+            top: calc(50% - 200px);
+            left: calc(50% - 150px);
         }
     }
     

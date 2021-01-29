@@ -1,7 +1,6 @@
 const ImMessagePb = require('../proto/ProtoMessage_pb');
-
 class ImNet{
-    constructor() {
+    constructor(store) {
         this._eventMap = {
             open: new Set(),
             error: new Set(),
@@ -9,55 +8,79 @@ class ImNet{
             connect: new Set(),
             message: new Set()
         };
+        this._store = store;
     }
 
     init(conf) {
-        if(conf.retryDelay == undefined || conf.retryDelay <= 0){
+        if(!conf.retryDelay || conf.retryDelay <= 0){
             conf.retryDelay = 2000;
         }
         this._conf = conf;
         this._remote = 'ws://' + conf.host + ':' + conf.port;
         this._timer = setInterval(()=>{
-            this.connect((event = undefined) => { console.log('连接到服务器'); });
+            this.connect(null, (event) => { console.log('连接到服务器'); });
         }, conf.retryDelay);
 
-        this.registry('error', (event = undefined) => { console.log('连接错误'); });
-        this.registry('close', (event = undefined) => { console.log('连接关闭'); });
+        this.registry('error', (event) => { console.log('连接错误'); });
+        this.registry('close', (event) => { console.log('连接关闭'); });
     }
 
-    
     //注册回调函数
-    registry(type, func){
-        if(this._eventMap[type] === undefined) {
+    registry(type, func, isTransient){
+        console.log(type);
+        if(!this._eventMap[type]) {
             throw new Error('error bind type');
         }
-        if(func !== undefined) {
-            this._eventMap[type].add(func);
+        if(func) {
+            this._eventMap[type].add({isTransient: isTransient ? isTransient : false, valid: true, func: func });
             console.log('注册' + type);
         }
     }
 
-    connect(cb) {
-        if(this._webSocket == undefined || (this._webSocket != undefined && this._webSocket.readyState == WebSocket.CLOSED)){
-            if(cb !== undefined){
-                this.registry('open', cb)
-            }
-            if(this._webSocket != undefined){
+    connect(conf, cb) {
+        console.log("[ CONNECT ]");
+        conf && this.init(conf);
+        if(!this._webSocket || (this._webSocket && this._webSocket.readyState == WebSocket.CLOSED)){
+            // 初始化websocket
+            if(this._webSocket){
                 console.log('连接服务器...' + this._webSocket.readyState);
             }
             this._webSocket = new WebSocket(this._remote);
             this._webSocket.binaryType = 'arraybuffer';
     
+
             // 绑定执行事件列表
-            let execEvent = (type, event) => {
-                this._eventMap[type].forEach((func) => {
-                    func(event);
+            const execEvent = (type, event) => {
+                this._eventMap[type].forEach((item) => {
+                    if(item.valid){
+                        item.func(event);
+                    }
+                    if(item.isTransient) item.valid = false;
                 });
+                this._eventMap[type] = new Set(Array.from(this._eventMap[type]).filter(item => {
+                    return item.valid;
+                }));
             };
             this._webSocket.onopen = () => { execEvent('open', {}) };
             this._webSocket.onerror = () => { execEvent('error', {}) };
             this._webSocket.onclose = () => { execEvent('close', {}) };
     
+
+            // 连接请求
+            cb && this.registry('connect', cb, true);
+            this.registry('open', () => {
+                // 构造连接消息
+                let aggregatedMsg = new ImMessagePb.AggregatedMessage();
+                let connecttMsg = new ImMessagePb.ConnectRequest();
+                let userId = this._store.state.userInfo.userId;
+                connecttMsg.setUserid(userId);
+                connecttMsg.setTime(Date.parse(new Date()));
+                aggregatedMsg.setCommandtype(ImMessagePb.CommandType.CONNECT_REQUEST);
+                aggregatedMsg.setConnectmsg(connecttMsg);
+                this.sendProtoData(aggregatedMsg);
+            }, true);
+
+
             // 分发读取的数据
             this._webSocket.addEventListener('message', (event) => {
                 if(event.data instanceof ArrayBuffer){
@@ -70,7 +93,11 @@ class ImNet{
                         case ImMessagePb.CommandType.CONNECT_RESPONSE:
                             execEvent('connect', { data: data });
                             break;
+                        default:
+                            console.log("发来未知消息");
                     }
+                }else{
+                    console.log(event);
                 }
             });
         }else{
@@ -80,7 +107,11 @@ class ImNet{
 
     getState() { return this._webSocket.readyState; }
     getSocket() { return this._webSocket; }
-    disconnect() { this._webSocket.close(); }
+    disconnect() {
+        clearInterval(this._timer);
+        this._webSocket.close();
+        this._webSocket = null;
+    }
 
     // 发送数据
     sendProtoData(msg){
@@ -89,9 +120,7 @@ class ImNet{
         }
         let packet = new ImDataPacket(msg.serializeBinary()).build();
         console.log('SEND LENGTH: ' + packet.byteLength);
-        if(this._webSocket !== undefined){
-            this._webSocket.send(packet);
-        }
+        this._webSocket && this._webSocket.send(packet);
     }
 }
 

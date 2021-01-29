@@ -1,0 +1,35 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: vico-gateway-server
+  cloud:
+    gateway:
+      enabled: true
+#      discovery:
+#        locator:
+#          enabled: true # 网关服务发现
+#          lower-case-service-id: true # 将服务名称改为小写
+      routes:
+        - id: vico-auth-server
+          uri: lb://vico-auth-server
+          predicates:
+            - Path=/auth/**
+          filters:
+            - RewritePath=/auth/(?<segment>.*), /$\{segment}
+
+        - id: vico-restful-server
+          uri: lb://vico-restful-server
+          predicates:
+            - Path=/restful/**
+          filters:
+            - RewritePath=/restful/(?<segment>.*), /$\{segment}
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka/
+
+auth:
+  server-meta:
+    prefix: IM_SERVER_META#

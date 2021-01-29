@@ -10,9 +10,8 @@
                 >{{isSignIn ? '已有帐号' : '创建帐号'}}</el-button>
         </div>
         <div class="body">
-            <sign-in v-show="isAvailable && isSignIn"></sign-in>
-            <sign-up v-show="isAvailable && !isSignIn"></sign-up>
-            <net-error v-show="!isAvailable"></net-error>
+            <sign-in v-show="isSignIn"></sign-in>
+            <sign-up v-show="!isSignIn"></sign-up>
         </div>
     </div>
 </template>
@@ -20,30 +19,23 @@
 <script>
 import signIn from "./sign/signIn";
 import signUp from "./sign/signUp";
-import netError from "./sign/netError";
 export default {
     components:{
         'sign-in': signIn,
-        'sign-up': signUp,
-        'net-error': netError
+        'sign-up': signUp
     },
     data(){
         return {
             isSignIn: true
         }
     },
-    computed: {
-        isAvailable: function() {
-            return this.$store.state.common.netAvailable;
-        }
-    },
     mounted(){
-        console.log(this.$store.state.common.netAvailable == true);
-        if(!this.isAvailable){
-            this.$IM.registry('close', () => { this.$store.commit('updateNetAvailable', false); });
-            this.$IM.registry('open', () => { this.$store.commit('updateNetAvailable', true); })
-            this.$IM.config({ host:'127.0.0.1', port:32952 }, ['Connect', 'Message']);
-        }
+        // console.log(this.$store.state.common.netAvailable == true);
+        // if(!this.isAvailable){
+        //     this.$IM.registry('close', () => { this.$store.commit('updateNetAvailable', false); });
+        //     this.$IM.registry('open', () => { this.$store.commit('updateNetAvailable', true); })
+        //     this.$IM.config({ host:'127.0.0.1', port:10002 }, ['Connect', 'Message']);
+        // }
     },
     methods:{
         changeStatus(){

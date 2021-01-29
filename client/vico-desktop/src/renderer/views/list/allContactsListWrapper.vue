@@ -1,7 +1,7 @@
 <template>
     <div id="all-list-wapper">
         <div class="header">
-            <br><div class="title">All Contacts</div>
+            <br><div class="title" @click="getFriendList()">All Contacts</div>
             <div class="search-wrapper">
                 <search-bar></search-bar>
             </div>
@@ -27,15 +27,15 @@ export default {
         toSortedList(){
             this.sortedFriendList = this.friendList;
             this.sortedFriendList.sort((a, b) => {
-                return chinesePY.Pinyin.GetJP(a.nickName[0]).localeCompare(chinesePY.Pinyin.GetJP(b.nickName[0]));
+                return chinesePY.Pinyin.GetJP(a.userNickName[0]).localeCompare(chinesePY.Pinyin.GetJP(b.userNickName[0]));
             });
             let renderList = [];
             this.sortedFriendList.forEach((value, index) => {
-                let nowCh = chinesePY.Pinyin.GetJP(value.nickName[0]);
+                let nowCh = chinesePY.Pinyin.GetJP(value.userNickName[0]);
                 if(index === 0){
                     renderList.push({ isTip : true, ch: nowCh});
                 }else{
-                    if(chinesePY.Pinyin.GetJP(this.sortedFriendList[index-1].nickName[0]) !== nowCh){
+                    if(chinesePY.Pinyin.GetJP(this.sortedFriendList[index-1].userNickName[0]) !== nowCh){
                         renderList.push({ isTip : true , ch: nowCh});
                     }
                 }
@@ -48,28 +48,34 @@ export default {
         return {
             sortedFriendList: [],
             friendList:[
-                {
-                    nickName: '小明',
-                    headURL: '',
-                    lastTime: '12:00AM',
-                    msg: '知道了',
-                    isActive: false
-                },
-                {
-                    nickName: '李薇柯',
-                    headURL: '',
-                    lastTime: '11:30AM',
-                    msg: '好的',
-                    isActive: true
-                },
-                {
-                    nickName: '金子裕',
-                    headURL: '',
-                    lastTime: '11:30AM',
-                    msg: '[表情]',
-                    isActive: false
-                }
+                // {
+                //     userName: '',
+                //     nickName: '',
+                //     sex: 0,
+                //     intro: '',
+                //     phone: '',
+                //     email: '',
+                //     age: 10
+                // },
             ]
+        }
+    },
+    mounted() {
+    },
+    methods: {
+        getFriendList(){
+            this.$req.post('/restful/friendList', {userId: 2}).apply()
+                .then((data) => {
+                    this.friendList = data.users.filter((item) => {
+                        item.lastTime = '11:30 AM'
+                        item.msg = 'test'
+                        item.isActive = false
+                        return true
+                    })
+                })
+                .catch((data) => {
+                    this.$notify({ type:'warning', title: '错误', message: '获取好友信息失败' })
+                })
         }
     }
 }

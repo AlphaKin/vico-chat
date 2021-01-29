@@ -7,7 +7,7 @@
         </div>
         <div class="body-wrapper">
             <div class="title">
-                <div class="nick">{{data.nickName}}</div>
+                <div class="nick">{{data.userNickName}}</div>
                 <div v-show="data.bubbleMode" class="time">{{data.lastTime}}</div>
             </div>
             <div class="body">

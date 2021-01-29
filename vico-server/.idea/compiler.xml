@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="vico-restful-server" />
+        <module name="vico-auth-server" />
+        <module name="vico-common" />
+        <module name="vico-eureka-server" />
+        <module name="vico-gateway" />
+        <module name="vico-im-server-10002" />
+        <module name="vico-im-server-10001" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
