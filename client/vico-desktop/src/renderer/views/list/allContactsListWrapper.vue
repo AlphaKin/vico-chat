@@ -1,24 +1,30 @@
 <template>
     <div id="all-list-wapper">
         <div class="header">
-            <br><div class="title" @click="getFriendList()">All Contacts</div>
+            <br><div class="title">All Contacts</div>
             <div class="search-wrapper">
                 <search-bar></search-bar>
             </div>
         </div>
         <div class="body">
-            <div v-for="(item, index) in toSortedList" :key="index">
+            <div v-for="(item, index) in toSortedList" :key="index" @click="itemClicked(item)">
                 <div v-show="item.isTip" class="dict-tip">{{item.ch}}</div>
-                <friend-bar v-show="!item.isTip" v-bind:data="item"></friend-bar>
+                <friend-bar v-show="!item.isTip" v-bind:data="item | toNormalStyle"></friend-bar>
             </div>
         </div>
     </div>
 </template>
 <script>
-import searchBar from '../common/searchBar';
-import friendBar from "../common/friendBar";
+import searchBar from '../common/searchBar'
+import friendBar from "../common/friendBar"
 import chinesePY from '../../assets/js/ChinesePY'
 export default {
+    props:{
+        showUserInfoPlane:{
+            type: Function,
+            default: null
+        }
+    },
     components:{
         'friend-bar': friendBar,
         'search-bar': searchBar
@@ -47,35 +53,38 @@ export default {
     data(){
         return {
             sortedFriendList: [],
-            friendList:[
-                // {
-                //     userName: '',
-                //     nickName: '',
-                //     sex: 0,
-                //     intro: '',
-                //     phone: '',
-                //     email: '',
-                //     age: 10
-                // },
-            ]
+            friendList:[]
         }
     },
-    mounted() {
+    mounted(){
+        this.friendListReq();
     },
     methods: {
-        getFriendList(){
-            this.$req.post('/restful/friendList', {userId: 2}).apply()
+        itemClicked(userInfo){
+            this.showUserInfoPlane(true, userInfo);
+        },
+        friendListReq(){
+            let userId = this.$store.state.userInfo.userId;
+            this.$req.post('/restful/friendList', {userId: userId}).apply()
                 .then((data) => {
                     this.friendList = data.users.filter((item) => {
-                        item.lastTime = '11:30 AM'
                         item.msg = 'test'
                         item.isActive = false
                         return true
                     })
+                    this.$store.commit('updateFriendList', JSON.parse(JSON.stringify(this.friendList)));
                 })
                 .catch((data) => {
                     this.$notify({ type:'warning', title: '错误', message: '获取好友信息失败' })
                 })
+        }
+    },
+    filters:{
+        toNormalStyle(info){
+            if(info){
+                info.bubbleMode = false;
+            }
+            return info;
         }
     }
 }

@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.vico.auth.pojo.User;
+import org.vico.auth.service.ImRelatedService;
 import org.vico.auth.service.handler.SignBaseHandler;
 import org.vico.auth.service.AuthorizationService;
 import org.vico.auth.service.handler.SignInHandler;
@@ -34,13 +35,27 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     @Resource
     private RedisTemplate redisTemplate;
 
+    @Resource
+    private ImRelatedService imRelatedService;
+
     @Override
     public Transfer signIn(String type, User user) {
         val handler = findHandler(signInHandlerList, type);
         if(handler != null){
             Transfer res = handler.apply(user);
             if(res.status() == StatusCode.SUCCESS){
-                res.param("token", tokenUtil.generate(user));
+                // 负载均衡
+                val serverInfo = imRelatedService.choose();
+                if(serverInfo == null){
+                    res.status(StatusCode.BL_NO_SERVER)
+                            .clearParams()
+                            .build();
+                }else{
+                    redisTemplate.opsForHash().put("ROUTING_KEYS", user.getId().toString(), serverInfo.getHost() + "#" + serverInfo.getPort());
+                    res.param("host", serverInfo.getHost())
+                        .param("port", serverInfo.getPort())
+                        .param("token", tokenUtil.generate(user));
+                }
             }
             return res;
         }

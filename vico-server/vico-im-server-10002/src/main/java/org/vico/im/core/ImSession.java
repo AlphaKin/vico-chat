@@ -16,7 +16,7 @@ public class ImSession {
     private Channel channel;
     private String sessionId;
     private boolean isLoggedIn;
-    private ImUser imUser;
+    private String userId;
 
     //获取 Session
     public static ImSession get(ChannelHandlerContext ctx){
@@ -35,7 +35,6 @@ public class ImSession {
 
     //绑定 Session
     public ImSession bind(){
-        log.info("bind session : " + channel.remoteAddress());
         channel.attr(ImSession.SESSION_KEY).set(this);
         return this;
     }

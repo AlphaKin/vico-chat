@@ -8,11 +8,11 @@
         <div class="body-wrapper">
             <div class="title">
                 <div class="nick">{{data.userNickName}}</div>
-                <div v-show="data.bubbleMode" class="time">{{data.lastTime}}</div>
+                <div v-show="data.bubbleMode && data.lastTime" class="time">{{data.lastTime | formatDate}}</div>
             </div>
             <div class="body">
-                <div v-show="data.bubbleMode" class="message">{{data.msg}}</div>
-                <div v-show="data.bubbleMode" class="tip">4</div>
+                <div v-show="data.bubbleMode" class="message">{{data.lastMsg}}</div>
+                <div v-show="data.bubbleMode && data.unreadNum > 0" class="tip">{{data.unreadNum}}</div>
             </div>
         </div>
     </div>
@@ -21,12 +21,41 @@
 export default {
     props:{
         data: {
-            nickName: "loading...",
-            lastTime: "",
+            userNickName: "loading...",
             headURL: "",
-            msg: "",
+            lastMsg: "",
+            unreadNum: 0,
             bubbleMode: false,
             isActive: false
+        }
+    },
+    methods: {
+        
+    },
+    filters:{
+        formatDate(date) {
+            if(isNaN(date) || date === '' || date == null || date == undefined){
+                date = Date.parse(new Date())
+            }
+            date = new Date(date)
+            let fmt = 'hh:mm'
+            if (/(y+)/.test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
+            }
+            let o = {
+                'M+': date.getMonth() + 1,
+                'd+': date.getDate(),
+                'h+': date.getHours(),
+                'm+': date.getMinutes(),
+                's+': date.getSeconds()
+            }
+            for (let k in o) {
+                if (new RegExp(`(${k})`).test(fmt)) {
+                let str = o[k] + ''
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? str : ('00' + str).substr(str.length))
+                }
+            }
+            return fmt
         }
     }
 }
@@ -36,6 +65,7 @@ export default {
 
     .common-bar{
         transition-duration: .3s;
+        cursor: pointer;
         color: gray;
         &:hover{
             background: rgb(240, 240, 240);

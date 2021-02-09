@@ -19,26 +19,11 @@ public class AuthController {
     @Resource
     private AuthorizationService authorizationService;
 
-    @Resource
-    private ImRelatedService imRelatedService;
 
     @PostMapping(value = "/signIn/{type}")
     public String signIn(@PathVariable("type") String type, User user){
-
         System.out.println(user);
         Transfer result = authorizationService.signIn(type, user);
-        if(result.status() == StatusCode.SUCCESS){
-            // 负载均衡
-            val serverInfo = imRelatedService.choose();
-            if(serverInfo == null){
-                result.status(StatusCode.BL_NO_SERVER)
-                        .clearParams()
-                        .build();
-            }else{
-                result.param("host", serverInfo.getHost())
-                        .param("port", serverInfo.getPort());
-            }
-        }
         return result.build();
     }
 
@@ -48,7 +33,6 @@ public class AuthController {
         Transfer result = authorizationService.logout(userId);
         return result.build();
     }
-
 
     @PostMapping(value = "/signUp/{type}")
     public String signUp(@PathVariable("type") String type, User user){

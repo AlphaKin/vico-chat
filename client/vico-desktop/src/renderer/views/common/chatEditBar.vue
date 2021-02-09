@@ -1,7 +1,7 @@
 <template>
     <div id="chat-edit-bar">
         <div class="input">
-            <textarea type="text" placeholder="Write something..." />
+            <textarea type="text" placeholder="Write something..." v-model="msg" />
             <div class="item send-btn" @click="addItem">
                 <i class="fa fa-paper-plane"></i>
             </div>
@@ -32,12 +32,13 @@ export default {
     },
     methods:{
         addItem(){
-            this.$parent.addItem();
+            // this.$parent.$parentaddItem(true, this.msg);
+            console.log(this.$parent.$parent.$parent.updateSession(null, this.msg, true));
         }
     },
     data(){
         return {
-            msg: 'asdqwe'
+            msg: ''
         }
     }
 }

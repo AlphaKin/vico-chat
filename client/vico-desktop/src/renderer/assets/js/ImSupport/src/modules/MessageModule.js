@@ -6,18 +6,22 @@ class MessageModule extends BaseModule.BaseModule {
     constructor(net) {
         super(net);
     }
-    send(aimId, content) {
+    send(from, to, content) {
+
+        console.log('########发送消息#######');
+        console.log('我[' + from + '] 对 ' + to + ' 说 ' + content);
+        console.log('#####################');
+
         let aggregatedMsg = new ImMessagePb.AggregatedMessage();
         let textMsg = new ImMessagePb.TextMessageRequest();
-        textMsg.setFrom('client11');
-        textMsg.setTo('client22');
-        textMsg.setTime(202111);
+        textMsg.setSessionid('abcdefg');
+        textMsg.setFrom(from);
+        textMsg.setTo(to);
         textMsg.setContent(content);
 
         aggregatedMsg.setCommandtype(ImMessagePb.CommandType.MESSAGE_TEXT_REQUEST);
-        aggregatedMsg.setSessionid('abcdefg');
-        aggregatedMsg.setToken('2345678');
-        aggregatedMsg.setTextmsg(textMsg);
+        aggregatedMsg.setTime(Date.parse(new Date()));
+        aggregatedMsg.setTextmsgreq(textMsg);
 
         console.log(aggregatedMsg)
         super.getImNet().sendProtoData(aggregatedMsg);

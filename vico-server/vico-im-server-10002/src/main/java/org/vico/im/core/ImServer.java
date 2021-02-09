@@ -26,13 +26,16 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component(value = "ImServer")
-public class ImServer implements CommandLineRunner {
+public class ImServer implements CommandLineRunner{
 
     @Resource
     PacketHeadDecoder packetHeadDecoder;
 
     @Resource
     HeartBeatHandler heartBeatHandler;
+
+    @Resource
+    ImSessionManager imSessionManager;
 
     @Value(value = "${server.port}")
     private Integer port;
@@ -73,6 +76,7 @@ public class ImServer implements CommandLineRunner {
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
 
 
+            imSessionManager.updateServerMeta();
             log.info("SERVER RUNNING - " + (System.currentTimeMillis() - beginTime) + "ms");
 
             val future = server.bind(port).sync();

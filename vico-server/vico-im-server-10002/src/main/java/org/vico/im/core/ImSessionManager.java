@@ -4,6 +4,8 @@ import io.netty.channel.Channel;
 import lombok.Data;
 import lombok.val;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.annotation.*;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -31,14 +33,22 @@ public class ImSessionManager {
     @Value("${server.port}")
     private Integer port;
 
+    @Value("${auth.exchange}")
+    private String exchange;
+
+    @Resource
+    private RabbitTemplate rabbitTemplate;
+
     @Resource
     RedisTemplate redisTemplate;
 
     //添加 Session
     public void addSession(ImSession session){
-        idMap.put(session.getImUser().getUserId(), session.getSessionId());
+        idMap.put(session.getUserId(), session.getSessionId());
         sessionMap.put(session.getSessionId(), session);
-        log.info("用户[id=" + session.getSessionId() + "] 登录");
+        log.info("用户[id=" + session.getUserId() + "] 登录");
+        System.out.println(session.getUserId() + " - " + idMap.get(session.getUserId()));
+        System.out.println("查找结果: " + sessionMap.get(idMap.get(session.getUserId())));
     }
 
     //获取 Session
@@ -67,7 +77,7 @@ public class ImSessionManager {
             return;
         }
         ImSession session = sessionMap.get(sessionId);
-        idMap.remove(session.getImUser().getUserId());
+        idMap.remove(session.getUserId());
         sessionMap.remove(sessionId);
         log.info("用户[id=" + sessionId + "] 退出");
     }
@@ -84,5 +94,10 @@ public class ImSessionManager {
     public void updateServerMeta(){
         String key = instanceName + ":" + port;
         redisTemplate.opsForHash().put(serverMetaPrefix, key, new ImServerMetaInfo(host, port, sessionMap.size()));
+    }
+
+    // 转发消息
+    public void forward(String routingKey, Object object){
+        rabbitTemplate.convertAndSend(exchange, routingKey, object);
     }
 }

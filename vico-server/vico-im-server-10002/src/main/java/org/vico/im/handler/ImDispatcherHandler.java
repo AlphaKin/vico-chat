@@ -26,9 +26,6 @@ public class ImDispatcherHandler{
     private SpringUtil springUtil;
     private Map<String, ImProcessor> processorMap = new HashMap<>();
 
-    @Resource
-    ImSessionManager imSessionManager;
-
     @Autowired
     public ImDispatcherHandler(SpringUtil springUtil){
         this.springUtil = springUtil;
@@ -55,7 +52,7 @@ public class ImDispatcherHandler{
             val message = AggregatedMessage.parseFrom(dataArray);
             val command = message.getCommandType().toString();
             if(processorMap.containsKey(command)){
-                Future future = processorMap.get(command).execute(ctx, imSessionManager, message);
+                Future future = processorMap.get(command).execute(ctx, message);
             }else{
                 log.error("Processor not found - " + command);
             }

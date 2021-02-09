@@ -11,7 +11,7 @@ import org.vico.common.annotation.Json;
 @Data
 @ToString
 @TableName(value = "user" )
-@Json(excludeField = { "id", "userPassword" })
+@Json(excludeField = { "userPassword" })
 public class User {
 
     @TableId(value = "id")

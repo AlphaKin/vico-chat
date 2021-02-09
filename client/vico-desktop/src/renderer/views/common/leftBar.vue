@@ -88,7 +88,7 @@
                 this.$IM.disconnect();
                 const { remote } = require('electron');
                 let window = remote.getCurrentWindow();
-                this.$req.post('/auth/logout', {userId: this.$store.state.userInfo.userId}).token().apply()
+                this.$req.post('/auth/logout', {userName: this.$store.state.userInfo.userName}).token().apply()
                     .then((data) => {
                         // window.setPosition(window.getPosition()[0] + 150, window.getPosition()[1] + 90);
                         window.setSize(660, 480);

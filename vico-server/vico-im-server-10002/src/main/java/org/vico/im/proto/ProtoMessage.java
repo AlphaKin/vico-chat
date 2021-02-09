@@ -263,7 +263,6 @@ public final class ProtoMessage {
 
   /**
    * <pre>
-   *##############################################################
    *消息状态
    * </pre>
    *
@@ -405,1091 +404,6 @@ public final class ProtoMessage {
     }
 
     // @@protoc_insertion_point(enum_scope:proto.MessageStatus)
-  }
-
-  public interface CommonResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:proto.CommonResponse)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     *状态码
-     * </pre>
-     *
-     * <code>int32 code = 1;</code>
-     * @return The code.
-     */
-    int getCode();
-  }
-  /**
-   * <pre>
-   *公共响应
-   * </pre>
-   *
-   * Protobuf type {@code proto.CommonResponse}
-   */
-  public static final class CommonResponse extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:proto.CommonResponse)
-      CommonResponseOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use CommonResponse.newBuilder() to construct.
-    private CommonResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private CommonResponse() {
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new CommonResponse();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private CommonResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-
-              code_ = input.readInt32();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return org.vico.im.proto.ProtoMessage.internal_static_proto_CommonResponse_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return org.vico.im.proto.ProtoMessage.internal_static_proto_CommonResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              org.vico.im.proto.ProtoMessage.CommonResponse.class, org.vico.im.proto.ProtoMessage.CommonResponse.Builder.class);
-    }
-
-    public static final int CODE_FIELD_NUMBER = 1;
-    private int code_;
-    /**
-     * <pre>
-     *状态码
-     * </pre>
-     *
-     * <code>int32 code = 1;</code>
-     * @return The code.
-     */
-    @java.lang.Override
-    public int getCode() {
-      return code_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (code_ != 0) {
-        output.writeInt32(1, code_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (code_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, code_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof org.vico.im.proto.ProtoMessage.CommonResponse)) {
-        return super.equals(obj);
-      }
-      org.vico.im.proto.ProtoMessage.CommonResponse other = (org.vico.im.proto.ProtoMessage.CommonResponse) obj;
-
-      if (getCode()
-          != other.getCode()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + CODE_FIELD_NUMBER;
-      hash = (53 * hash) + getCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static org.vico.im.proto.ProtoMessage.CommonResponse parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.vico.im.proto.ProtoMessage.CommonResponse parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static org.vico.im.proto.ProtoMessage.CommonResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.vico.im.proto.ProtoMessage.CommonResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static org.vico.im.proto.ProtoMessage.CommonResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.vico.im.proto.ProtoMessage.CommonResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static org.vico.im.proto.ProtoMessage.CommonResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static org.vico.im.proto.ProtoMessage.CommonResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static org.vico.im.proto.ProtoMessage.CommonResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static org.vico.im.proto.ProtoMessage.CommonResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static org.vico.im.proto.ProtoMessage.CommonResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static org.vico.im.proto.ProtoMessage.CommonResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(org.vico.im.proto.ProtoMessage.CommonResponse prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     *公共响应
-     * </pre>
-     *
-     * Protobuf type {@code proto.CommonResponse}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:proto.CommonResponse)
-        org.vico.im.proto.ProtoMessage.CommonResponseOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return org.vico.im.proto.ProtoMessage.internal_static_proto_CommonResponse_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return org.vico.im.proto.ProtoMessage.internal_static_proto_CommonResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                org.vico.im.proto.ProtoMessage.CommonResponse.class, org.vico.im.proto.ProtoMessage.CommonResponse.Builder.class);
-      }
-
-      // Construct using org.vico.im.proto.ProtoMessage.CommonResponse.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        code_ = 0;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return org.vico.im.proto.ProtoMessage.internal_static_proto_CommonResponse_descriptor;
-      }
-
-      @java.lang.Override
-      public org.vico.im.proto.ProtoMessage.CommonResponse getDefaultInstanceForType() {
-        return org.vico.im.proto.ProtoMessage.CommonResponse.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public org.vico.im.proto.ProtoMessage.CommonResponse build() {
-        org.vico.im.proto.ProtoMessage.CommonResponse result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public org.vico.im.proto.ProtoMessage.CommonResponse buildPartial() {
-        org.vico.im.proto.ProtoMessage.CommonResponse result = new org.vico.im.proto.ProtoMessage.CommonResponse(this);
-        result.code_ = code_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof org.vico.im.proto.ProtoMessage.CommonResponse) {
-          return mergeFrom((org.vico.im.proto.ProtoMessage.CommonResponse)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(org.vico.im.proto.ProtoMessage.CommonResponse other) {
-        if (other == org.vico.im.proto.ProtoMessage.CommonResponse.getDefaultInstance()) return this;
-        if (other.getCode() != 0) {
-          setCode(other.getCode());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        org.vico.im.proto.ProtoMessage.CommonResponse parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (org.vico.im.proto.ProtoMessage.CommonResponse) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private int code_ ;
-      /**
-       * <pre>
-       *状态码
-       * </pre>
-       *
-       * <code>int32 code = 1;</code>
-       * @return The code.
-       */
-      @java.lang.Override
-      public int getCode() {
-        return code_;
-      }
-      /**
-       * <pre>
-       *状态码
-       * </pre>
-       *
-       * <code>int32 code = 1;</code>
-       * @param value The code to set.
-       * @return This builder for chaining.
-       */
-      public Builder setCode(int value) {
-        
-        code_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *状态码
-       * </pre>
-       *
-       * <code>int32 code = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearCode() {
-        
-        code_ = 0;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:proto.CommonResponse)
-    }
-
-    // @@protoc_insertion_point(class_scope:proto.CommonResponse)
-    private static final org.vico.im.proto.ProtoMessage.CommonResponse DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new org.vico.im.proto.ProtoMessage.CommonResponse();
-    }
-
-    public static org.vico.im.proto.ProtoMessage.CommonResponse getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<CommonResponse>
-        PARSER = new com.google.protobuf.AbstractParser<CommonResponse>() {
-      @java.lang.Override
-      public CommonResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new CommonResponse(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<CommonResponse> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<CommonResponse> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public org.vico.im.proto.ProtoMessage.CommonResponse getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface MessageResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:proto.MessageResponse)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     *接收状态
-     * </pre>
-     *
-     * <code>.proto.MessageStatus status = 1;</code>
-     * @return The enum numeric value on the wire for status.
-     */
-    int getStatusValue();
-    /**
-     * <pre>
-     *接收状态
-     * </pre>
-     *
-     * <code>.proto.MessageStatus status = 1;</code>
-     * @return The status.
-     */
-    org.vico.im.proto.ProtoMessage.MessageStatus getStatus();
-  }
-  /**
-   * <pre>
-   *消息响应
-   * </pre>
-   *
-   * Protobuf type {@code proto.MessageResponse}
-   */
-  public static final class MessageResponse extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:proto.MessageResponse)
-      MessageResponseOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use MessageResponse.newBuilder() to construct.
-    private MessageResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private MessageResponse() {
-      status_ = 0;
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new MessageResponse();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private MessageResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-              int rawValue = input.readEnum();
-
-              status_ = rawValue;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return org.vico.im.proto.ProtoMessage.internal_static_proto_MessageResponse_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return org.vico.im.proto.ProtoMessage.internal_static_proto_MessageResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              org.vico.im.proto.ProtoMessage.MessageResponse.class, org.vico.im.proto.ProtoMessage.MessageResponse.Builder.class);
-    }
-
-    public static final int STATUS_FIELD_NUMBER = 1;
-    private int status_;
-    /**
-     * <pre>
-     *接收状态
-     * </pre>
-     *
-     * <code>.proto.MessageStatus status = 1;</code>
-     * @return The enum numeric value on the wire for status.
-     */
-    @java.lang.Override public int getStatusValue() {
-      return status_;
-    }
-    /**
-     * <pre>
-     *接收状态
-     * </pre>
-     *
-     * <code>.proto.MessageStatus status = 1;</code>
-     * @return The status.
-     */
-    @java.lang.Override public org.vico.im.proto.ProtoMessage.MessageStatus getStatus() {
-      @SuppressWarnings("deprecation")
-      org.vico.im.proto.ProtoMessage.MessageStatus result = org.vico.im.proto.ProtoMessage.MessageStatus.valueOf(status_);
-      return result == null ? org.vico.im.proto.ProtoMessage.MessageStatus.UNRECOGNIZED : result;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (status_ != org.vico.im.proto.ProtoMessage.MessageStatus.RECEIVED.getNumber()) {
-        output.writeEnum(1, status_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (status_ != org.vico.im.proto.ProtoMessage.MessageStatus.RECEIVED.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, status_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof org.vico.im.proto.ProtoMessage.MessageResponse)) {
-        return super.equals(obj);
-      }
-      org.vico.im.proto.ProtoMessage.MessageResponse other = (org.vico.im.proto.ProtoMessage.MessageResponse) obj;
-
-      if (status_ != other.status_) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + STATUS_FIELD_NUMBER;
-      hash = (53 * hash) + status_;
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static org.vico.im.proto.ProtoMessage.MessageResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static org.vico.im.proto.ProtoMessage.MessageResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(org.vico.im.proto.ProtoMessage.MessageResponse prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     *消息响应
-     * </pre>
-     *
-     * Protobuf type {@code proto.MessageResponse}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:proto.MessageResponse)
-        org.vico.im.proto.ProtoMessage.MessageResponseOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return org.vico.im.proto.ProtoMessage.internal_static_proto_MessageResponse_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return org.vico.im.proto.ProtoMessage.internal_static_proto_MessageResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                org.vico.im.proto.ProtoMessage.MessageResponse.class, org.vico.im.proto.ProtoMessage.MessageResponse.Builder.class);
-      }
-
-      // Construct using org.vico.im.proto.ProtoMessage.MessageResponse.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        status_ = 0;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return org.vico.im.proto.ProtoMessage.internal_static_proto_MessageResponse_descriptor;
-      }
-
-      @java.lang.Override
-      public org.vico.im.proto.ProtoMessage.MessageResponse getDefaultInstanceForType() {
-        return org.vico.im.proto.ProtoMessage.MessageResponse.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public org.vico.im.proto.ProtoMessage.MessageResponse build() {
-        org.vico.im.proto.ProtoMessage.MessageResponse result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public org.vico.im.proto.ProtoMessage.MessageResponse buildPartial() {
-        org.vico.im.proto.ProtoMessage.MessageResponse result = new org.vico.im.proto.ProtoMessage.MessageResponse(this);
-        result.status_ = status_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof org.vico.im.proto.ProtoMessage.MessageResponse) {
-          return mergeFrom((org.vico.im.proto.ProtoMessage.MessageResponse)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(org.vico.im.proto.ProtoMessage.MessageResponse other) {
-        if (other == org.vico.im.proto.ProtoMessage.MessageResponse.getDefaultInstance()) return this;
-        if (other.status_ != 0) {
-          setStatusValue(other.getStatusValue());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        org.vico.im.proto.ProtoMessage.MessageResponse parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (org.vico.im.proto.ProtoMessage.MessageResponse) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private int status_ = 0;
-      /**
-       * <pre>
-       *接收状态
-       * </pre>
-       *
-       * <code>.proto.MessageStatus status = 1;</code>
-       * @return The enum numeric value on the wire for status.
-       */
-      @java.lang.Override public int getStatusValue() {
-        return status_;
-      }
-      /**
-       * <pre>
-       *接收状态
-       * </pre>
-       *
-       * <code>.proto.MessageStatus status = 1;</code>
-       * @param value The enum numeric value on the wire for status to set.
-       * @return This builder for chaining.
-       */
-      public Builder setStatusValue(int value) {
-        
-        status_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *接收状态
-       * </pre>
-       *
-       * <code>.proto.MessageStatus status = 1;</code>
-       * @return The status.
-       */
-      @java.lang.Override
-      public org.vico.im.proto.ProtoMessage.MessageStatus getStatus() {
-        @SuppressWarnings("deprecation")
-        org.vico.im.proto.ProtoMessage.MessageStatus result = org.vico.im.proto.ProtoMessage.MessageStatus.valueOf(status_);
-        return result == null ? org.vico.im.proto.ProtoMessage.MessageStatus.UNRECOGNIZED : result;
-      }
-      /**
-       * <pre>
-       *接收状态
-       * </pre>
-       *
-       * <code>.proto.MessageStatus status = 1;</code>
-       * @param value The status to set.
-       * @return This builder for chaining.
-       */
-      public Builder setStatus(org.vico.im.proto.ProtoMessage.MessageStatus value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        status_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *接收状态
-       * </pre>
-       *
-       * <code>.proto.MessageStatus status = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearStatus() {
-        
-        status_ = 0;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:proto.MessageResponse)
-    }
-
-    // @@protoc_insertion_point(class_scope:proto.MessageResponse)
-    private static final org.vico.im.proto.ProtoMessage.MessageResponse DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new org.vico.im.proto.ProtoMessage.MessageResponse();
-    }
-
-    public static org.vico.im.proto.ProtoMessage.MessageResponse getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<MessageResponse>
-        PARSER = new com.google.protobuf.AbstractParser<MessageResponse>() {
-      @java.lang.Override
-      public MessageResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new MessageResponse(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<MessageResponse> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<MessageResponse> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public org.vico.im.proto.ProtoMessage.MessageResponse getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
   }
 
   public interface ConnectRequestOrBuilder extends
@@ -2201,10 +1115,30 @@ public final class ProtoMessage {
 
     /**
      * <pre>
+     *sessionId
+     * </pre>
+     *
+     * <code>string sessionId = 1;</code>
+     * @return The sessionId.
+     */
+    java.lang.String getSessionId();
+    /**
+     * <pre>
+     *sessionId
+     * </pre>
+     *
+     * <code>string sessionId = 1;</code>
+     * @return The bytes for sessionId.
+     */
+    com.google.protobuf.ByteString
+        getSessionIdBytes();
+
+    /**
+     * <pre>
      *发送者ID
      * </pre>
      *
-     * <code>string from = 1;</code>
+     * <code>string from = 2;</code>
      * @return The from.
      */
     java.lang.String getFrom();
@@ -2213,7 +1147,7 @@ public final class ProtoMessage {
      *发送者ID
      * </pre>
      *
-     * <code>string from = 1;</code>
+     * <code>string from = 2;</code>
      * @return The bytes for from.
      */
     com.google.protobuf.ByteString
@@ -2224,7 +1158,7 @@ public final class ProtoMessage {
      *接收者ID
      * </pre>
      *
-     * <code>string to = 2;</code>
+     * <code>string to = 3;</code>
      * @return The to.
      */
     java.lang.String getTo();
@@ -2233,21 +1167,11 @@ public final class ProtoMessage {
      *接收者ID
      * </pre>
      *
-     * <code>string to = 2;</code>
+     * <code>string to = 3;</code>
      * @return The bytes for to.
      */
     com.google.protobuf.ByteString
         getToBytes();
-
-    /**
-     * <pre>
-     *时间
-     * </pre>
-     *
-     * <code>uint64 time = 3;</code>
-     * @return The time.
-     */
-    long getTime();
 
     /**
      * <pre>
@@ -2268,10 +1192,19 @@ public final class ProtoMessage {
      */
     com.google.protobuf.ByteString
         getContentBytes();
+
+    /**
+     * <pre>
+     *是否被转发
+     * </pre>
+     *
+     * <code>bool isForward = 5;</code>
+     * @return The isForward.
+     */
+    boolean getIsForward();
   }
   /**
    * <pre>
-   *##############################################################
    *文字消息请求
    * </pre>
    *
@@ -2287,6 +1220,7 @@ public final class ProtoMessage {
       super(builder);
     }
     private TextMessageRequest() {
+      sessionId_ = "";
       from_ = "";
       to_ = "";
       content_ = "";
@@ -2325,24 +1259,30 @@ public final class ProtoMessage {
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              from_ = s;
+              sessionId_ = s;
               break;
             }
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              to_ = s;
+              from_ = s;
               break;
             }
-            case 24: {
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
 
-              time_ = input.readUInt64();
+              to_ = s;
               break;
             }
             case 34: {
               java.lang.String s = input.readStringRequireUtf8();
 
               content_ = s;
+              break;
+            }
+            case 40: {
+
+              isForward_ = input.readBool();
               break;
             }
             default: {
@@ -2377,14 +1317,60 @@ public final class ProtoMessage {
               org.vico.im.proto.ProtoMessage.TextMessageRequest.class, org.vico.im.proto.ProtoMessage.TextMessageRequest.Builder.class);
     }
 
-    public static final int FROM_FIELD_NUMBER = 1;
+    public static final int SESSIONID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object sessionId_;
+    /**
+     * <pre>
+     *sessionId
+     * </pre>
+     *
+     * <code>string sessionId = 1;</code>
+     * @return The sessionId.
+     */
+    @java.lang.Override
+    public java.lang.String getSessionId() {
+      java.lang.Object ref = sessionId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        sessionId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *sessionId
+     * </pre>
+     *
+     * <code>string sessionId = 1;</code>
+     * @return The bytes for sessionId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getSessionIdBytes() {
+      java.lang.Object ref = sessionId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sessionId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FROM_FIELD_NUMBER = 2;
     private volatile java.lang.Object from_;
     /**
      * <pre>
      *发送者ID
      * </pre>
      *
-     * <code>string from = 1;</code>
+     * <code>string from = 2;</code>
      * @return The from.
      */
     @java.lang.Override
@@ -2405,7 +1391,7 @@ public final class ProtoMessage {
      *发送者ID
      * </pre>
      *
-     * <code>string from = 1;</code>
+     * <code>string from = 2;</code>
      * @return The bytes for from.
      */
     @java.lang.Override
@@ -2423,14 +1409,14 @@ public final class ProtoMessage {
       }
     }
 
-    public static final int TO_FIELD_NUMBER = 2;
+    public static final int TO_FIELD_NUMBER = 3;
     private volatile java.lang.Object to_;
     /**
      * <pre>
      *接收者ID
      * </pre>
      *
-     * <code>string to = 2;</code>
+     * <code>string to = 3;</code>
      * @return The to.
      */
     @java.lang.Override
@@ -2451,7 +1437,7 @@ public final class ProtoMessage {
      *接收者ID
      * </pre>
      *
-     * <code>string to = 2;</code>
+     * <code>string to = 3;</code>
      * @return The bytes for to.
      */
     @java.lang.Override
@@ -2467,21 +1453,6 @@ public final class ProtoMessage {
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
-    }
-
-    public static final int TIME_FIELD_NUMBER = 3;
-    private long time_;
-    /**
-     * <pre>
-     *时间
-     * </pre>
-     *
-     * <code>uint64 time = 3;</code>
-     * @return The time.
-     */
-    @java.lang.Override
-    public long getTime() {
-      return time_;
     }
 
     public static final int CONTENT_FIELD_NUMBER = 4;
@@ -2530,6 +1501,21 @@ public final class ProtoMessage {
       }
     }
 
+    public static final int ISFORWARD_FIELD_NUMBER = 5;
+    private boolean isForward_;
+    /**
+     * <pre>
+     *是否被转发
+     * </pre>
+     *
+     * <code>bool isForward = 5;</code>
+     * @return The isForward.
+     */
+    @java.lang.Override
+    public boolean getIsForward() {
+      return isForward_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -2544,17 +1530,20 @@ public final class ProtoMessage {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (!getSessionIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, sessionId_);
+      }
       if (!getFromBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, from_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, from_);
       }
       if (!getToBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, to_);
-      }
-      if (time_ != 0L) {
-        output.writeUInt64(3, time_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, to_);
       }
       if (!getContentBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, content_);
+      }
+      if (isForward_ != false) {
+        output.writeBool(5, isForward_);
       }
       unknownFields.writeTo(output);
     }
@@ -2565,18 +1554,21 @@ public final class ProtoMessage {
       if (size != -1) return size;
 
       size = 0;
+      if (!getSessionIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, sessionId_);
+      }
       if (!getFromBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, from_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, from_);
       }
       if (!getToBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, to_);
-      }
-      if (time_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(3, time_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, to_);
       }
       if (!getContentBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, content_);
+      }
+      if (isForward_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, isForward_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2593,14 +1585,16 @@ public final class ProtoMessage {
       }
       org.vico.im.proto.ProtoMessage.TextMessageRequest other = (org.vico.im.proto.ProtoMessage.TextMessageRequest) obj;
 
+      if (!getSessionId()
+          .equals(other.getSessionId())) return false;
       if (!getFrom()
           .equals(other.getFrom())) return false;
       if (!getTo()
           .equals(other.getTo())) return false;
-      if (getTime()
-          != other.getTime()) return false;
       if (!getContent()
           .equals(other.getContent())) return false;
+      if (getIsForward()
+          != other.getIsForward()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -2612,15 +1606,17 @@ public final class ProtoMessage {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + SESSIONID_FIELD_NUMBER;
+      hash = (53 * hash) + getSessionId().hashCode();
       hash = (37 * hash) + FROM_FIELD_NUMBER;
       hash = (53 * hash) + getFrom().hashCode();
       hash = (37 * hash) + TO_FIELD_NUMBER;
       hash = (53 * hash) + getTo().hashCode();
-      hash = (37 * hash) + TIME_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getTime());
       hash = (37 * hash) + CONTENT_FIELD_NUMBER;
       hash = (53 * hash) + getContent().hashCode();
+      hash = (37 * hash) + ISFORWARD_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getIsForward());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2718,7 +1714,6 @@ public final class ProtoMessage {
     }
     /**
      * <pre>
-     *##############################################################
      *文字消息请求
      * </pre>
      *
@@ -2759,13 +1754,15 @@ public final class ProtoMessage {
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        sessionId_ = "";
+
         from_ = "";
 
         to_ = "";
 
-        time_ = 0L;
-
         content_ = "";
+
+        isForward_ = false;
 
         return this;
       }
@@ -2793,10 +1790,11 @@ public final class ProtoMessage {
       @java.lang.Override
       public org.vico.im.proto.ProtoMessage.TextMessageRequest buildPartial() {
         org.vico.im.proto.ProtoMessage.TextMessageRequest result = new org.vico.im.proto.ProtoMessage.TextMessageRequest(this);
+        result.sessionId_ = sessionId_;
         result.from_ = from_;
         result.to_ = to_;
-        result.time_ = time_;
         result.content_ = content_;
+        result.isForward_ = isForward_;
         onBuilt();
         return result;
       }
@@ -2845,6 +1843,10 @@ public final class ProtoMessage {
 
       public Builder mergeFrom(org.vico.im.proto.ProtoMessage.TextMessageRequest other) {
         if (other == org.vico.im.proto.ProtoMessage.TextMessageRequest.getDefaultInstance()) return this;
+        if (!other.getSessionId().isEmpty()) {
+          sessionId_ = other.sessionId_;
+          onChanged();
+        }
         if (!other.getFrom().isEmpty()) {
           from_ = other.from_;
           onChanged();
@@ -2853,12 +1855,12 @@ public final class ProtoMessage {
           to_ = other.to_;
           onChanged();
         }
-        if (other.getTime() != 0L) {
-          setTime(other.getTime());
-        }
         if (!other.getContent().isEmpty()) {
           content_ = other.content_;
           onChanged();
+        }
+        if (other.getIsForward() != false) {
+          setIsForward(other.getIsForward());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2889,13 +1891,109 @@ public final class ProtoMessage {
         return this;
       }
 
+      private java.lang.Object sessionId_ = "";
+      /**
+       * <pre>
+       *sessionId
+       * </pre>
+       *
+       * <code>string sessionId = 1;</code>
+       * @return The sessionId.
+       */
+      public java.lang.String getSessionId() {
+        java.lang.Object ref = sessionId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          sessionId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *sessionId
+       * </pre>
+       *
+       * <code>string sessionId = 1;</code>
+       * @return The bytes for sessionId.
+       */
+      public com.google.protobuf.ByteString
+          getSessionIdBytes() {
+        java.lang.Object ref = sessionId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sessionId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *sessionId
+       * </pre>
+       *
+       * <code>string sessionId = 1;</code>
+       * @param value The sessionId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSessionId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        sessionId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *sessionId
+       * </pre>
+       *
+       * <code>string sessionId = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSessionId() {
+        
+        sessionId_ = getDefaultInstance().getSessionId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *sessionId
+       * </pre>
+       *
+       * <code>string sessionId = 1;</code>
+       * @param value The bytes for sessionId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSessionIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        sessionId_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object from_ = "";
       /**
        * <pre>
        *发送者ID
        * </pre>
        *
-       * <code>string from = 1;</code>
+       * <code>string from = 2;</code>
        * @return The from.
        */
       public java.lang.String getFrom() {
@@ -2915,7 +2013,7 @@ public final class ProtoMessage {
        *发送者ID
        * </pre>
        *
-       * <code>string from = 1;</code>
+       * <code>string from = 2;</code>
        * @return The bytes for from.
        */
       public com.google.protobuf.ByteString
@@ -2936,7 +2034,7 @@ public final class ProtoMessage {
        *发送者ID
        * </pre>
        *
-       * <code>string from = 1;</code>
+       * <code>string from = 2;</code>
        * @param value The from to set.
        * @return This builder for chaining.
        */
@@ -2955,7 +2053,7 @@ public final class ProtoMessage {
        *发送者ID
        * </pre>
        *
-       * <code>string from = 1;</code>
+       * <code>string from = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearFrom() {
@@ -2969,7 +2067,7 @@ public final class ProtoMessage {
        *发送者ID
        * </pre>
        *
-       * <code>string from = 1;</code>
+       * <code>string from = 2;</code>
        * @param value The bytes for from to set.
        * @return This builder for chaining.
        */
@@ -2991,7 +2089,7 @@ public final class ProtoMessage {
        *接收者ID
        * </pre>
        *
-       * <code>string to = 2;</code>
+       * <code>string to = 3;</code>
        * @return The to.
        */
       public java.lang.String getTo() {
@@ -3011,7 +2109,7 @@ public final class ProtoMessage {
        *接收者ID
        * </pre>
        *
-       * <code>string to = 2;</code>
+       * <code>string to = 3;</code>
        * @return The bytes for to.
        */
       public com.google.protobuf.ByteString
@@ -3032,7 +2130,7 @@ public final class ProtoMessage {
        *接收者ID
        * </pre>
        *
-       * <code>string to = 2;</code>
+       * <code>string to = 3;</code>
        * @param value The to to set.
        * @return This builder for chaining.
        */
@@ -3051,7 +2149,7 @@ public final class ProtoMessage {
        *接收者ID
        * </pre>
        *
-       * <code>string to = 2;</code>
+       * <code>string to = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearTo() {
@@ -3065,7 +2163,7 @@ public final class ProtoMessage {
        *接收者ID
        * </pre>
        *
-       * <code>string to = 2;</code>
+       * <code>string to = 3;</code>
        * @param value The bytes for to to set.
        * @return This builder for chaining.
        */
@@ -3077,49 +2175,6 @@ public final class ProtoMessage {
   checkByteStringIsUtf8(value);
         
         to_ = value;
-        onChanged();
-        return this;
-      }
-
-      private long time_ ;
-      /**
-       * <pre>
-       *时间
-       * </pre>
-       *
-       * <code>uint64 time = 3;</code>
-       * @return The time.
-       */
-      @java.lang.Override
-      public long getTime() {
-        return time_;
-      }
-      /**
-       * <pre>
-       *时间
-       * </pre>
-       *
-       * <code>uint64 time = 3;</code>
-       * @param value The time to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTime(long value) {
-        
-        time_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *时间
-       * </pre>
-       *
-       * <code>uint64 time = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearTime() {
-        
-        time_ = 0L;
         onChanged();
         return this;
       }
@@ -3219,6 +2274,49 @@ public final class ProtoMessage {
         onChanged();
         return this;
       }
+
+      private boolean isForward_ ;
+      /**
+       * <pre>
+       *是否被转发
+       * </pre>
+       *
+       * <code>bool isForward = 5;</code>
+       * @return The isForward.
+       */
+      @java.lang.Override
+      public boolean getIsForward() {
+        return isForward_;
+      }
+      /**
+       * <pre>
+       *是否被转发
+       * </pre>
+       *
+       * <code>bool isForward = 5;</code>
+       * @param value The isForward to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIsForward(boolean value) {
+        
+        isForward_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *是否被转发
+       * </pre>
+       *
+       * <code>bool isForward = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearIsForward() {
+        
+        isForward_ = false;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -3272,6 +2370,1373 @@ public final class ProtoMessage {
 
   }
 
+  public interface MessageResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:proto.MessageResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     *接收状态
+     * </pre>
+     *
+     * <code>.proto.MessageStatus status = 1;</code>
+     * @return The enum numeric value on the wire for status.
+     */
+    int getStatusValue();
+    /**
+     * <pre>
+     *接收状态
+     * </pre>
+     *
+     * <code>.proto.MessageStatus status = 1;</code>
+     * @return The status.
+     */
+    org.vico.im.proto.ProtoMessage.MessageStatus getStatus();
+  }
+  /**
+   * <pre>
+   *消息响应
+   * </pre>
+   *
+   * Protobuf type {@code proto.MessageResponse}
+   */
+  public static final class MessageResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:proto.MessageResponse)
+      MessageResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use MessageResponse.newBuilder() to construct.
+    private MessageResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private MessageResponse() {
+      status_ = 0;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new MessageResponse();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private MessageResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+              int rawValue = input.readEnum();
+
+              status_ = rawValue;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.vico.im.proto.ProtoMessage.internal_static_proto_MessageResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.vico.im.proto.ProtoMessage.internal_static_proto_MessageResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.vico.im.proto.ProtoMessage.MessageResponse.class, org.vico.im.proto.ProtoMessage.MessageResponse.Builder.class);
+    }
+
+    public static final int STATUS_FIELD_NUMBER = 1;
+    private int status_;
+    /**
+     * <pre>
+     *接收状态
+     * </pre>
+     *
+     * <code>.proto.MessageStatus status = 1;</code>
+     * @return The enum numeric value on the wire for status.
+     */
+    @java.lang.Override public int getStatusValue() {
+      return status_;
+    }
+    /**
+     * <pre>
+     *接收状态
+     * </pre>
+     *
+     * <code>.proto.MessageStatus status = 1;</code>
+     * @return The status.
+     */
+    @java.lang.Override public org.vico.im.proto.ProtoMessage.MessageStatus getStatus() {
+      @SuppressWarnings("deprecation")
+      org.vico.im.proto.ProtoMessage.MessageStatus result = org.vico.im.proto.ProtoMessage.MessageStatus.valueOf(status_);
+      return result == null ? org.vico.im.proto.ProtoMessage.MessageStatus.UNRECOGNIZED : result;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (status_ != org.vico.im.proto.ProtoMessage.MessageStatus.RECEIVED.getNumber()) {
+        output.writeEnum(1, status_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (status_ != org.vico.im.proto.ProtoMessage.MessageStatus.RECEIVED.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, status_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.vico.im.proto.ProtoMessage.MessageResponse)) {
+        return super.equals(obj);
+      }
+      org.vico.im.proto.ProtoMessage.MessageResponse other = (org.vico.im.proto.ProtoMessage.MessageResponse) obj;
+
+      if (status_ != other.status_) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + STATUS_FIELD_NUMBER;
+      hash = (53 * hash) + status_;
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.MessageResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static org.vico.im.proto.ProtoMessage.MessageResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.vico.im.proto.ProtoMessage.MessageResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(org.vico.im.proto.ProtoMessage.MessageResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *消息响应
+     * </pre>
+     *
+     * Protobuf type {@code proto.MessageResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:proto.MessageResponse)
+        org.vico.im.proto.ProtoMessage.MessageResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.vico.im.proto.ProtoMessage.internal_static_proto_MessageResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.vico.im.proto.ProtoMessage.internal_static_proto_MessageResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.vico.im.proto.ProtoMessage.MessageResponse.class, org.vico.im.proto.ProtoMessage.MessageResponse.Builder.class);
+      }
+
+      // Construct using org.vico.im.proto.ProtoMessage.MessageResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        status_ = 0;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.vico.im.proto.ProtoMessage.internal_static_proto_MessageResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public org.vico.im.proto.ProtoMessage.MessageResponse getDefaultInstanceForType() {
+        return org.vico.im.proto.ProtoMessage.MessageResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public org.vico.im.proto.ProtoMessage.MessageResponse build() {
+        org.vico.im.proto.ProtoMessage.MessageResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public org.vico.im.proto.ProtoMessage.MessageResponse buildPartial() {
+        org.vico.im.proto.ProtoMessage.MessageResponse result = new org.vico.im.proto.ProtoMessage.MessageResponse(this);
+        result.status_ = status_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.vico.im.proto.ProtoMessage.MessageResponse) {
+          return mergeFrom((org.vico.im.proto.ProtoMessage.MessageResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.vico.im.proto.ProtoMessage.MessageResponse other) {
+        if (other == org.vico.im.proto.ProtoMessage.MessageResponse.getDefaultInstance()) return this;
+        if (other.status_ != 0) {
+          setStatusValue(other.getStatusValue());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.vico.im.proto.ProtoMessage.MessageResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.vico.im.proto.ProtoMessage.MessageResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int status_ = 0;
+      /**
+       * <pre>
+       *接收状态
+       * </pre>
+       *
+       * <code>.proto.MessageStatus status = 1;</code>
+       * @return The enum numeric value on the wire for status.
+       */
+      @java.lang.Override public int getStatusValue() {
+        return status_;
+      }
+      /**
+       * <pre>
+       *接收状态
+       * </pre>
+       *
+       * <code>.proto.MessageStatus status = 1;</code>
+       * @param value The enum numeric value on the wire for status to set.
+       * @return This builder for chaining.
+       */
+      public Builder setStatusValue(int value) {
+        
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *接收状态
+       * </pre>
+       *
+       * <code>.proto.MessageStatus status = 1;</code>
+       * @return The status.
+       */
+      @java.lang.Override
+      public org.vico.im.proto.ProtoMessage.MessageStatus getStatus() {
+        @SuppressWarnings("deprecation")
+        org.vico.im.proto.ProtoMessage.MessageStatus result = org.vico.im.proto.ProtoMessage.MessageStatus.valueOf(status_);
+        return result == null ? org.vico.im.proto.ProtoMessage.MessageStatus.UNRECOGNIZED : result;
+      }
+      /**
+       * <pre>
+       *接收状态
+       * </pre>
+       *
+       * <code>.proto.MessageStatus status = 1;</code>
+       * @param value The status to set.
+       * @return This builder for chaining.
+       */
+      public Builder setStatus(org.vico.im.proto.ProtoMessage.MessageStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        status_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *接收状态
+       * </pre>
+       *
+       * <code>.proto.MessageStatus status = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearStatus() {
+        
+        status_ = 0;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:proto.MessageResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:proto.MessageResponse)
+    private static final org.vico.im.proto.ProtoMessage.MessageResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new org.vico.im.proto.ProtoMessage.MessageResponse();
+    }
+
+    public static org.vico.im.proto.ProtoMessage.MessageResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<MessageResponse>
+        PARSER = new com.google.protobuf.AbstractParser<MessageResponse>() {
+      @java.lang.Override
+      public MessageResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new MessageResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<MessageResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<MessageResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public org.vico.im.proto.ProtoMessage.MessageResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ConnectResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:proto.ConnectResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     *sessionId
+     * </pre>
+     *
+     * <code>string sessionId = 1;</code>
+     * @return The sessionId.
+     */
+    java.lang.String getSessionId();
+    /**
+     * <pre>
+     *sessionId
+     * </pre>
+     *
+     * <code>string sessionId = 1;</code>
+     * @return The bytes for sessionId.
+     */
+    com.google.protobuf.ByteString
+        getSessionIdBytes();
+
+    /**
+     * <pre>
+     * secret key
+     * </pre>
+     *
+     * <code>string key = 2;</code>
+     * @return The key.
+     */
+    java.lang.String getKey();
+    /**
+     * <pre>
+     * secret key
+     * </pre>
+     *
+     * <code>string key = 2;</code>
+     * @return The bytes for key.
+     */
+    com.google.protobuf.ByteString
+        getKeyBytes();
+  }
+  /**
+   * <pre>
+   *连接响应
+   * </pre>
+   *
+   * Protobuf type {@code proto.ConnectResponse}
+   */
+  public static final class ConnectResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:proto.ConnectResponse)
+      ConnectResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ConnectResponse.newBuilder() to construct.
+    private ConnectResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ConnectResponse() {
+      sessionId_ = "";
+      key_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ConnectResponse();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ConnectResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              sessionId_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              key_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.vico.im.proto.ProtoMessage.internal_static_proto_ConnectResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.vico.im.proto.ProtoMessage.internal_static_proto_ConnectResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.vico.im.proto.ProtoMessage.ConnectResponse.class, org.vico.im.proto.ProtoMessage.ConnectResponse.Builder.class);
+    }
+
+    public static final int SESSIONID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object sessionId_;
+    /**
+     * <pre>
+     *sessionId
+     * </pre>
+     *
+     * <code>string sessionId = 1;</code>
+     * @return The sessionId.
+     */
+    @java.lang.Override
+    public java.lang.String getSessionId() {
+      java.lang.Object ref = sessionId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        sessionId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *sessionId
+     * </pre>
+     *
+     * <code>string sessionId = 1;</code>
+     * @return The bytes for sessionId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getSessionIdBytes() {
+      java.lang.Object ref = sessionId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sessionId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int KEY_FIELD_NUMBER = 2;
+    private volatile java.lang.Object key_;
+    /**
+     * <pre>
+     * secret key
+     * </pre>
+     *
+     * <code>string key = 2;</code>
+     * @return The key.
+     */
+    @java.lang.Override
+    public java.lang.String getKey() {
+      java.lang.Object ref = key_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        key_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * secret key
+     * </pre>
+     *
+     * <code>string key = 2;</code>
+     * @return The bytes for key.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getKeyBytes() {
+      java.lang.Object ref = key_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        key_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getSessionIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, sessionId_);
+      }
+      if (!getKeyBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, key_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getSessionIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, sessionId_);
+      }
+      if (!getKeyBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, key_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.vico.im.proto.ProtoMessage.ConnectResponse)) {
+        return super.equals(obj);
+      }
+      org.vico.im.proto.ProtoMessage.ConnectResponse other = (org.vico.im.proto.ProtoMessage.ConnectResponse) obj;
+
+      if (!getSessionId()
+          .equals(other.getSessionId())) return false;
+      if (!getKey()
+          .equals(other.getKey())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + SESSIONID_FIELD_NUMBER;
+      hash = (53 * hash) + getSessionId().hashCode();
+      hash = (37 * hash) + KEY_FIELD_NUMBER;
+      hash = (53 * hash) + getKey().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.vico.im.proto.ProtoMessage.ConnectResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.vico.im.proto.ProtoMessage.ConnectResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.ConnectResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.vico.im.proto.ProtoMessage.ConnectResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.ConnectResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.vico.im.proto.ProtoMessage.ConnectResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.ConnectResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.vico.im.proto.ProtoMessage.ConnectResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.ConnectResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static org.vico.im.proto.ProtoMessage.ConnectResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.ConnectResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.vico.im.proto.ProtoMessage.ConnectResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(org.vico.im.proto.ProtoMessage.ConnectResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *连接响应
+     * </pre>
+     *
+     * Protobuf type {@code proto.ConnectResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:proto.ConnectResponse)
+        org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.vico.im.proto.ProtoMessage.internal_static_proto_ConnectResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.vico.im.proto.ProtoMessage.internal_static_proto_ConnectResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.vico.im.proto.ProtoMessage.ConnectResponse.class, org.vico.im.proto.ProtoMessage.ConnectResponse.Builder.class);
+      }
+
+      // Construct using org.vico.im.proto.ProtoMessage.ConnectResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        sessionId_ = "";
+
+        key_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.vico.im.proto.ProtoMessage.internal_static_proto_ConnectResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public org.vico.im.proto.ProtoMessage.ConnectResponse getDefaultInstanceForType() {
+        return org.vico.im.proto.ProtoMessage.ConnectResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public org.vico.im.proto.ProtoMessage.ConnectResponse build() {
+        org.vico.im.proto.ProtoMessage.ConnectResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public org.vico.im.proto.ProtoMessage.ConnectResponse buildPartial() {
+        org.vico.im.proto.ProtoMessage.ConnectResponse result = new org.vico.im.proto.ProtoMessage.ConnectResponse(this);
+        result.sessionId_ = sessionId_;
+        result.key_ = key_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.vico.im.proto.ProtoMessage.ConnectResponse) {
+          return mergeFrom((org.vico.im.proto.ProtoMessage.ConnectResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.vico.im.proto.ProtoMessage.ConnectResponse other) {
+        if (other == org.vico.im.proto.ProtoMessage.ConnectResponse.getDefaultInstance()) return this;
+        if (!other.getSessionId().isEmpty()) {
+          sessionId_ = other.sessionId_;
+          onChanged();
+        }
+        if (!other.getKey().isEmpty()) {
+          key_ = other.key_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.vico.im.proto.ProtoMessage.ConnectResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.vico.im.proto.ProtoMessage.ConnectResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object sessionId_ = "";
+      /**
+       * <pre>
+       *sessionId
+       * </pre>
+       *
+       * <code>string sessionId = 1;</code>
+       * @return The sessionId.
+       */
+      public java.lang.String getSessionId() {
+        java.lang.Object ref = sessionId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          sessionId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *sessionId
+       * </pre>
+       *
+       * <code>string sessionId = 1;</code>
+       * @return The bytes for sessionId.
+       */
+      public com.google.protobuf.ByteString
+          getSessionIdBytes() {
+        java.lang.Object ref = sessionId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sessionId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *sessionId
+       * </pre>
+       *
+       * <code>string sessionId = 1;</code>
+       * @param value The sessionId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSessionId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        sessionId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *sessionId
+       * </pre>
+       *
+       * <code>string sessionId = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSessionId() {
+        
+        sessionId_ = getDefaultInstance().getSessionId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *sessionId
+       * </pre>
+       *
+       * <code>string sessionId = 1;</code>
+       * @param value The bytes for sessionId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSessionIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        sessionId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object key_ = "";
+      /**
+       * <pre>
+       * secret key
+       * </pre>
+       *
+       * <code>string key = 2;</code>
+       * @return The key.
+       */
+      public java.lang.String getKey() {
+        java.lang.Object ref = key_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          key_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * secret key
+       * </pre>
+       *
+       * <code>string key = 2;</code>
+       * @return The bytes for key.
+       */
+      public com.google.protobuf.ByteString
+          getKeyBytes() {
+        java.lang.Object ref = key_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          key_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * secret key
+       * </pre>
+       *
+       * <code>string key = 2;</code>
+       * @param value The key to set.
+       * @return This builder for chaining.
+       */
+      public Builder setKey(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        key_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * secret key
+       * </pre>
+       *
+       * <code>string key = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearKey() {
+        
+        key_ = getDefaultInstance().getKey();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * secret key
+       * </pre>
+       *
+       * <code>string key = 2;</code>
+       * @param value The bytes for key to set.
+       * @return This builder for chaining.
+       */
+      public Builder setKeyBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        key_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:proto.ConnectResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:proto.ConnectResponse)
+    private static final org.vico.im.proto.ProtoMessage.ConnectResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new org.vico.im.proto.ProtoMessage.ConnectResponse();
+    }
+
+    public static org.vico.im.proto.ProtoMessage.ConnectResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ConnectResponse>
+        PARSER = new com.google.protobuf.AbstractParser<ConnectResponse>() {
+      @java.lang.Override
+      public ConnectResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ConnectResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ConnectResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ConnectResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public org.vico.im.proto.ProtoMessage.ConnectResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface AggregatedMessageOrBuilder extends
       // @@protoc_insertion_point(interface_extends:proto.AggregatedMessage)
       com.google.protobuf.MessageOrBuilder {
@@ -3297,124 +3762,151 @@ public final class ProtoMessage {
 
     /**
      * <pre>
-     * sessionId
+     *状态码
      * </pre>
      *
-     * <code>string sessionId = 2;</code>
-     * @return The sessionId.
+     * <code>int32 code = 2;</code>
+     * @return The code.
      */
-    java.lang.String getSessionId();
+    int getCode();
+
     /**
      * <pre>
-     * sessionId
+     *提示
      * </pre>
      *
-     * <code>string sessionId = 2;</code>
-     * @return The bytes for sessionId.
+     * <code>string msg = 3;</code>
+     * @return The msg.
+     */
+    java.lang.String getMsg();
+    /**
+     * <pre>
+     *提示
+     * </pre>
+     *
+     * <code>string msg = 3;</code>
+     * @return The bytes for msg.
      */
     com.google.protobuf.ByteString
-        getSessionIdBytes();
-
-    /**
-     * <pre>
-     * token
-     * </pre>
-     *
-     * <code>string token = 3;</code>
-     * @return The token.
-     */
-    java.lang.String getToken();
-    /**
-     * <pre>
-     * token
-     * </pre>
-     *
-     * <code>string token = 3;</code>
-     * @return The bytes for token.
-     */
-    com.google.protobuf.ByteString
-        getTokenBytes();
+        getMsgBytes();
 
     /**
      * <pre>
      * 连接消息
      * </pre>
      *
-     * <code>.proto.ConnectRequest connectMsg = 4;</code>
-     * @return Whether the connectMsg field is set.
+     * <code>.proto.ConnectRequest connectReq = 5;</code>
+     * @return Whether the connectReq field is set.
      */
-    boolean hasConnectMsg();
+    boolean hasConnectReq();
     /**
      * <pre>
      * 连接消息
      * </pre>
      *
-     * <code>.proto.ConnectRequest connectMsg = 4;</code>
-     * @return The connectMsg.
+     * <code>.proto.ConnectRequest connectReq = 5;</code>
+     * @return The connectReq.
      */
-    org.vico.im.proto.ProtoMessage.ConnectRequest getConnectMsg();
+    org.vico.im.proto.ProtoMessage.ConnectRequest getConnectReq();
     /**
      * <pre>
      * 连接消息
      * </pre>
      *
-     * <code>.proto.ConnectRequest connectMsg = 4;</code>
+     * <code>.proto.ConnectRequest connectReq = 5;</code>
      */
-    org.vico.im.proto.ProtoMessage.ConnectRequestOrBuilder getConnectMsgOrBuilder();
+    org.vico.im.proto.ProtoMessage.ConnectRequestOrBuilder getConnectReqOrBuilder();
 
     /**
      * <pre>
      * 文字消息
      * </pre>
      *
-     * <code>.proto.TextMessageRequest textMsg = 5;</code>
-     * @return Whether the textMsg field is set.
+     * <code>.proto.TextMessageRequest textMsgReq = 6;</code>
+     * @return Whether the textMsgReq field is set.
      */
-    boolean hasTextMsg();
+    boolean hasTextMsgReq();
     /**
      * <pre>
      * 文字消息
      * </pre>
      *
-     * <code>.proto.TextMessageRequest textMsg = 5;</code>
-     * @return The textMsg.
+     * <code>.proto.TextMessageRequest textMsgReq = 6;</code>
+     * @return The textMsgReq.
      */
-    org.vico.im.proto.ProtoMessage.TextMessageRequest getTextMsg();
+    org.vico.im.proto.ProtoMessage.TextMessageRequest getTextMsgReq();
     /**
      * <pre>
      * 文字消息
      * </pre>
      *
-     * <code>.proto.TextMessageRequest textMsg = 5;</code>
+     * <code>.proto.TextMessageRequest textMsgReq = 6;</code>
      */
-    org.vico.im.proto.ProtoMessage.TextMessageRequestOrBuilder getTextMsgOrBuilder();
+    org.vico.im.proto.ProtoMessage.TextMessageRequestOrBuilder getTextMsgReqOrBuilder();
 
     /**
      * <pre>
-     * 公共响应
+     * 连接响应
      * </pre>
      *
-     * <code>.proto.CommonResponse commonRes = 6;</code>
-     * @return Whether the commonRes field is set.
+     * <code>.proto.ConnectResponse connectResp = 7;</code>
+     * @return Whether the connectResp field is set.
      */
-    boolean hasCommonRes();
+    boolean hasConnectResp();
     /**
      * <pre>
-     * 公共响应
+     * 连接响应
      * </pre>
      *
-     * <code>.proto.CommonResponse commonRes = 6;</code>
-     * @return The commonRes.
+     * <code>.proto.ConnectResponse connectResp = 7;</code>
+     * @return The connectResp.
      */
-    org.vico.im.proto.ProtoMessage.CommonResponse getCommonRes();
+    org.vico.im.proto.ProtoMessage.ConnectResponse getConnectResp();
     /**
      * <pre>
-     * 公共响应
+     * 连接响应
      * </pre>
      *
-     * <code>.proto.CommonResponse commonRes = 6;</code>
+     * <code>.proto.ConnectResponse connectResp = 7;</code>
      */
-    org.vico.im.proto.ProtoMessage.CommonResponseOrBuilder getCommonResOrBuilder();
+    org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder getConnectRespOrBuilder();
+
+    /**
+     * <pre>
+     * 消息响应
+     * </pre>
+     *
+     * <code>.proto.MessageResponse messageResp = 8;</code>
+     * @return Whether the messageResp field is set.
+     */
+    boolean hasMessageResp();
+    /**
+     * <pre>
+     * 消息响应
+     * </pre>
+     *
+     * <code>.proto.MessageResponse messageResp = 8;</code>
+     * @return The messageResp.
+     */
+    org.vico.im.proto.ProtoMessage.MessageResponse getMessageResp();
+    /**
+     * <pre>
+     * 消息响应
+     * </pre>
+     *
+     * <code>.proto.MessageResponse messageResp = 8;</code>
+     */
+    org.vico.im.proto.ProtoMessage.MessageResponseOrBuilder getMessageRespOrBuilder();
+
+    /**
+     * <pre>
+     *时间
+     * </pre>
+     *
+     * <code>uint64 time = 9;</code>
+     * @return The time.
+     */
+    long getTime();
   }
   /**
    * <pre>
@@ -3434,8 +3926,7 @@ public final class ProtoMessage {
     }
     private AggregatedMessage() {
       commandType_ = 0;
-      sessionId_ = "";
-      token_ = "";
+      msg_ = "";
     }
 
     @java.lang.Override
@@ -3474,55 +3965,72 @@ public final class ProtoMessage {
               commandType_ = rawValue;
               break;
             }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
+            case 16: {
 
-              sessionId_ = s;
+              code_ = input.readInt32();
               break;
             }
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              token_ = s;
-              break;
-            }
-            case 34: {
-              org.vico.im.proto.ProtoMessage.ConnectRequest.Builder subBuilder = null;
-              if (connectMsg_ != null) {
-                subBuilder = connectMsg_.toBuilder();
-              }
-              connectMsg_ = input.readMessage(org.vico.im.proto.ProtoMessage.ConnectRequest.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(connectMsg_);
-                connectMsg_ = subBuilder.buildPartial();
-              }
-
+              msg_ = s;
               break;
             }
             case 42: {
-              org.vico.im.proto.ProtoMessage.TextMessageRequest.Builder subBuilder = null;
-              if (textMsg_ != null) {
-                subBuilder = textMsg_.toBuilder();
+              org.vico.im.proto.ProtoMessage.ConnectRequest.Builder subBuilder = null;
+              if (connectReq_ != null) {
+                subBuilder = connectReq_.toBuilder();
               }
-              textMsg_ = input.readMessage(org.vico.im.proto.ProtoMessage.TextMessageRequest.parser(), extensionRegistry);
+              connectReq_ = input.readMessage(org.vico.im.proto.ProtoMessage.ConnectRequest.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(textMsg_);
-                textMsg_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(connectReq_);
+                connectReq_ = subBuilder.buildPartial();
               }
 
               break;
             }
             case 50: {
-              org.vico.im.proto.ProtoMessage.CommonResponse.Builder subBuilder = null;
-              if (commonRes_ != null) {
-                subBuilder = commonRes_.toBuilder();
+              org.vico.im.proto.ProtoMessage.TextMessageRequest.Builder subBuilder = null;
+              if (textMsgReq_ != null) {
+                subBuilder = textMsgReq_.toBuilder();
               }
-              commonRes_ = input.readMessage(org.vico.im.proto.ProtoMessage.CommonResponse.parser(), extensionRegistry);
+              textMsgReq_ = input.readMessage(org.vico.im.proto.ProtoMessage.TextMessageRequest.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(commonRes_);
-                commonRes_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(textMsgReq_);
+                textMsgReq_ = subBuilder.buildPartial();
               }
 
+              break;
+            }
+            case 58: {
+              org.vico.im.proto.ProtoMessage.ConnectResponse.Builder subBuilder = null;
+              if (connectResp_ != null) {
+                subBuilder = connectResp_.toBuilder();
+              }
+              connectResp_ = input.readMessage(org.vico.im.proto.ProtoMessage.ConnectResponse.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(connectResp_);
+                connectResp_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 66: {
+              org.vico.im.proto.ProtoMessage.MessageResponse.Builder subBuilder = null;
+              if (messageResp_ != null) {
+                subBuilder = messageResp_.toBuilder();
+              }
+              messageResp_ = input.readMessage(org.vico.im.proto.ProtoMessage.MessageResponse.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(messageResp_);
+                messageResp_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 72: {
+
+              time_ = input.readUInt64();
               break;
             }
             default: {
@@ -3584,210 +4092,232 @@ public final class ProtoMessage {
       return result == null ? org.vico.im.proto.ProtoMessage.CommandType.UNRECOGNIZED : result;
     }
 
-    public static final int SESSIONID_FIELD_NUMBER = 2;
-    private volatile java.lang.Object sessionId_;
+    public static final int CODE_FIELD_NUMBER = 2;
+    private int code_;
     /**
      * <pre>
-     * sessionId
+     *状态码
      * </pre>
      *
-     * <code>string sessionId = 2;</code>
-     * @return The sessionId.
+     * <code>int32 code = 2;</code>
+     * @return The code.
      */
     @java.lang.Override
-    public java.lang.String getSessionId() {
-      java.lang.Object ref = sessionId_;
+    public int getCode() {
+      return code_;
+    }
+
+    public static final int MSG_FIELD_NUMBER = 3;
+    private volatile java.lang.Object msg_;
+    /**
+     * <pre>
+     *提示
+     * </pre>
+     *
+     * <code>string msg = 3;</code>
+     * @return The msg.
+     */
+    @java.lang.Override
+    public java.lang.String getMsg() {
+      java.lang.Object ref = msg_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        sessionId_ = s;
+        msg_ = s;
         return s;
       }
     }
     /**
      * <pre>
-     * sessionId
+     *提示
      * </pre>
      *
-     * <code>string sessionId = 2;</code>
-     * @return The bytes for sessionId.
+     * <code>string msg = 3;</code>
+     * @return The bytes for msg.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getSessionIdBytes() {
-      java.lang.Object ref = sessionId_;
+        getMsgBytes() {
+      java.lang.Object ref = msg_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        sessionId_ = b;
+        msg_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int TOKEN_FIELD_NUMBER = 3;
-    private volatile java.lang.Object token_;
-    /**
-     * <pre>
-     * token
-     * </pre>
-     *
-     * <code>string token = 3;</code>
-     * @return The token.
-     */
-    @java.lang.Override
-    public java.lang.String getToken() {
-      java.lang.Object ref = token_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        token_ = s;
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     * token
-     * </pre>
-     *
-     * <code>string token = 3;</code>
-     * @return The bytes for token.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getTokenBytes() {
-      java.lang.Object ref = token_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        token_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int CONNECTMSG_FIELD_NUMBER = 4;
-    private org.vico.im.proto.ProtoMessage.ConnectRequest connectMsg_;
+    public static final int CONNECTREQ_FIELD_NUMBER = 5;
+    private org.vico.im.proto.ProtoMessage.ConnectRequest connectReq_;
     /**
      * <pre>
      * 连接消息
      * </pre>
      *
-     * <code>.proto.ConnectRequest connectMsg = 4;</code>
-     * @return Whether the connectMsg field is set.
+     * <code>.proto.ConnectRequest connectReq = 5;</code>
+     * @return Whether the connectReq field is set.
      */
     @java.lang.Override
-    public boolean hasConnectMsg() {
-      return connectMsg_ != null;
+    public boolean hasConnectReq() {
+      return connectReq_ != null;
     }
     /**
      * <pre>
      * 连接消息
      * </pre>
      *
-     * <code>.proto.ConnectRequest connectMsg = 4;</code>
-     * @return The connectMsg.
+     * <code>.proto.ConnectRequest connectReq = 5;</code>
+     * @return The connectReq.
      */
     @java.lang.Override
-    public org.vico.im.proto.ProtoMessage.ConnectRequest getConnectMsg() {
-      return connectMsg_ == null ? org.vico.im.proto.ProtoMessage.ConnectRequest.getDefaultInstance() : connectMsg_;
+    public org.vico.im.proto.ProtoMessage.ConnectRequest getConnectReq() {
+      return connectReq_ == null ? org.vico.im.proto.ProtoMessage.ConnectRequest.getDefaultInstance() : connectReq_;
     }
     /**
      * <pre>
      * 连接消息
      * </pre>
      *
-     * <code>.proto.ConnectRequest connectMsg = 4;</code>
+     * <code>.proto.ConnectRequest connectReq = 5;</code>
      */
     @java.lang.Override
-    public org.vico.im.proto.ProtoMessage.ConnectRequestOrBuilder getConnectMsgOrBuilder() {
-      return getConnectMsg();
+    public org.vico.im.proto.ProtoMessage.ConnectRequestOrBuilder getConnectReqOrBuilder() {
+      return getConnectReq();
     }
 
-    public static final int TEXTMSG_FIELD_NUMBER = 5;
-    private org.vico.im.proto.ProtoMessage.TextMessageRequest textMsg_;
+    public static final int TEXTMSGREQ_FIELD_NUMBER = 6;
+    private org.vico.im.proto.ProtoMessage.TextMessageRequest textMsgReq_;
     /**
      * <pre>
      * 文字消息
      * </pre>
      *
-     * <code>.proto.TextMessageRequest textMsg = 5;</code>
-     * @return Whether the textMsg field is set.
+     * <code>.proto.TextMessageRequest textMsgReq = 6;</code>
+     * @return Whether the textMsgReq field is set.
      */
     @java.lang.Override
-    public boolean hasTextMsg() {
-      return textMsg_ != null;
+    public boolean hasTextMsgReq() {
+      return textMsgReq_ != null;
     }
     /**
      * <pre>
      * 文字消息
      * </pre>
      *
-     * <code>.proto.TextMessageRequest textMsg = 5;</code>
-     * @return The textMsg.
+     * <code>.proto.TextMessageRequest textMsgReq = 6;</code>
+     * @return The textMsgReq.
      */
     @java.lang.Override
-    public org.vico.im.proto.ProtoMessage.TextMessageRequest getTextMsg() {
-      return textMsg_ == null ? org.vico.im.proto.ProtoMessage.TextMessageRequest.getDefaultInstance() : textMsg_;
+    public org.vico.im.proto.ProtoMessage.TextMessageRequest getTextMsgReq() {
+      return textMsgReq_ == null ? org.vico.im.proto.ProtoMessage.TextMessageRequest.getDefaultInstance() : textMsgReq_;
     }
     /**
      * <pre>
      * 文字消息
      * </pre>
      *
-     * <code>.proto.TextMessageRequest textMsg = 5;</code>
+     * <code>.proto.TextMessageRequest textMsgReq = 6;</code>
      */
     @java.lang.Override
-    public org.vico.im.proto.ProtoMessage.TextMessageRequestOrBuilder getTextMsgOrBuilder() {
-      return getTextMsg();
+    public org.vico.im.proto.ProtoMessage.TextMessageRequestOrBuilder getTextMsgReqOrBuilder() {
+      return getTextMsgReq();
     }
 
-    public static final int COMMONRES_FIELD_NUMBER = 6;
-    private org.vico.im.proto.ProtoMessage.CommonResponse commonRes_;
+    public static final int CONNECTRESP_FIELD_NUMBER = 7;
+    private org.vico.im.proto.ProtoMessage.ConnectResponse connectResp_;
     /**
      * <pre>
-     * 公共响应
+     * 连接响应
      * </pre>
      *
-     * <code>.proto.CommonResponse commonRes = 6;</code>
-     * @return Whether the commonRes field is set.
+     * <code>.proto.ConnectResponse connectResp = 7;</code>
+     * @return Whether the connectResp field is set.
      */
     @java.lang.Override
-    public boolean hasCommonRes() {
-      return commonRes_ != null;
+    public boolean hasConnectResp() {
+      return connectResp_ != null;
     }
     /**
      * <pre>
-     * 公共响应
+     * 连接响应
      * </pre>
      *
-     * <code>.proto.CommonResponse commonRes = 6;</code>
-     * @return The commonRes.
+     * <code>.proto.ConnectResponse connectResp = 7;</code>
+     * @return The connectResp.
      */
     @java.lang.Override
-    public org.vico.im.proto.ProtoMessage.CommonResponse getCommonRes() {
-      return commonRes_ == null ? org.vico.im.proto.ProtoMessage.CommonResponse.getDefaultInstance() : commonRes_;
+    public org.vico.im.proto.ProtoMessage.ConnectResponse getConnectResp() {
+      return connectResp_ == null ? org.vico.im.proto.ProtoMessage.ConnectResponse.getDefaultInstance() : connectResp_;
     }
     /**
      * <pre>
-     * 公共响应
+     * 连接响应
      * </pre>
      *
-     * <code>.proto.CommonResponse commonRes = 6;</code>
+     * <code>.proto.ConnectResponse connectResp = 7;</code>
      */
     @java.lang.Override
-    public org.vico.im.proto.ProtoMessage.CommonResponseOrBuilder getCommonResOrBuilder() {
-      return getCommonRes();
+    public org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder getConnectRespOrBuilder() {
+      return getConnectResp();
+    }
+
+    public static final int MESSAGERESP_FIELD_NUMBER = 8;
+    private org.vico.im.proto.ProtoMessage.MessageResponse messageResp_;
+    /**
+     * <pre>
+     * 消息响应
+     * </pre>
+     *
+     * <code>.proto.MessageResponse messageResp = 8;</code>
+     * @return Whether the messageResp field is set.
+     */
+    @java.lang.Override
+    public boolean hasMessageResp() {
+      return messageResp_ != null;
+    }
+    /**
+     * <pre>
+     * 消息响应
+     * </pre>
+     *
+     * <code>.proto.MessageResponse messageResp = 8;</code>
+     * @return The messageResp.
+     */
+    @java.lang.Override
+    public org.vico.im.proto.ProtoMessage.MessageResponse getMessageResp() {
+      return messageResp_ == null ? org.vico.im.proto.ProtoMessage.MessageResponse.getDefaultInstance() : messageResp_;
+    }
+    /**
+     * <pre>
+     * 消息响应
+     * </pre>
+     *
+     * <code>.proto.MessageResponse messageResp = 8;</code>
+     */
+    @java.lang.Override
+    public org.vico.im.proto.ProtoMessage.MessageResponseOrBuilder getMessageRespOrBuilder() {
+      return getMessageResp();
+    }
+
+    public static final int TIME_FIELD_NUMBER = 9;
+    private long time_;
+    /**
+     * <pre>
+     *时间
+     * </pre>
+     *
+     * <code>uint64 time = 9;</code>
+     * @return The time.
+     */
+    @java.lang.Override
+    public long getTime() {
+      return time_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -3807,20 +4337,26 @@ public final class ProtoMessage {
       if (commandType_ != org.vico.im.proto.ProtoMessage.CommandType.CONNECT_REQUEST.getNumber()) {
         output.writeEnum(1, commandType_);
       }
-      if (!getSessionIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, sessionId_);
+      if (code_ != 0) {
+        output.writeInt32(2, code_);
       }
-      if (!getTokenBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, token_);
+      if (!getMsgBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, msg_);
       }
-      if (connectMsg_ != null) {
-        output.writeMessage(4, getConnectMsg());
+      if (connectReq_ != null) {
+        output.writeMessage(5, getConnectReq());
       }
-      if (textMsg_ != null) {
-        output.writeMessage(5, getTextMsg());
+      if (textMsgReq_ != null) {
+        output.writeMessage(6, getTextMsgReq());
       }
-      if (commonRes_ != null) {
-        output.writeMessage(6, getCommonRes());
+      if (connectResp_ != null) {
+        output.writeMessage(7, getConnectResp());
+      }
+      if (messageResp_ != null) {
+        output.writeMessage(8, getMessageResp());
+      }
+      if (time_ != 0L) {
+        output.writeUInt64(9, time_);
       }
       unknownFields.writeTo(output);
     }
@@ -3835,23 +4371,32 @@ public final class ProtoMessage {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, commandType_);
       }
-      if (!getSessionIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, sessionId_);
-      }
-      if (!getTokenBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, token_);
-      }
-      if (connectMsg_ != null) {
+      if (code_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getConnectMsg());
+          .computeInt32Size(2, code_);
       }
-      if (textMsg_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, getTextMsg());
+      if (!getMsgBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, msg_);
       }
-      if (commonRes_ != null) {
+      if (connectReq_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, getCommonRes());
+          .computeMessageSize(5, getConnectReq());
+      }
+      if (textMsgReq_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, getTextMsgReq());
+      }
+      if (connectResp_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, getConnectResp());
+      }
+      if (messageResp_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, getMessageResp());
+      }
+      if (time_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(9, time_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3869,25 +4414,32 @@ public final class ProtoMessage {
       org.vico.im.proto.ProtoMessage.AggregatedMessage other = (org.vico.im.proto.ProtoMessage.AggregatedMessage) obj;
 
       if (commandType_ != other.commandType_) return false;
-      if (!getSessionId()
-          .equals(other.getSessionId())) return false;
-      if (!getToken()
-          .equals(other.getToken())) return false;
-      if (hasConnectMsg() != other.hasConnectMsg()) return false;
-      if (hasConnectMsg()) {
-        if (!getConnectMsg()
-            .equals(other.getConnectMsg())) return false;
+      if (getCode()
+          != other.getCode()) return false;
+      if (!getMsg()
+          .equals(other.getMsg())) return false;
+      if (hasConnectReq() != other.hasConnectReq()) return false;
+      if (hasConnectReq()) {
+        if (!getConnectReq()
+            .equals(other.getConnectReq())) return false;
       }
-      if (hasTextMsg() != other.hasTextMsg()) return false;
-      if (hasTextMsg()) {
-        if (!getTextMsg()
-            .equals(other.getTextMsg())) return false;
+      if (hasTextMsgReq() != other.hasTextMsgReq()) return false;
+      if (hasTextMsgReq()) {
+        if (!getTextMsgReq()
+            .equals(other.getTextMsgReq())) return false;
       }
-      if (hasCommonRes() != other.hasCommonRes()) return false;
-      if (hasCommonRes()) {
-        if (!getCommonRes()
-            .equals(other.getCommonRes())) return false;
+      if (hasConnectResp() != other.hasConnectResp()) return false;
+      if (hasConnectResp()) {
+        if (!getConnectResp()
+            .equals(other.getConnectResp())) return false;
       }
+      if (hasMessageResp() != other.hasMessageResp()) return false;
+      if (hasMessageResp()) {
+        if (!getMessageResp()
+            .equals(other.getMessageResp())) return false;
+      }
+      if (getTime()
+          != other.getTime()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -3901,22 +4453,29 @@ public final class ProtoMessage {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + COMMANDTYPE_FIELD_NUMBER;
       hash = (53 * hash) + commandType_;
-      hash = (37 * hash) + SESSIONID_FIELD_NUMBER;
-      hash = (53 * hash) + getSessionId().hashCode();
-      hash = (37 * hash) + TOKEN_FIELD_NUMBER;
-      hash = (53 * hash) + getToken().hashCode();
-      if (hasConnectMsg()) {
-        hash = (37 * hash) + CONNECTMSG_FIELD_NUMBER;
-        hash = (53 * hash) + getConnectMsg().hashCode();
+      hash = (37 * hash) + CODE_FIELD_NUMBER;
+      hash = (53 * hash) + getCode();
+      hash = (37 * hash) + MSG_FIELD_NUMBER;
+      hash = (53 * hash) + getMsg().hashCode();
+      if (hasConnectReq()) {
+        hash = (37 * hash) + CONNECTREQ_FIELD_NUMBER;
+        hash = (53 * hash) + getConnectReq().hashCode();
       }
-      if (hasTextMsg()) {
-        hash = (37 * hash) + TEXTMSG_FIELD_NUMBER;
-        hash = (53 * hash) + getTextMsg().hashCode();
+      if (hasTextMsgReq()) {
+        hash = (37 * hash) + TEXTMSGREQ_FIELD_NUMBER;
+        hash = (53 * hash) + getTextMsgReq().hashCode();
       }
-      if (hasCommonRes()) {
-        hash = (37 * hash) + COMMONRES_FIELD_NUMBER;
-        hash = (53 * hash) + getCommonRes().hashCode();
+      if (hasConnectResp()) {
+        hash = (37 * hash) + CONNECTRESP_FIELD_NUMBER;
+        hash = (53 * hash) + getConnectResp().hashCode();
       }
+      if (hasMessageResp()) {
+        hash = (37 * hash) + MESSAGERESP_FIELD_NUMBER;
+        hash = (53 * hash) + getMessageResp().hashCode();
+      }
+      hash = (37 * hash) + TIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getTime());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -4056,28 +4615,36 @@ public final class ProtoMessage {
         super.clear();
         commandType_ = 0;
 
-        sessionId_ = "";
+        code_ = 0;
 
-        token_ = "";
+        msg_ = "";
 
-        if (connectMsgBuilder_ == null) {
-          connectMsg_ = null;
+        if (connectReqBuilder_ == null) {
+          connectReq_ = null;
         } else {
-          connectMsg_ = null;
-          connectMsgBuilder_ = null;
+          connectReq_ = null;
+          connectReqBuilder_ = null;
         }
-        if (textMsgBuilder_ == null) {
-          textMsg_ = null;
+        if (textMsgReqBuilder_ == null) {
+          textMsgReq_ = null;
         } else {
-          textMsg_ = null;
-          textMsgBuilder_ = null;
+          textMsgReq_ = null;
+          textMsgReqBuilder_ = null;
         }
-        if (commonResBuilder_ == null) {
-          commonRes_ = null;
+        if (connectRespBuilder_ == null) {
+          connectResp_ = null;
         } else {
-          commonRes_ = null;
-          commonResBuilder_ = null;
+          connectResp_ = null;
+          connectRespBuilder_ = null;
         }
+        if (messageRespBuilder_ == null) {
+          messageResp_ = null;
+        } else {
+          messageResp_ = null;
+          messageRespBuilder_ = null;
+        }
+        time_ = 0L;
+
         return this;
       }
 
@@ -4105,23 +4672,29 @@ public final class ProtoMessage {
       public org.vico.im.proto.ProtoMessage.AggregatedMessage buildPartial() {
         org.vico.im.proto.ProtoMessage.AggregatedMessage result = new org.vico.im.proto.ProtoMessage.AggregatedMessage(this);
         result.commandType_ = commandType_;
-        result.sessionId_ = sessionId_;
-        result.token_ = token_;
-        if (connectMsgBuilder_ == null) {
-          result.connectMsg_ = connectMsg_;
+        result.code_ = code_;
+        result.msg_ = msg_;
+        if (connectReqBuilder_ == null) {
+          result.connectReq_ = connectReq_;
         } else {
-          result.connectMsg_ = connectMsgBuilder_.build();
+          result.connectReq_ = connectReqBuilder_.build();
         }
-        if (textMsgBuilder_ == null) {
-          result.textMsg_ = textMsg_;
+        if (textMsgReqBuilder_ == null) {
+          result.textMsgReq_ = textMsgReq_;
         } else {
-          result.textMsg_ = textMsgBuilder_.build();
+          result.textMsgReq_ = textMsgReqBuilder_.build();
         }
-        if (commonResBuilder_ == null) {
-          result.commonRes_ = commonRes_;
+        if (connectRespBuilder_ == null) {
+          result.connectResp_ = connectResp_;
         } else {
-          result.commonRes_ = commonResBuilder_.build();
+          result.connectResp_ = connectRespBuilder_.build();
         }
+        if (messageRespBuilder_ == null) {
+          result.messageResp_ = messageResp_;
+        } else {
+          result.messageResp_ = messageRespBuilder_.build();
+        }
+        result.time_ = time_;
         onBuilt();
         return result;
       }
@@ -4173,22 +4746,27 @@ public final class ProtoMessage {
         if (other.commandType_ != 0) {
           setCommandTypeValue(other.getCommandTypeValue());
         }
-        if (!other.getSessionId().isEmpty()) {
-          sessionId_ = other.sessionId_;
+        if (other.getCode() != 0) {
+          setCode(other.getCode());
+        }
+        if (!other.getMsg().isEmpty()) {
+          msg_ = other.msg_;
           onChanged();
         }
-        if (!other.getToken().isEmpty()) {
-          token_ = other.token_;
-          onChanged();
+        if (other.hasConnectReq()) {
+          mergeConnectReq(other.getConnectReq());
         }
-        if (other.hasConnectMsg()) {
-          mergeConnectMsg(other.getConnectMsg());
+        if (other.hasTextMsgReq()) {
+          mergeTextMsgReq(other.getTextMsgReq());
         }
-        if (other.hasTextMsg()) {
-          mergeTextMsg(other.getTextMsg());
+        if (other.hasConnectResp()) {
+          mergeConnectResp(other.getConnectResp());
         }
-        if (other.hasCommonRes()) {
-          mergeCommonRes(other.getCommonRes());
+        if (other.hasMessageResp()) {
+          mergeMessageResp(other.getMessageResp());
+        }
+        if (other.getTime() != 0L) {
+          setTime(other.getTime());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -4293,22 +4871,65 @@ public final class ProtoMessage {
         return this;
       }
 
-      private java.lang.Object sessionId_ = "";
+      private int code_ ;
       /**
        * <pre>
-       * sessionId
+       *状态码
        * </pre>
        *
-       * <code>string sessionId = 2;</code>
-       * @return The sessionId.
+       * <code>int32 code = 2;</code>
+       * @return The code.
        */
-      public java.lang.String getSessionId() {
-        java.lang.Object ref = sessionId_;
+      @java.lang.Override
+      public int getCode() {
+        return code_;
+      }
+      /**
+       * <pre>
+       *状态码
+       * </pre>
+       *
+       * <code>int32 code = 2;</code>
+       * @param value The code to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCode(int value) {
+        
+        code_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *状态码
+       * </pre>
+       *
+       * <code>int32 code = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCode() {
+        
+        code_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object msg_ = "";
+      /**
+       * <pre>
+       *提示
+       * </pre>
+       *
+       * <code>string msg = 3;</code>
+       * @return The msg.
+       */
+      public java.lang.String getMsg() {
+        java.lang.Object ref = msg_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          sessionId_ = s;
+          msg_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -4316,20 +4937,20 @@ public final class ProtoMessage {
       }
       /**
        * <pre>
-       * sessionId
+       *提示
        * </pre>
        *
-       * <code>string sessionId = 2;</code>
-       * @return The bytes for sessionId.
+       * <code>string msg = 3;</code>
+       * @return The bytes for msg.
        */
       public com.google.protobuf.ByteString
-          getSessionIdBytes() {
-        java.lang.Object ref = sessionId_;
+          getMsgBytes() {
+        java.lang.Object ref = msg_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          sessionId_ = b;
+          msg_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
@@ -4337,181 +4958,85 @@ public final class ProtoMessage {
       }
       /**
        * <pre>
-       * sessionId
+       *提示
        * </pre>
        *
-       * <code>string sessionId = 2;</code>
-       * @param value The sessionId to set.
+       * <code>string msg = 3;</code>
+       * @param value The msg to set.
        * @return This builder for chaining.
        */
-      public Builder setSessionId(
+      public Builder setMsg(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        sessionId_ = value;
+        msg_ = value;
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * sessionId
+       *提示
        * </pre>
        *
-       * <code>string sessionId = 2;</code>
+       * <code>string msg = 3;</code>
        * @return This builder for chaining.
        */
-      public Builder clearSessionId() {
+      public Builder clearMsg() {
         
-        sessionId_ = getDefaultInstance().getSessionId();
+        msg_ = getDefaultInstance().getMsg();
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * sessionId
+       *提示
        * </pre>
        *
-       * <code>string sessionId = 2;</code>
-       * @param value The bytes for sessionId to set.
+       * <code>string msg = 3;</code>
+       * @param value The bytes for msg to set.
        * @return This builder for chaining.
        */
-      public Builder setSessionIdBytes(
+      public Builder setMsgBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        sessionId_ = value;
+        msg_ = value;
         onChanged();
         return this;
       }
 
-      private java.lang.Object token_ = "";
-      /**
-       * <pre>
-       * token
-       * </pre>
-       *
-       * <code>string token = 3;</code>
-       * @return The token.
-       */
-      public java.lang.String getToken() {
-        java.lang.Object ref = token_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          token_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       * token
-       * </pre>
-       *
-       * <code>string token = 3;</code>
-       * @return The bytes for token.
-       */
-      public com.google.protobuf.ByteString
-          getTokenBytes() {
-        java.lang.Object ref = token_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          token_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       * token
-       * </pre>
-       *
-       * <code>string token = 3;</code>
-       * @param value The token to set.
-       * @return This builder for chaining.
-       */
-      public Builder setToken(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        token_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * token
-       * </pre>
-       *
-       * <code>string token = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearToken() {
-        
-        token_ = getDefaultInstance().getToken();
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * token
-       * </pre>
-       *
-       * <code>string token = 3;</code>
-       * @param value The bytes for token to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTokenBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        token_ = value;
-        onChanged();
-        return this;
-      }
-
-      private org.vico.im.proto.ProtoMessage.ConnectRequest connectMsg_;
+      private org.vico.im.proto.ProtoMessage.ConnectRequest connectReq_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.vico.im.proto.ProtoMessage.ConnectRequest, org.vico.im.proto.ProtoMessage.ConnectRequest.Builder, org.vico.im.proto.ProtoMessage.ConnectRequestOrBuilder> connectMsgBuilder_;
+          org.vico.im.proto.ProtoMessage.ConnectRequest, org.vico.im.proto.ProtoMessage.ConnectRequest.Builder, org.vico.im.proto.ProtoMessage.ConnectRequestOrBuilder> connectReqBuilder_;
       /**
        * <pre>
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectMsg = 4;</code>
-       * @return Whether the connectMsg field is set.
+       * <code>.proto.ConnectRequest connectReq = 5;</code>
+       * @return Whether the connectReq field is set.
        */
-      public boolean hasConnectMsg() {
-        return connectMsgBuilder_ != null || connectMsg_ != null;
+      public boolean hasConnectReq() {
+        return connectReqBuilder_ != null || connectReq_ != null;
       }
       /**
        * <pre>
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectMsg = 4;</code>
-       * @return The connectMsg.
+       * <code>.proto.ConnectRequest connectReq = 5;</code>
+       * @return The connectReq.
        */
-      public org.vico.im.proto.ProtoMessage.ConnectRequest getConnectMsg() {
-        if (connectMsgBuilder_ == null) {
-          return connectMsg_ == null ? org.vico.im.proto.ProtoMessage.ConnectRequest.getDefaultInstance() : connectMsg_;
+      public org.vico.im.proto.ProtoMessage.ConnectRequest getConnectReq() {
+        if (connectReqBuilder_ == null) {
+          return connectReq_ == null ? org.vico.im.proto.ProtoMessage.ConnectRequest.getDefaultInstance() : connectReq_;
         } else {
-          return connectMsgBuilder_.getMessage();
+          return connectReqBuilder_.getMessage();
         }
       }
       /**
@@ -4519,17 +5044,17 @@ public final class ProtoMessage {
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectMsg = 4;</code>
+       * <code>.proto.ConnectRequest connectReq = 5;</code>
        */
-      public Builder setConnectMsg(org.vico.im.proto.ProtoMessage.ConnectRequest value) {
-        if (connectMsgBuilder_ == null) {
+      public Builder setConnectReq(org.vico.im.proto.ProtoMessage.ConnectRequest value) {
+        if (connectReqBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          connectMsg_ = value;
+          connectReq_ = value;
           onChanged();
         } else {
-          connectMsgBuilder_.setMessage(value);
+          connectReqBuilder_.setMessage(value);
         }
 
         return this;
@@ -4539,15 +5064,15 @@ public final class ProtoMessage {
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectMsg = 4;</code>
+       * <code>.proto.ConnectRequest connectReq = 5;</code>
        */
-      public Builder setConnectMsg(
+      public Builder setConnectReq(
           org.vico.im.proto.ProtoMessage.ConnectRequest.Builder builderForValue) {
-        if (connectMsgBuilder_ == null) {
-          connectMsg_ = builderForValue.build();
+        if (connectReqBuilder_ == null) {
+          connectReq_ = builderForValue.build();
           onChanged();
         } else {
-          connectMsgBuilder_.setMessage(builderForValue.build());
+          connectReqBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
@@ -4557,19 +5082,19 @@ public final class ProtoMessage {
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectMsg = 4;</code>
+       * <code>.proto.ConnectRequest connectReq = 5;</code>
        */
-      public Builder mergeConnectMsg(org.vico.im.proto.ProtoMessage.ConnectRequest value) {
-        if (connectMsgBuilder_ == null) {
-          if (connectMsg_ != null) {
-            connectMsg_ =
-              org.vico.im.proto.ProtoMessage.ConnectRequest.newBuilder(connectMsg_).mergeFrom(value).buildPartial();
+      public Builder mergeConnectReq(org.vico.im.proto.ProtoMessage.ConnectRequest value) {
+        if (connectReqBuilder_ == null) {
+          if (connectReq_ != null) {
+            connectReq_ =
+              org.vico.im.proto.ProtoMessage.ConnectRequest.newBuilder(connectReq_).mergeFrom(value).buildPartial();
           } else {
-            connectMsg_ = value;
+            connectReq_ = value;
           }
           onChanged();
         } else {
-          connectMsgBuilder_.mergeFrom(value);
+          connectReqBuilder_.mergeFrom(value);
         }
 
         return this;
@@ -4579,15 +5104,15 @@ public final class ProtoMessage {
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectMsg = 4;</code>
+       * <code>.proto.ConnectRequest connectReq = 5;</code>
        */
-      public Builder clearConnectMsg() {
-        if (connectMsgBuilder_ == null) {
-          connectMsg_ = null;
+      public Builder clearConnectReq() {
+        if (connectReqBuilder_ == null) {
+          connectReq_ = null;
           onChanged();
         } else {
-          connectMsg_ = null;
-          connectMsgBuilder_ = null;
+          connectReq_ = null;
+          connectReqBuilder_ = null;
         }
 
         return this;
@@ -4597,26 +5122,26 @@ public final class ProtoMessage {
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectMsg = 4;</code>
+       * <code>.proto.ConnectRequest connectReq = 5;</code>
        */
-      public org.vico.im.proto.ProtoMessage.ConnectRequest.Builder getConnectMsgBuilder() {
+      public org.vico.im.proto.ProtoMessage.ConnectRequest.Builder getConnectReqBuilder() {
         
         onChanged();
-        return getConnectMsgFieldBuilder().getBuilder();
+        return getConnectReqFieldBuilder().getBuilder();
       }
       /**
        * <pre>
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectMsg = 4;</code>
+       * <code>.proto.ConnectRequest connectReq = 5;</code>
        */
-      public org.vico.im.proto.ProtoMessage.ConnectRequestOrBuilder getConnectMsgOrBuilder() {
-        if (connectMsgBuilder_ != null) {
-          return connectMsgBuilder_.getMessageOrBuilder();
+      public org.vico.im.proto.ProtoMessage.ConnectRequestOrBuilder getConnectReqOrBuilder() {
+        if (connectReqBuilder_ != null) {
+          return connectReqBuilder_.getMessageOrBuilder();
         } else {
-          return connectMsg_ == null ?
-              org.vico.im.proto.ProtoMessage.ConnectRequest.getDefaultInstance() : connectMsg_;
+          return connectReq_ == null ?
+              org.vico.im.proto.ProtoMessage.ConnectRequest.getDefaultInstance() : connectReq_;
         }
       }
       /**
@@ -4624,49 +5149,49 @@ public final class ProtoMessage {
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectMsg = 4;</code>
+       * <code>.proto.ConnectRequest connectReq = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           org.vico.im.proto.ProtoMessage.ConnectRequest, org.vico.im.proto.ProtoMessage.ConnectRequest.Builder, org.vico.im.proto.ProtoMessage.ConnectRequestOrBuilder> 
-          getConnectMsgFieldBuilder() {
-        if (connectMsgBuilder_ == null) {
-          connectMsgBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          getConnectReqFieldBuilder() {
+        if (connectReqBuilder_ == null) {
+          connectReqBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               org.vico.im.proto.ProtoMessage.ConnectRequest, org.vico.im.proto.ProtoMessage.ConnectRequest.Builder, org.vico.im.proto.ProtoMessage.ConnectRequestOrBuilder>(
-                  getConnectMsg(),
+                  getConnectReq(),
                   getParentForChildren(),
                   isClean());
-          connectMsg_ = null;
+          connectReq_ = null;
         }
-        return connectMsgBuilder_;
+        return connectReqBuilder_;
       }
 
-      private org.vico.im.proto.ProtoMessage.TextMessageRequest textMsg_;
+      private org.vico.im.proto.ProtoMessage.TextMessageRequest textMsgReq_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.vico.im.proto.ProtoMessage.TextMessageRequest, org.vico.im.proto.ProtoMessage.TextMessageRequest.Builder, org.vico.im.proto.ProtoMessage.TextMessageRequestOrBuilder> textMsgBuilder_;
+          org.vico.im.proto.ProtoMessage.TextMessageRequest, org.vico.im.proto.ProtoMessage.TextMessageRequest.Builder, org.vico.im.proto.ProtoMessage.TextMessageRequestOrBuilder> textMsgReqBuilder_;
       /**
        * <pre>
        * 文字消息
        * </pre>
        *
-       * <code>.proto.TextMessageRequest textMsg = 5;</code>
-       * @return Whether the textMsg field is set.
+       * <code>.proto.TextMessageRequest textMsgReq = 6;</code>
+       * @return Whether the textMsgReq field is set.
        */
-      public boolean hasTextMsg() {
-        return textMsgBuilder_ != null || textMsg_ != null;
+      public boolean hasTextMsgReq() {
+        return textMsgReqBuilder_ != null || textMsgReq_ != null;
       }
       /**
        * <pre>
        * 文字消息
        * </pre>
        *
-       * <code>.proto.TextMessageRequest textMsg = 5;</code>
-       * @return The textMsg.
+       * <code>.proto.TextMessageRequest textMsgReq = 6;</code>
+       * @return The textMsgReq.
        */
-      public org.vico.im.proto.ProtoMessage.TextMessageRequest getTextMsg() {
-        if (textMsgBuilder_ == null) {
-          return textMsg_ == null ? org.vico.im.proto.ProtoMessage.TextMessageRequest.getDefaultInstance() : textMsg_;
+      public org.vico.im.proto.ProtoMessage.TextMessageRequest getTextMsgReq() {
+        if (textMsgReqBuilder_ == null) {
+          return textMsgReq_ == null ? org.vico.im.proto.ProtoMessage.TextMessageRequest.getDefaultInstance() : textMsgReq_;
         } else {
-          return textMsgBuilder_.getMessage();
+          return textMsgReqBuilder_.getMessage();
         }
       }
       /**
@@ -4674,17 +5199,17 @@ public final class ProtoMessage {
        * 文字消息
        * </pre>
        *
-       * <code>.proto.TextMessageRequest textMsg = 5;</code>
+       * <code>.proto.TextMessageRequest textMsgReq = 6;</code>
        */
-      public Builder setTextMsg(org.vico.im.proto.ProtoMessage.TextMessageRequest value) {
-        if (textMsgBuilder_ == null) {
+      public Builder setTextMsgReq(org.vico.im.proto.ProtoMessage.TextMessageRequest value) {
+        if (textMsgReqBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          textMsg_ = value;
+          textMsgReq_ = value;
           onChanged();
         } else {
-          textMsgBuilder_.setMessage(value);
+          textMsgReqBuilder_.setMessage(value);
         }
 
         return this;
@@ -4694,15 +5219,15 @@ public final class ProtoMessage {
        * 文字消息
        * </pre>
        *
-       * <code>.proto.TextMessageRequest textMsg = 5;</code>
+       * <code>.proto.TextMessageRequest textMsgReq = 6;</code>
        */
-      public Builder setTextMsg(
+      public Builder setTextMsgReq(
           org.vico.im.proto.ProtoMessage.TextMessageRequest.Builder builderForValue) {
-        if (textMsgBuilder_ == null) {
-          textMsg_ = builderForValue.build();
+        if (textMsgReqBuilder_ == null) {
+          textMsgReq_ = builderForValue.build();
           onChanged();
         } else {
-          textMsgBuilder_.setMessage(builderForValue.build());
+          textMsgReqBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
@@ -4712,19 +5237,19 @@ public final class ProtoMessage {
        * 文字消息
        * </pre>
        *
-       * <code>.proto.TextMessageRequest textMsg = 5;</code>
+       * <code>.proto.TextMessageRequest textMsgReq = 6;</code>
        */
-      public Builder mergeTextMsg(org.vico.im.proto.ProtoMessage.TextMessageRequest value) {
-        if (textMsgBuilder_ == null) {
-          if (textMsg_ != null) {
-            textMsg_ =
-              org.vico.im.proto.ProtoMessage.TextMessageRequest.newBuilder(textMsg_).mergeFrom(value).buildPartial();
+      public Builder mergeTextMsgReq(org.vico.im.proto.ProtoMessage.TextMessageRequest value) {
+        if (textMsgReqBuilder_ == null) {
+          if (textMsgReq_ != null) {
+            textMsgReq_ =
+              org.vico.im.proto.ProtoMessage.TextMessageRequest.newBuilder(textMsgReq_).mergeFrom(value).buildPartial();
           } else {
-            textMsg_ = value;
+            textMsgReq_ = value;
           }
           onChanged();
         } else {
-          textMsgBuilder_.mergeFrom(value);
+          textMsgReqBuilder_.mergeFrom(value);
         }
 
         return this;
@@ -4734,15 +5259,15 @@ public final class ProtoMessage {
        * 文字消息
        * </pre>
        *
-       * <code>.proto.TextMessageRequest textMsg = 5;</code>
+       * <code>.proto.TextMessageRequest textMsgReq = 6;</code>
        */
-      public Builder clearTextMsg() {
-        if (textMsgBuilder_ == null) {
-          textMsg_ = null;
+      public Builder clearTextMsgReq() {
+        if (textMsgReqBuilder_ == null) {
+          textMsgReq_ = null;
           onChanged();
         } else {
-          textMsg_ = null;
-          textMsgBuilder_ = null;
+          textMsgReq_ = null;
+          textMsgReqBuilder_ = null;
         }
 
         return this;
@@ -4752,26 +5277,26 @@ public final class ProtoMessage {
        * 文字消息
        * </pre>
        *
-       * <code>.proto.TextMessageRequest textMsg = 5;</code>
+       * <code>.proto.TextMessageRequest textMsgReq = 6;</code>
        */
-      public org.vico.im.proto.ProtoMessage.TextMessageRequest.Builder getTextMsgBuilder() {
+      public org.vico.im.proto.ProtoMessage.TextMessageRequest.Builder getTextMsgReqBuilder() {
         
         onChanged();
-        return getTextMsgFieldBuilder().getBuilder();
+        return getTextMsgReqFieldBuilder().getBuilder();
       }
       /**
        * <pre>
        * 文字消息
        * </pre>
        *
-       * <code>.proto.TextMessageRequest textMsg = 5;</code>
+       * <code>.proto.TextMessageRequest textMsgReq = 6;</code>
        */
-      public org.vico.im.proto.ProtoMessage.TextMessageRequestOrBuilder getTextMsgOrBuilder() {
-        if (textMsgBuilder_ != null) {
-          return textMsgBuilder_.getMessageOrBuilder();
+      public org.vico.im.proto.ProtoMessage.TextMessageRequestOrBuilder getTextMsgReqOrBuilder() {
+        if (textMsgReqBuilder_ != null) {
+          return textMsgReqBuilder_.getMessageOrBuilder();
         } else {
-          return textMsg_ == null ?
-              org.vico.im.proto.ProtoMessage.TextMessageRequest.getDefaultInstance() : textMsg_;
+          return textMsgReq_ == null ?
+              org.vico.im.proto.ProtoMessage.TextMessageRequest.getDefaultInstance() : textMsgReq_;
         }
       }
       /**
@@ -4779,175 +5304,373 @@ public final class ProtoMessage {
        * 文字消息
        * </pre>
        *
-       * <code>.proto.TextMessageRequest textMsg = 5;</code>
+       * <code>.proto.TextMessageRequest textMsgReq = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           org.vico.im.proto.ProtoMessage.TextMessageRequest, org.vico.im.proto.ProtoMessage.TextMessageRequest.Builder, org.vico.im.proto.ProtoMessage.TextMessageRequestOrBuilder> 
-          getTextMsgFieldBuilder() {
-        if (textMsgBuilder_ == null) {
-          textMsgBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          getTextMsgReqFieldBuilder() {
+        if (textMsgReqBuilder_ == null) {
+          textMsgReqBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               org.vico.im.proto.ProtoMessage.TextMessageRequest, org.vico.im.proto.ProtoMessage.TextMessageRequest.Builder, org.vico.im.proto.ProtoMessage.TextMessageRequestOrBuilder>(
-                  getTextMsg(),
+                  getTextMsgReq(),
                   getParentForChildren(),
                   isClean());
-          textMsg_ = null;
+          textMsgReq_ = null;
         }
-        return textMsgBuilder_;
+        return textMsgReqBuilder_;
       }
 
-      private org.vico.im.proto.ProtoMessage.CommonResponse commonRes_;
+      private org.vico.im.proto.ProtoMessage.ConnectResponse connectResp_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.vico.im.proto.ProtoMessage.CommonResponse, org.vico.im.proto.ProtoMessage.CommonResponse.Builder, org.vico.im.proto.ProtoMessage.CommonResponseOrBuilder> commonResBuilder_;
+          org.vico.im.proto.ProtoMessage.ConnectResponse, org.vico.im.proto.ProtoMessage.ConnectResponse.Builder, org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder> connectRespBuilder_;
       /**
        * <pre>
-       * 公共响应
+       * 连接响应
        * </pre>
        *
-       * <code>.proto.CommonResponse commonRes = 6;</code>
-       * @return Whether the commonRes field is set.
+       * <code>.proto.ConnectResponse connectResp = 7;</code>
+       * @return Whether the connectResp field is set.
        */
-      public boolean hasCommonRes() {
-        return commonResBuilder_ != null || commonRes_ != null;
+      public boolean hasConnectResp() {
+        return connectRespBuilder_ != null || connectResp_ != null;
       }
       /**
        * <pre>
-       * 公共响应
+       * 连接响应
        * </pre>
        *
-       * <code>.proto.CommonResponse commonRes = 6;</code>
-       * @return The commonRes.
+       * <code>.proto.ConnectResponse connectResp = 7;</code>
+       * @return The connectResp.
        */
-      public org.vico.im.proto.ProtoMessage.CommonResponse getCommonRes() {
-        if (commonResBuilder_ == null) {
-          return commonRes_ == null ? org.vico.im.proto.ProtoMessage.CommonResponse.getDefaultInstance() : commonRes_;
+      public org.vico.im.proto.ProtoMessage.ConnectResponse getConnectResp() {
+        if (connectRespBuilder_ == null) {
+          return connectResp_ == null ? org.vico.im.proto.ProtoMessage.ConnectResponse.getDefaultInstance() : connectResp_;
         } else {
-          return commonResBuilder_.getMessage();
+          return connectRespBuilder_.getMessage();
         }
       }
       /**
        * <pre>
-       * 公共响应
+       * 连接响应
        * </pre>
        *
-       * <code>.proto.CommonResponse commonRes = 6;</code>
+       * <code>.proto.ConnectResponse connectResp = 7;</code>
        */
-      public Builder setCommonRes(org.vico.im.proto.ProtoMessage.CommonResponse value) {
-        if (commonResBuilder_ == null) {
+      public Builder setConnectResp(org.vico.im.proto.ProtoMessage.ConnectResponse value) {
+        if (connectRespBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          commonRes_ = value;
+          connectResp_ = value;
           onChanged();
         } else {
-          commonResBuilder_.setMessage(value);
+          connectRespBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
        * <pre>
-       * 公共响应
+       * 连接响应
        * </pre>
        *
-       * <code>.proto.CommonResponse commonRes = 6;</code>
+       * <code>.proto.ConnectResponse connectResp = 7;</code>
        */
-      public Builder setCommonRes(
-          org.vico.im.proto.ProtoMessage.CommonResponse.Builder builderForValue) {
-        if (commonResBuilder_ == null) {
-          commonRes_ = builderForValue.build();
+      public Builder setConnectResp(
+          org.vico.im.proto.ProtoMessage.ConnectResponse.Builder builderForValue) {
+        if (connectRespBuilder_ == null) {
+          connectResp_ = builderForValue.build();
           onChanged();
         } else {
-          commonResBuilder_.setMessage(builderForValue.build());
+          connectRespBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
        * <pre>
-       * 公共响应
+       * 连接响应
        * </pre>
        *
-       * <code>.proto.CommonResponse commonRes = 6;</code>
+       * <code>.proto.ConnectResponse connectResp = 7;</code>
        */
-      public Builder mergeCommonRes(org.vico.im.proto.ProtoMessage.CommonResponse value) {
-        if (commonResBuilder_ == null) {
-          if (commonRes_ != null) {
-            commonRes_ =
-              org.vico.im.proto.ProtoMessage.CommonResponse.newBuilder(commonRes_).mergeFrom(value).buildPartial();
+      public Builder mergeConnectResp(org.vico.im.proto.ProtoMessage.ConnectResponse value) {
+        if (connectRespBuilder_ == null) {
+          if (connectResp_ != null) {
+            connectResp_ =
+              org.vico.im.proto.ProtoMessage.ConnectResponse.newBuilder(connectResp_).mergeFrom(value).buildPartial();
           } else {
-            commonRes_ = value;
+            connectResp_ = value;
           }
           onChanged();
         } else {
-          commonResBuilder_.mergeFrom(value);
+          connectRespBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
        * <pre>
-       * 公共响应
+       * 连接响应
        * </pre>
        *
-       * <code>.proto.CommonResponse commonRes = 6;</code>
+       * <code>.proto.ConnectResponse connectResp = 7;</code>
        */
-      public Builder clearCommonRes() {
-        if (commonResBuilder_ == null) {
-          commonRes_ = null;
+      public Builder clearConnectResp() {
+        if (connectRespBuilder_ == null) {
+          connectResp_ = null;
           onChanged();
         } else {
-          commonRes_ = null;
-          commonResBuilder_ = null;
+          connectResp_ = null;
+          connectRespBuilder_ = null;
         }
 
         return this;
       }
       /**
        * <pre>
-       * 公共响应
+       * 连接响应
        * </pre>
        *
-       * <code>.proto.CommonResponse commonRes = 6;</code>
+       * <code>.proto.ConnectResponse connectResp = 7;</code>
        */
-      public org.vico.im.proto.ProtoMessage.CommonResponse.Builder getCommonResBuilder() {
+      public org.vico.im.proto.ProtoMessage.ConnectResponse.Builder getConnectRespBuilder() {
         
         onChanged();
-        return getCommonResFieldBuilder().getBuilder();
+        return getConnectRespFieldBuilder().getBuilder();
       }
       /**
        * <pre>
-       * 公共响应
+       * 连接响应
        * </pre>
        *
-       * <code>.proto.CommonResponse commonRes = 6;</code>
+       * <code>.proto.ConnectResponse connectResp = 7;</code>
        */
-      public org.vico.im.proto.ProtoMessage.CommonResponseOrBuilder getCommonResOrBuilder() {
-        if (commonResBuilder_ != null) {
-          return commonResBuilder_.getMessageOrBuilder();
+      public org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder getConnectRespOrBuilder() {
+        if (connectRespBuilder_ != null) {
+          return connectRespBuilder_.getMessageOrBuilder();
         } else {
-          return commonRes_ == null ?
-              org.vico.im.proto.ProtoMessage.CommonResponse.getDefaultInstance() : commonRes_;
+          return connectResp_ == null ?
+              org.vico.im.proto.ProtoMessage.ConnectResponse.getDefaultInstance() : connectResp_;
         }
       }
       /**
        * <pre>
-       * 公共响应
+       * 连接响应
        * </pre>
        *
-       * <code>.proto.CommonResponse commonRes = 6;</code>
+       * <code>.proto.ConnectResponse connectResp = 7;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.vico.im.proto.ProtoMessage.CommonResponse, org.vico.im.proto.ProtoMessage.CommonResponse.Builder, org.vico.im.proto.ProtoMessage.CommonResponseOrBuilder> 
-          getCommonResFieldBuilder() {
-        if (commonResBuilder_ == null) {
-          commonResBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              org.vico.im.proto.ProtoMessage.CommonResponse, org.vico.im.proto.ProtoMessage.CommonResponse.Builder, org.vico.im.proto.ProtoMessage.CommonResponseOrBuilder>(
-                  getCommonRes(),
+          org.vico.im.proto.ProtoMessage.ConnectResponse, org.vico.im.proto.ProtoMessage.ConnectResponse.Builder, org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder> 
+          getConnectRespFieldBuilder() {
+        if (connectRespBuilder_ == null) {
+          connectRespBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              org.vico.im.proto.ProtoMessage.ConnectResponse, org.vico.im.proto.ProtoMessage.ConnectResponse.Builder, org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder>(
+                  getConnectResp(),
                   getParentForChildren(),
                   isClean());
-          commonRes_ = null;
+          connectResp_ = null;
         }
-        return commonResBuilder_;
+        return connectRespBuilder_;
+      }
+
+      private org.vico.im.proto.ProtoMessage.MessageResponse messageResp_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.vico.im.proto.ProtoMessage.MessageResponse, org.vico.im.proto.ProtoMessage.MessageResponse.Builder, org.vico.im.proto.ProtoMessage.MessageResponseOrBuilder> messageRespBuilder_;
+      /**
+       * <pre>
+       * 消息响应
+       * </pre>
+       *
+       * <code>.proto.MessageResponse messageResp = 8;</code>
+       * @return Whether the messageResp field is set.
+       */
+      public boolean hasMessageResp() {
+        return messageRespBuilder_ != null || messageResp_ != null;
+      }
+      /**
+       * <pre>
+       * 消息响应
+       * </pre>
+       *
+       * <code>.proto.MessageResponse messageResp = 8;</code>
+       * @return The messageResp.
+       */
+      public org.vico.im.proto.ProtoMessage.MessageResponse getMessageResp() {
+        if (messageRespBuilder_ == null) {
+          return messageResp_ == null ? org.vico.im.proto.ProtoMessage.MessageResponse.getDefaultInstance() : messageResp_;
+        } else {
+          return messageRespBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * 消息响应
+       * </pre>
+       *
+       * <code>.proto.MessageResponse messageResp = 8;</code>
+       */
+      public Builder setMessageResp(org.vico.im.proto.ProtoMessage.MessageResponse value) {
+        if (messageRespBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          messageResp_ = value;
+          onChanged();
+        } else {
+          messageRespBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 消息响应
+       * </pre>
+       *
+       * <code>.proto.MessageResponse messageResp = 8;</code>
+       */
+      public Builder setMessageResp(
+          org.vico.im.proto.ProtoMessage.MessageResponse.Builder builderForValue) {
+        if (messageRespBuilder_ == null) {
+          messageResp_ = builderForValue.build();
+          onChanged();
+        } else {
+          messageRespBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 消息响应
+       * </pre>
+       *
+       * <code>.proto.MessageResponse messageResp = 8;</code>
+       */
+      public Builder mergeMessageResp(org.vico.im.proto.ProtoMessage.MessageResponse value) {
+        if (messageRespBuilder_ == null) {
+          if (messageResp_ != null) {
+            messageResp_ =
+              org.vico.im.proto.ProtoMessage.MessageResponse.newBuilder(messageResp_).mergeFrom(value).buildPartial();
+          } else {
+            messageResp_ = value;
+          }
+          onChanged();
+        } else {
+          messageRespBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 消息响应
+       * </pre>
+       *
+       * <code>.proto.MessageResponse messageResp = 8;</code>
+       */
+      public Builder clearMessageResp() {
+        if (messageRespBuilder_ == null) {
+          messageResp_ = null;
+          onChanged();
+        } else {
+          messageResp_ = null;
+          messageRespBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 消息响应
+       * </pre>
+       *
+       * <code>.proto.MessageResponse messageResp = 8;</code>
+       */
+      public org.vico.im.proto.ProtoMessage.MessageResponse.Builder getMessageRespBuilder() {
+        
+        onChanged();
+        return getMessageRespFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * 消息响应
+       * </pre>
+       *
+       * <code>.proto.MessageResponse messageResp = 8;</code>
+       */
+      public org.vico.im.proto.ProtoMessage.MessageResponseOrBuilder getMessageRespOrBuilder() {
+        if (messageRespBuilder_ != null) {
+          return messageRespBuilder_.getMessageOrBuilder();
+        } else {
+          return messageResp_ == null ?
+              org.vico.im.proto.ProtoMessage.MessageResponse.getDefaultInstance() : messageResp_;
+        }
+      }
+      /**
+       * <pre>
+       * 消息响应
+       * </pre>
+       *
+       * <code>.proto.MessageResponse messageResp = 8;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.vico.im.proto.ProtoMessage.MessageResponse, org.vico.im.proto.ProtoMessage.MessageResponse.Builder, org.vico.im.proto.ProtoMessage.MessageResponseOrBuilder> 
+          getMessageRespFieldBuilder() {
+        if (messageRespBuilder_ == null) {
+          messageRespBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              org.vico.im.proto.ProtoMessage.MessageResponse, org.vico.im.proto.ProtoMessage.MessageResponse.Builder, org.vico.im.proto.ProtoMessage.MessageResponseOrBuilder>(
+                  getMessageResp(),
+                  getParentForChildren(),
+                  isClean());
+          messageResp_ = null;
+        }
+        return messageRespBuilder_;
+      }
+
+      private long time_ ;
+      /**
+       * <pre>
+       *时间
+       * </pre>
+       *
+       * <code>uint64 time = 9;</code>
+       * @return The time.
+       */
+      @java.lang.Override
+      public long getTime() {
+        return time_;
+      }
+      /**
+       * <pre>
+       *时间
+       * </pre>
+       *
+       * <code>uint64 time = 9;</code>
+       * @param value The time to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTime(long value) {
+        
+        time_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *时间
+       * </pre>
+       *
+       * <code>uint64 time = 9;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTime() {
+        
+        time_ = 0L;
+        onChanged();
+        return this;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -5003,16 +5726,6 @@ public final class ProtoMessage {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto_CommonResponse_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto_CommonResponse_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto_MessageResponse_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto_MessageResponse_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_proto_ConnectRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -5022,6 +5735,16 @@ public final class ProtoMessage {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_proto_TextMessageRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_proto_MessageResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_proto_MessageResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_proto_ConnectResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_proto_ConnectResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_proto_AggregatedMessage_descriptor;
   private static final 
@@ -5036,61 +5759,64 @@ public final class ProtoMessage {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022ProtoMessage.proto\022\005proto\"\036\n\016CommonRes" +
-      "ponse\022\014\n\004code\030\001 \001(\005\"7\n\017MessageResponse\022$" +
-      "\n\006status\030\001 \001(\0162\024.proto.MessageStatus\".\n\016" +
-      "ConnectRequest\022\016\n\006userId\030\001 \001(\t\022\014\n\004time\030\002" +
-      " \001(\004\"M\n\022TextMessageRequest\022\014\n\004from\030\001 \001(\t" +
-      "\022\n\n\002to\030\002 \001(\t\022\014\n\004time\030\003 \001(\004\022\017\n\007content\030\004 " +
-      "\001(\t\"\337\001\n\021AggregatedMessage\022\'\n\013commandType" +
-      "\030\001 \001(\0162\022.proto.CommandType\022\021\n\tsessionId\030" +
-      "\002 \001(\t\022\r\n\005token\030\003 \001(\t\022)\n\nconnectMsg\030\004 \001(\013" +
-      "2\025.proto.ConnectRequest\022*\n\007textMsg\030\005 \001(\013" +
-      "2\031.proto.TextMessageRequest\022(\n\tcommonRes" +
-      "\030\006 \001(\0132\025.proto.CommonResponse*\331\001\n\013Comman" +
-      "dType\022\023\n\017CONNECT_REQUEST\020\000\022\024\n\020CONNECT_RE" +
-      "SPONSE\020\001\022\022\n\016LOGOUT_REQUEST\020\002\022\023\n\017LOGOUT_R" +
-      "ESPONSE\020\003\022\025\n\021KEEPALIVE_REQUEST\020\004\022\026\n\022KEEP" +
-      "ALIVE_RESPONSE\020\005\022\030\n\024MESSAGE_TEXT_REQUEST" +
-      "\020\006\022\031\n\025MESSAGE_TEXT_RESPONSE\020\007\022\022\n\016MESSAGE" +
-      "_SYSTEM\020\010*5\n\rMessageStatus\022\014\n\010RECEIVED\020\000" +
-      "\022\010\n\004READ\020\001\022\014\n\010REJECTED\020\002B!\n\021org.vico.im." +
-      "protoB\014ProtoMessageb\006proto3"
+      "\n\022ProtoMessage.proto\022\005proto\".\n\016ConnectRe" +
+      "quest\022\016\n\006userId\030\001 \001(\t\022\014\n\004time\030\002 \001(\004\"e\n\022T" +
+      "extMessageRequest\022\021\n\tsessionId\030\001 \001(\t\022\014\n\004" +
+      "from\030\002 \001(\t\022\n\n\002to\030\003 \001(\t\022\017\n\007content\030\004 \001(\t\022" +
+      "\021\n\tisForward\030\005 \001(\010\"7\n\017MessageResponse\022$\n" +
+      "\006status\030\001 \001(\0162\024.proto.MessageStatus\"1\n\017C" +
+      "onnectResponse\022\021\n\tsessionId\030\001 \001(\t\022\013\n\003key" +
+      "\030\002 \001(\t\"\231\002\n\021AggregatedMessage\022\'\n\013commandT" +
+      "ype\030\001 \001(\0162\022.proto.CommandType\022\014\n\004code\030\002 " +
+      "\001(\005\022\013\n\003msg\030\003 \001(\t\022)\n\nconnectReq\030\005 \001(\0132\025.p" +
+      "roto.ConnectRequest\022-\n\ntextMsgReq\030\006 \001(\0132" +
+      "\031.proto.TextMessageRequest\022+\n\013connectRes" +
+      "p\030\007 \001(\0132\026.proto.ConnectResponse\022+\n\013messa" +
+      "geResp\030\010 \001(\0132\026.proto.MessageResponse\022\014\n\004" +
+      "time\030\t \001(\004*\331\001\n\013CommandType\022\023\n\017CONNECT_RE" +
+      "QUEST\020\000\022\024\n\020CONNECT_RESPONSE\020\001\022\022\n\016LOGOUT_" +
+      "REQUEST\020\002\022\023\n\017LOGOUT_RESPONSE\020\003\022\025\n\021KEEPAL" +
+      "IVE_REQUEST\020\004\022\026\n\022KEEPALIVE_RESPONSE\020\005\022\030\n" +
+      "\024MESSAGE_TEXT_REQUEST\020\006\022\031\n\025MESSAGE_TEXT_" +
+      "RESPONSE\020\007\022\022\n\016MESSAGE_SYSTEM\020\010*5\n\rMessag" +
+      "eStatus\022\014\n\010RECEIVED\020\000\022\010\n\004READ\020\001\022\014\n\010REJEC" +
+      "TED\020\002B!\n\021org.vico.im.protoB\014ProtoMessage" +
+      "b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_proto_CommonResponse_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_proto_CommonResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto_CommonResponse_descriptor,
-        new java.lang.String[] { "Code", });
-    internal_static_proto_MessageResponse_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_proto_MessageResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto_MessageResponse_descriptor,
-        new java.lang.String[] { "Status", });
     internal_static_proto_ConnectRequest_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(0);
     internal_static_proto_ConnectRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_proto_ConnectRequest_descriptor,
         new java.lang.String[] { "UserId", "Time", });
     internal_static_proto_TextMessageRequest_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(1);
     internal_static_proto_TextMessageRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_proto_TextMessageRequest_descriptor,
-        new java.lang.String[] { "From", "To", "Time", "Content", });
+        new java.lang.String[] { "SessionId", "From", "To", "Content", "IsForward", });
+    internal_static_proto_MessageResponse_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_proto_MessageResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_proto_MessageResponse_descriptor,
+        new java.lang.String[] { "Status", });
+    internal_static_proto_ConnectResponse_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_proto_ConnectResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_proto_ConnectResponse_descriptor,
+        new java.lang.String[] { "SessionId", "Key", });
     internal_static_proto_AggregatedMessage_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_proto_AggregatedMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_proto_AggregatedMessage_descriptor,
-        new java.lang.String[] { "CommandType", "SessionId", "Token", "ConnectMsg", "TextMsg", "CommonRes", });
+        new java.lang.String[] { "CommandType", "Code", "Msg", "ConnectReq", "TextMsgReq", "ConnectResp", "MessageResp", "Time", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -33,6 +33,7 @@ public class SimpleSignInHandler extends SignInHandler {
         if(res == null){
             return new Transfer(StatusCode.SIGN_IN_UN_NO_EXISTED);
         }
+        user.setId(res.getId());
         return passwordEncoder.matches(user.getUserPassword(), res.getUserPassword()) ?
                 new Transfer(StatusCode.SUCCESS).param("user", res) :
                 new Transfer(StatusCode.SIGN_IN_PW_ERROR);

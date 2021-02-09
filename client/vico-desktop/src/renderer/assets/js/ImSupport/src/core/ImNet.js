@@ -6,7 +6,7 @@ class ImNet{
             error: new Set(),
             close: new Set(),
             connect: new Set(),
-            message: new Set()
+            text_msg: new Set()
         };
         this._store = store;
     }
@@ -27,18 +27,15 @@ class ImNet{
 
     //注册回调函数
     registry(type, func, isTransient){
-        console.log(type);
         if(!this._eventMap[type]) {
             throw new Error('error bind type');
         }
         if(func) {
             this._eventMap[type].add({isTransient: isTransient ? isTransient : false, valid: true, func: func });
-            console.log('注册' + type);
         }
     }
 
     connect(conf, cb) {
-        console.log("[ CONNECT ]");
         conf && this.init(conf);
         if(!this._webSocket || (this._webSocket && this._webSocket.readyState == WebSocket.CLOSED)){
             // 初始化websocket
@@ -71,12 +68,12 @@ class ImNet{
             this.registry('open', () => {
                 // 构造连接消息
                 let aggregatedMsg = new ImMessagePb.AggregatedMessage();
-                let connecttMsg = new ImMessagePb.ConnectRequest();
+                let connectMsg = new ImMessagePb.ConnectRequest();
                 let userId = this._store.state.userInfo.userId;
-                connecttMsg.setUserid(userId);
-                connecttMsg.setTime(Date.parse(new Date()));
+                connectMsg.setUserid(userId.toString());
+                connectMsg.setTime(Date.parse(new Date()));
                 aggregatedMsg.setCommandtype(ImMessagePb.CommandType.CONNECT_REQUEST);
-                aggregatedMsg.setConnectmsg(connecttMsg);
+                aggregatedMsg.setConnectreq(connectMsg);
                 this.sendProtoData(aggregatedMsg);
             }, true);
 
@@ -89,15 +86,17 @@ class ImNet{
                     
                     let data = ImMessagePb.AggregatedMessage.deserializeBinary(buf);
                     switch(data.getCommandtype()){
-                        // 建立Session
                         case ImMessagePb.CommandType.CONNECT_RESPONSE:
                             execEvent('connect', { data: data });
+                            break;
+                        case ImMessagePb.CommandType.MESSAGE_TEXT_REQUEST:
+                            execEvent('text_msg', { data: data });
                             break;
                         default:
                             console.log("发来未知消息");
                     }
                 }else{
-                    console.log(event);
+                    console.log('文本消息:' + event.data);
                 }
             });
         }else{

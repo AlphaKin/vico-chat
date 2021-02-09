@@ -14,10 +14,13 @@ spring:
   application:
     name: vico-auth-server
   redis:
+    cluster:
+      nodes: 47.93.97.143:6379,8.131.63.174:6379,121.196.145.204:6379
+    sentinel:
+      master: mymaster
+      nodes: 47.93.97.143:26379,8.131.63.174:26379,121.196.145.204:26379
     max-redirects: 3
     database: 1
-    port: 6379
-    host: 8.131.63.174
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver

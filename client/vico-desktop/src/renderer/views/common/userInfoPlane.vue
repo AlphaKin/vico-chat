@@ -1,11 +1,11 @@
 <template>
     <div id="user-info-plane">
         <div class="op-wrapper">
-            <i class="fa fa-times"></i>
+            <i class="fa fa-times" @click="switchDisplay(false)"></i>
         </div>
         <div class="header-wrapoer">
             <el-avatar :size="100" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2280478089,3772795422&fm=26&gp=0.jpg"></el-avatar>
-            <h4>Alphakin&nbsp;<i class="fa fa-venus" /><i class="fa fa-mars" /></h4>
+            <h4>{{data.userNickName}}&nbsp;<i v-if="data.userSex == 0" class="fa fa-venus female" /><i v-if="data.userSex == 1" class="fa fa-mars male" /></h4>
         </div>
         <div class="body-wrapper">
             <table>
@@ -16,7 +16,7 @@
             </table>
         </div>
         <div class="footer-wrapper">
-            <button>发消息</button>
+            <button @click="openChatWin()">发消息</button>
             <button>添加好友</button>
         </div>
     </div>
@@ -24,21 +24,32 @@
 <script>
 export default {
     props:{
-        data: {
-            nickName: "loading...",
-            lastTime: "",
-            headURL: "",
-            msg: "",
-            bubbleMode: false,
-            isActive: false
-        }
+        switchDisplay:{
+            type: Function,
+            default: null
+        },
+
+        data: { }
     },
     data(){
         return {
-            showInfo: {
-                VICO号: 'ss3295286',
-                邮箱: 'xqera@dfg.com'
+        }
+    },
+    methods:{
+        openChatWin(){
+            this.$parent.showRightPlane('chat-view', this.data);
+        }
+    },
+    computed:{
+        showInfo(){
+            let info = {
+                VICO号: this.data.userName,
+                邮箱: this.data.mail
             }
+            Object.keys(info).forEach((key) => {
+                if(!info[key]) info[key] = '暂无'
+            })
+            return info;
         }
     }
 }
@@ -78,6 +89,9 @@ export default {
             h4{
                 margin-top: 5px;
             }
+
+            .male { color: rgb(100, 195, 255); }
+            .female { color: rgb(255, 147, 163); }
         }
 
         .body-wrapper{
@@ -95,6 +109,7 @@ export default {
             width: 100%;
             height: 80px;
             background: white;
+            border-radius: 10px;
             @include flex-center(row);
 
             button{

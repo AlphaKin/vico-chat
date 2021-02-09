@@ -13,8 +13,10 @@
         <module name="vico-eureka-server" />
         <module name="vico-gateway" />
         <module name="vico-im-server-10002" />
-        <module name="vico-im-server-10001" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="vico-im-server-10001" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

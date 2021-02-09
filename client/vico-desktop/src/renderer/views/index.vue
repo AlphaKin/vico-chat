@@ -29,14 +29,6 @@ export default {
             isSignIn: true
         }
     },
-    mounted(){
-        // console.log(this.$store.state.common.netAvailable == true);
-        // if(!this.isAvailable){
-        //     this.$IM.registry('close', () => { this.$store.commit('updateNetAvailable', false); });
-        //     this.$IM.registry('open', () => { this.$store.commit('updateNetAvailable', true); })
-        //     this.$IM.config({ host:'127.0.0.1', port:10002 }, ['Connect', 'Message']);
-        // }
-    },
     methods:{
         changeStatus(){
             if(this.isSignIn){

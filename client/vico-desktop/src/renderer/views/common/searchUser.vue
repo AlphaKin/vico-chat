@@ -4,7 +4,7 @@
         <div class="search-wrapper">
             <div class="search-bar">
                 <i class="fa fa-search"></i>
-                <input type="text"></input>
+                <input type="text" />
             </div>
             <button>搜索</button>
         </div>

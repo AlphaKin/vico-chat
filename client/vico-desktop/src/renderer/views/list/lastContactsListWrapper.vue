@@ -7,7 +7,9 @@
             </div>
         </div>
         <div class="body">
-            <friend-bar v-for="(item, index) in friendList" v-bind:data="item" :key="index"></friend-bar>
+            <div v-for="(item, index) in friendList" :key="index" @click="openSession(item)">
+                <friend-bar v-bind:data="item | toBubbleStyle"></friend-bar>
+            </div>
         </div>
     </div>
 </template>
@@ -15,38 +17,50 @@
 import friendBar from '../common/friendBar';
 import searchBar from '../common/searchBar';
 export default {
+    props: [
+        'data'
+    ],
     components:{
         'friend-bar': friendBar,
         'search-bar': searchBar
     },
+    computed: {
+        friendList(){
+            let list = []
+            for(let key in this.data){
+                let item = this.data[key].userInfo;
+                item.unreadNum = this.data[key].unreadNum
+                item.bubbleMode = true
+                let msgInfo = this.data[key].msgList
+                if(msgInfo && msgInfo != 0){
+                    item.lastMsg = msgInfo[msgInfo.length-1].msg
+                    item.lastTime = msgInfo[msgInfo.length-1].time
+                }
+                list.push(item);
+            }
+            list = list.sort((a, b) => {
+                return b.lastTime - a.lastTime
+            });
+            console.log(list);
+            return list;
+        }
+    },
+    methods:{
+        openSession(item){
+            this.$parent.$parent.showRightPlane('chat-view', item);
+        }
+    },
     data(){
         return {
-            friendList:[
-                {
-                    nickName: '小明',
-                    headURL: '',
-                    lastTime: '12:00AM',
-                    msg: '知道了',
-                    bubbleMode: true,
-                    isActive: false
-                },
-                {
-                    nickName: '李薇柯',
-                    headURL: '',
-                    lastTime: '11:30AM',
-                    msg: '好的',
-                    bubbleMode: true,
-                    isActive: true
-                },
-                {
-                    nickName: '金子裕',
-                    headURL: '',
-                    lastTime: '11:30AM',
-                    msg: '[表情]',
-                    bubbleMode: true,
-                    isActive: false
-                }
-            ]
+            
+        }
+    },
+    filters:{
+        toBubbleStyle(info){
+            if(info){
+                info.bubbleMode = true;
+            }
+            return info;
         }
     }
 }
@@ -56,8 +70,6 @@ export default {
     #last-list-wapper{
         width: 100%;
         height: 100%;
-        // box-shadow: rgb(236, 236, 236) -1px 0px 0px 0px inset;
-        // background: lightseagreen;
 
         .header{
             border-bottom: solid 1px rgb(230, 230, 230);

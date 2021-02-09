@@ -6,7 +6,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
 import lombok.val;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
 import org.vico.im.core.ImSession;
@@ -15,6 +14,7 @@ import org.vico.im.pojo.ImUser;
 import org.vico.im.proto.ProtoMessage;
 
 import javax.annotation.Resource;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 import java.util.concurrent.Future;
 
@@ -22,34 +22,39 @@ import java.util.concurrent.Future;
 @Component("ConnectProcessor")
 public class ConnectProcessor implements ImProcessor{
 
+    @Resource
+    private ImSessionManager imSessionManager;
+
     @Override
-    public Future<Object> execute(ChannelHandlerContext ctx, ImSessionManager imSessionManager, ProtoMessage.AggregatedMessage aggregatedMessage) {
-        val message = aggregatedMessage.getConnectMsg();
+    public Future<Object> execute(ChannelHandlerContext ctx, ProtoMessage.AggregatedMessage aggregatedMessage) {
+        val message = aggregatedMessage.getConnectReq();
 
         // 构造Session
+        String sessionId = UUID.randomUUID().toString();
         val newSession = ImSession.builder()
                 .channel(ctx.channel())
-                .sessionId(UUID.randomUUID().toString())
-                .imUser(new ImUser(message.getUserId(), "testName", 18))
+                .sessionId(sessionId)
+                .userId(message.getUserId())
                 .build();
         newSession.bind();
         imSessionManager.addSession(newSession);
-        log.info("[" + newSession.getImUser().getUserId() + "] connect");
+        log.info("[" + newSession.getUserId() + "] connect");
         log.info("当前Session数: " + imSessionManager.getSessionMap().size());
 
         //更新服务信息缓存
         imSessionManager.updateServerMeta();
 
         // proto响应
-        val commonResponse = ProtoMessage.CommonResponse.newBuilder()
-                .setCode(200)
+        val connectResponse = ProtoMessage.ConnectResponse.newBuilder()
+                .setSessionId(sessionId)
+                .setKey("secret key")
                 .build();
         val response = ProtoMessage.AggregatedMessage.newBuilder()
                 .setCommandType(ProtoMessage.CommandType.CONNECT_RESPONSE)
-                .setCommonRes(commonResponse)
+                .setCode(1)
+                .setConnectResp(connectResponse)
                 .build();
 
-        // 写入session
         ByteBuf res = Unpooled.buffer().writeBytes(response.toByteArray());
         newSession.writeAndFlush(new BinaryWebSocketFrame(res));
         return new AsyncResult<>(true);

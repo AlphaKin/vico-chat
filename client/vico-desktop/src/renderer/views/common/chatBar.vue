@@ -6,7 +6,7 @@
                 <el-avatar class="head" style="float: right; margin-top: 5px;" :size="32" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4163356956,4069646919&fm=11&gp=0.jpg"></el-avatar>
             </el-aside>
             <el-main class="bubble-wrapper">
-                <div class="bubble-left" :class="{'bubble-active':isExtensionShow}" @click="showExtension()" v-html="data.content"></div>
+                <div class="bubble-left" :class="{'bubble-active':isExtensionShow}" @click="showExtension()" v-html="data.msg"></div>
                 <el-badge v-show="data.isnew" is-dot style="margin-left:-5px; margin-top: -5px;"></el-badge>
                 <div class="extension-wrapper" v-show="isExtensionShow">
                     <div class="extension"><i class="fa fa-files-o"></i></div>
@@ -17,7 +17,7 @@
         <!-- 乙方消息 -->
         <el-container v-show="data.itemtype == 'msg-mine'" class="wrapper">
             <el-main class="bubble-wrapper">
-                <div class="bubble-right" v-html="data.content"></div>
+                <div class="bubble-right" v-html="data.msg"></div>
                 <div class="extension-wrapper" v-show="isExtensionShow">
                     <div class="extension"><i class="fa fa-reply"></i></div>
                 </div>
@@ -29,17 +29,17 @@
 
         <!-- 时间 -->
         <div v-show="data.itemtype == 'time'" class="wrapper msg-tip">
-            {{data.content}}
+            {{data.msg}}
         </div>
 
         <!-- 撤回消息 -->
         <div v-show="data.itemtype == 'msg-back'" class="wrapper msg-tip">
-            {{data.content}} 撤回了一条消息
+            {{data.msg}} 撤回了一条消息
         </div>
 
         <!-- 未知类型 -->
         <div v-show="data.itemtype == 'none'" class="wrapper">
-            {{data.content}}
+            {{data.msg}}
         </div>
         
     </div>
@@ -49,7 +49,7 @@ export default {
     props:{
         data: {
             itemtype: "none",
-            content: "none",
+            msg: "none",
             isnew: false
         }
     },

@@ -50,41 +50,45 @@ export default {
     methods:{
         login(){
             this.isLoading = true;
-            this.toMain();
-            // this.$req.post('/auth/signIn/simple', this.loginInfo).apply()
-            //     .then((data) => {
-            //         this.isLoading = false;
-            //         this.$store.commit('updateuserName', data.user.userName);
-            //         this.$store.commit('updateToken', data.token);
-            //         console.log('准备连接IM服务：' + data.host + ':' + data.port);
-            //         //连接IM服务
-            //         this.$IM.connect({host: data.host, port: data.port}, (event) => {
-            //             let response = event.data.getCommonres();
-            //             if(response.getCode() === 200){
-            //                 this.toMain();
-            //                 this.$notify({
-            //                     type: 'info',
-            //                     title: '登录成功',
-            //                     message: '连接到IM服务'
-            //                 });
-            //             }else{
-            //                 //等着改掉
-            //                 response.getMessage = '未知原因';
-            //                 //
-            //                 this.$notify.error({
-            //                     title: '连接失败',
-            //                     message: response.getMessage
-            //                 }); 
+
+            // this.$store.commit('updateUserName', this.loginInfo.userName);
+            // this.toMain();
             
-            //                 this.isLoading = false;
-            //             }
-            //         });
-            //     })
-            //     .catch((data) => {
-            //         console.log(data);
-            //         this.isLoading = false;
-            //         this.$notify({ type:'warning', title: '登陆失败', message: data.msg })
-            //     });
+            this.$req.post('/auth/signIn/simple', this.loginInfo).apply()
+                .then((data) => {
+                    this.isLoading = false;
+                    this.$store.commit('updateUserId', data.user.id);
+                    this.$store.commit('updateUserName', data.user.userName);
+                    this.$store.commit('updateToken', data.token);
+                    console.log('准备连接IM服务：' + data.host + ':' + data.port);
+                    //连接IM服务
+                    this.$IM.connect({host: data.host, port: data.port}, (event) => {
+                        let response = event.data.getConnectresp();
+                        console.log(event.data.getCode());
+                        if(event.data.getCode() === 1){
+                            this.toMain();
+                            this.$notify({
+                                type: 'info',
+                                title: '登录成功',
+                                message: 'KEY:' + response.getKey()
+                            });
+                        }else{
+                            //等着改掉
+                            response.getMessage = '未知原因';
+                            //
+                            this.$notify.error({
+                                title: '连接失败',
+                                message: event.data.getMsg()
+                            });
+                            this.isLoading = false;
+                        }
+                    });
+                })
+                .catch((data) => {
+                    console.log(data);
+                    this.isLoading = false;
+                    this.$notify({ type:'warning', title: '登陆失败', message: data.msg })
+                });
         },
         toMain(){
             this.isLoading = false;

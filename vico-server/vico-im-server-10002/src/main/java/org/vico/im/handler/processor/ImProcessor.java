@@ -9,5 +9,5 @@ import java.util.concurrent.Future;
 
 @Async
 public interface ImProcessor {
-    Future<Object> execute(ChannelHandlerContext ctx, ImSessionManager imSessionManager, ProtoMessage.AggregatedMessage aggregatedMessage);
+    Future<Object> execute(ChannelHandlerContext ctx, ProtoMessage.AggregatedMessage aggregatedMessage);
 }

@@ -6,10 +6,19 @@ spring:
   application:
     name: vico-im-server-10002
   redis:
+    cluster:
+      nodes: 47.93.97.143:6379,8.131.63.174:6379,121.196.145.204:6379
+    sentinel:
+      master: mymaster
+      nodes: 47.93.97.143:26379,8.131.63.174:26379,121.196.145.204:26379
     max-redirects: 3
     database: 1
-    port: 6379
+  rabbitmq:
     host: 47.93.97.143
+    port: 5672
+    username: mquser
+    password: 3295286
+
 
 eureka:
   client:
@@ -19,3 +28,5 @@ eureka:
 auth:
   server-meta:
     prefix: IM_SERVER_META#
+  exchange: IM_MSG_EXCHANGE
+  queue: 127.0.0.1#10002
