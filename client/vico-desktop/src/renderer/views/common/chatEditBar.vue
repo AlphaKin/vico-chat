@@ -33,7 +33,7 @@ export default {
     methods:{
         addItem(){
             // this.$parent.$parentaddItem(true, this.msg);
-            console.log(this.$parent.$parent.$parent.updateSession(null, this.msg, true));
+            console.log(this.$parent.$parent.$parent.updateSession(null, this.msg, false, true, false));
         }
     },
     data(){

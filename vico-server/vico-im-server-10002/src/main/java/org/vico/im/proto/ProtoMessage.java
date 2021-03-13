@@ -1195,10 +1195,20 @@ public final class ProtoMessage {
 
     /**
      * <pre>
+     *是否为群消息
+     * </pre>
+     *
+     * <code>bool isGroup = 5;</code>
+     * @return The isGroup.
+     */
+    boolean getIsGroup();
+
+    /**
+     * <pre>
      *是否被转发
      * </pre>
      *
-     * <code>bool isForward = 5;</code>
+     * <code>bool isForward = 6;</code>
      * @return The isForward.
      */
     boolean getIsForward();
@@ -1281,6 +1291,11 @@ public final class ProtoMessage {
               break;
             }
             case 40: {
+
+              isGroup_ = input.readBool();
+              break;
+            }
+            case 48: {
 
               isForward_ = input.readBool();
               break;
@@ -1501,14 +1516,29 @@ public final class ProtoMessage {
       }
     }
 
-    public static final int ISFORWARD_FIELD_NUMBER = 5;
+    public static final int ISGROUP_FIELD_NUMBER = 5;
+    private boolean isGroup_;
+    /**
+     * <pre>
+     *是否为群消息
+     * </pre>
+     *
+     * <code>bool isGroup = 5;</code>
+     * @return The isGroup.
+     */
+    @java.lang.Override
+    public boolean getIsGroup() {
+      return isGroup_;
+    }
+
+    public static final int ISFORWARD_FIELD_NUMBER = 6;
     private boolean isForward_;
     /**
      * <pre>
      *是否被转发
      * </pre>
      *
-     * <code>bool isForward = 5;</code>
+     * <code>bool isForward = 6;</code>
      * @return The isForward.
      */
     @java.lang.Override
@@ -1542,8 +1572,11 @@ public final class ProtoMessage {
       if (!getContentBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, content_);
       }
+      if (isGroup_ != false) {
+        output.writeBool(5, isGroup_);
+      }
       if (isForward_ != false) {
-        output.writeBool(5, isForward_);
+        output.writeBool(6, isForward_);
       }
       unknownFields.writeTo(output);
     }
@@ -1566,9 +1599,13 @@ public final class ProtoMessage {
       if (!getContentBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, content_);
       }
+      if (isGroup_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, isGroup_);
+      }
       if (isForward_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(5, isForward_);
+          .computeBoolSize(6, isForward_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1593,6 +1630,8 @@ public final class ProtoMessage {
           .equals(other.getTo())) return false;
       if (!getContent()
           .equals(other.getContent())) return false;
+      if (getIsGroup()
+          != other.getIsGroup()) return false;
       if (getIsForward()
           != other.getIsForward()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -1614,6 +1653,9 @@ public final class ProtoMessage {
       hash = (53 * hash) + getTo().hashCode();
       hash = (37 * hash) + CONTENT_FIELD_NUMBER;
       hash = (53 * hash) + getContent().hashCode();
+      hash = (37 * hash) + ISGROUP_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getIsGroup());
       hash = (37 * hash) + ISFORWARD_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getIsForward());
@@ -1762,6 +1804,8 @@ public final class ProtoMessage {
 
         content_ = "";
 
+        isGroup_ = false;
+
         isForward_ = false;
 
         return this;
@@ -1794,6 +1838,7 @@ public final class ProtoMessage {
         result.from_ = from_;
         result.to_ = to_;
         result.content_ = content_;
+        result.isGroup_ = isGroup_;
         result.isForward_ = isForward_;
         onBuilt();
         return result;
@@ -1858,6 +1903,9 @@ public final class ProtoMessage {
         if (!other.getContent().isEmpty()) {
           content_ = other.content_;
           onChanged();
+        }
+        if (other.getIsGroup() != false) {
+          setIsGroup(other.getIsGroup());
         }
         if (other.getIsForward() != false) {
           setIsForward(other.getIsForward());
@@ -2275,13 +2323,56 @@ public final class ProtoMessage {
         return this;
       }
 
+      private boolean isGroup_ ;
+      /**
+       * <pre>
+       *是否为群消息
+       * </pre>
+       *
+       * <code>bool isGroup = 5;</code>
+       * @return The isGroup.
+       */
+      @java.lang.Override
+      public boolean getIsGroup() {
+        return isGroup_;
+      }
+      /**
+       * <pre>
+       *是否为群消息
+       * </pre>
+       *
+       * <code>bool isGroup = 5;</code>
+       * @param value The isGroup to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIsGroup(boolean value) {
+        
+        isGroup_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *是否为群消息
+       * </pre>
+       *
+       * <code>bool isGroup = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearIsGroup() {
+        
+        isGroup_ = false;
+        onChanged();
+        return this;
+      }
+
       private boolean isForward_ ;
       /**
        * <pre>
        *是否被转发
        * </pre>
        *
-       * <code>bool isForward = 5;</code>
+       * <code>bool isForward = 6;</code>
        * @return The isForward.
        */
       @java.lang.Override
@@ -2293,7 +2384,7 @@ public final class ProtoMessage {
        *是否被转发
        * </pre>
        *
-       * <code>bool isForward = 5;</code>
+       * <code>bool isForward = 6;</code>
        * @param value The isForward to set.
        * @return This builder for chaining.
        */
@@ -2308,7 +2399,7 @@ public final class ProtoMessage {
        *是否被转发
        * </pre>
        *
-       * <code>bool isForward = 5;</code>
+       * <code>bool isForward = 6;</code>
        * @return This builder for chaining.
        */
       public Builder clearIsForward() {
@@ -5760,28 +5851,28 @@ public final class ProtoMessage {
   static {
     java.lang.String[] descriptorData = {
       "\n\022ProtoMessage.proto\022\005proto\".\n\016ConnectRe" +
-      "quest\022\016\n\006userId\030\001 \001(\t\022\014\n\004time\030\002 \001(\004\"e\n\022T" +
+      "quest\022\016\n\006userId\030\001 \001(\t\022\014\n\004time\030\002 \001(\004\"v\n\022T" +
       "extMessageRequest\022\021\n\tsessionId\030\001 \001(\t\022\014\n\004" +
       "from\030\002 \001(\t\022\n\n\002to\030\003 \001(\t\022\017\n\007content\030\004 \001(\t\022" +
-      "\021\n\tisForward\030\005 \001(\010\"7\n\017MessageResponse\022$\n" +
-      "\006status\030\001 \001(\0162\024.proto.MessageStatus\"1\n\017C" +
-      "onnectResponse\022\021\n\tsessionId\030\001 \001(\t\022\013\n\003key" +
-      "\030\002 \001(\t\"\231\002\n\021AggregatedMessage\022\'\n\013commandT" +
-      "ype\030\001 \001(\0162\022.proto.CommandType\022\014\n\004code\030\002 " +
-      "\001(\005\022\013\n\003msg\030\003 \001(\t\022)\n\nconnectReq\030\005 \001(\0132\025.p" +
-      "roto.ConnectRequest\022-\n\ntextMsgReq\030\006 \001(\0132" +
-      "\031.proto.TextMessageRequest\022+\n\013connectRes" +
-      "p\030\007 \001(\0132\026.proto.ConnectResponse\022+\n\013messa" +
-      "geResp\030\010 \001(\0132\026.proto.MessageResponse\022\014\n\004" +
-      "time\030\t \001(\004*\331\001\n\013CommandType\022\023\n\017CONNECT_RE" +
-      "QUEST\020\000\022\024\n\020CONNECT_RESPONSE\020\001\022\022\n\016LOGOUT_" +
-      "REQUEST\020\002\022\023\n\017LOGOUT_RESPONSE\020\003\022\025\n\021KEEPAL" +
-      "IVE_REQUEST\020\004\022\026\n\022KEEPALIVE_RESPONSE\020\005\022\030\n" +
-      "\024MESSAGE_TEXT_REQUEST\020\006\022\031\n\025MESSAGE_TEXT_" +
-      "RESPONSE\020\007\022\022\n\016MESSAGE_SYSTEM\020\010*5\n\rMessag" +
-      "eStatus\022\014\n\010RECEIVED\020\000\022\010\n\004READ\020\001\022\014\n\010REJEC" +
-      "TED\020\002B!\n\021org.vico.im.protoB\014ProtoMessage" +
-      "b\006proto3"
+      "\017\n\007isGroup\030\005 \001(\010\022\021\n\tisForward\030\006 \001(\010\"7\n\017M" +
+      "essageResponse\022$\n\006status\030\001 \001(\0162\024.proto.M" +
+      "essageStatus\"1\n\017ConnectResponse\022\021\n\tsessi" +
+      "onId\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\"\231\002\n\021AggregatedMe" +
+      "ssage\022\'\n\013commandType\030\001 \001(\0162\022.proto.Comma" +
+      "ndType\022\014\n\004code\030\002 \001(\005\022\013\n\003msg\030\003 \001(\t\022)\n\ncon" +
+      "nectReq\030\005 \001(\0132\025.proto.ConnectRequest\022-\n\n" +
+      "textMsgReq\030\006 \001(\0132\031.proto.TextMessageRequ" +
+      "est\022+\n\013connectResp\030\007 \001(\0132\026.proto.Connect" +
+      "Response\022+\n\013messageResp\030\010 \001(\0132\026.proto.Me" +
+      "ssageResponse\022\014\n\004time\030\t \001(\004*\331\001\n\013CommandT" +
+      "ype\022\023\n\017CONNECT_REQUEST\020\000\022\024\n\020CONNECT_RESP" +
+      "ONSE\020\001\022\022\n\016LOGOUT_REQUEST\020\002\022\023\n\017LOGOUT_RES" +
+      "PONSE\020\003\022\025\n\021KEEPALIVE_REQUEST\020\004\022\026\n\022KEEPAL" +
+      "IVE_RESPONSE\020\005\022\030\n\024MESSAGE_TEXT_REQUEST\020\006" +
+      "\022\031\n\025MESSAGE_TEXT_RESPONSE\020\007\022\022\n\016MESSAGE_S" +
+      "YSTEM\020\010*5\n\rMessageStatus\022\014\n\010RECEIVED\020\000\022\010" +
+      "\n\004READ\020\001\022\014\n\010REJECTED\020\002B!\n\021org.vico.im.pr" +
+      "otoB\014ProtoMessageb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -5798,7 +5889,7 @@ public final class ProtoMessage {
     internal_static_proto_TextMessageRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_proto_TextMessageRequest_descriptor,
-        new java.lang.String[] { "SessionId", "From", "To", "Content", "IsForward", });
+        new java.lang.String[] { "SessionId", "From", "To", "Content", "IsGroup", "IsForward", });
     internal_static_proto_MessageResponse_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_proto_MessageResponse_fieldAccessorTable = new

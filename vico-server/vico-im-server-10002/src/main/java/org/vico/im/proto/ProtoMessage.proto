@@ -42,7 +42,8 @@ message TextMessageRequest {
   string from                    = 2;  //发送者ID
   string to                      = 3;  //接收者ID
   string content                 = 4;  //消息内容
-  bool isForward                 = 5;  //是否被转发
+  bool isGroup                   = 5;  //是否为群消息
+  bool isForward                 = 6;  //是否被转发
 }
 
 

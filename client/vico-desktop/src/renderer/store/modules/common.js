@@ -1,11 +1,13 @@
 const state = {
     netAvailable: true,
-    friendList: []
+    friendList: [],
+    groupList: []
 }
 
 const getters = {
     netAvailable: state => state.netAvailable,
-    friendList: state => state.friendList
+    friendList: state => state.friendList,
+    groupList: state => state.groupList
 }
 
 const mutations = {
@@ -14,6 +16,9 @@ const mutations = {
     },
     updateFriendList(state, value){
         state.friendList = value;
+    },
+    updateGroupList(state, value){
+        state.groupList = value;
     }
 }
 

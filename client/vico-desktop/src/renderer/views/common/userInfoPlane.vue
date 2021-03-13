@@ -33,6 +33,7 @@ export default {
     },
     data(){
         return {
+
         }
     },
     methods:{
@@ -42,6 +43,7 @@ export default {
     },
     computed:{
         showInfo(){
+            console.log(this.data);
             let info = {
                 VICO号: this.data.userName,
                 邮箱: this.data.mail

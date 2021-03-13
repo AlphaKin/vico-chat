@@ -6,7 +6,7 @@ class MessageModule extends BaseModule.BaseModule {
     constructor(net) {
         super(net);
     }
-    send(from, to, content) {
+    send(from, to, content, isGroup) {
 
         console.log('########发送消息#######');
         console.log('我[' + from + '] 对 ' + to + ' 说 ' + content);
@@ -18,6 +18,7 @@ class MessageModule extends BaseModule.BaseModule {
         textMsg.setFrom(from);
         textMsg.setTo(to);
         textMsg.setContent(content);
+        textMsg.setIsgroup(isGroup);
 
         aggregatedMsg.setCommandtype(ImMessagePb.CommandType.MESSAGE_TEXT_REQUEST);
         aggregatedMsg.setTime(Date.parse(new Date()));

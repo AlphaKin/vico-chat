@@ -62,8 +62,14 @@
                     },
                     {
                         type: 'FRIEND',
-                        style: 'fa-users',
+                        style: 'fa-user',
                         aim: 'all-list',
+                        isActive: false
+                    },
+                    {
+                        type: 'GROUP',
+                        style: 'fa-users',
+                        aim: 'group-list',
                         isActive: false
                     }
                 ]
@@ -85,22 +91,26 @@
             },
 
             logout(){
-                this.$IM.disconnect();
                 const { remote } = require('electron');
                 let window = remote.getCurrentWindow();
-                this.$req.post('/auth/logout', {userName: this.$store.state.userInfo.userName}).token().apply()
-                    .then((data) => {
-                        // window.setPosition(window.getPosition()[0] + 150, window.getPosition()[1] + 90);
-                        window.setSize(660, 480);
-                        this.$router.push({ path:'/'})
-                    })
-                    .catch((data) => {
-                        window.setSize(660, 480);
-                        this.$notify.error({
-                            title: '请求错误',
-                            message: data.msg
-                        });
-                    });
+                window.setSize(660, 480);
+                this.$router.push({ path:'/'})
+                // this.$IM.disconnect();
+                // const { remote } = require('electron');
+                // let window = remote.getCurrentWindow();
+                // this.$req.post('/auth/logout', {userName: this.$store.state.userInfo.userName}).token().apply()
+                //     .then((data) => {
+                //         // window.setPosition(window.getPosition()[0] + 150, window.getPosition()[1] + 90);
+                //         window.setSize(660, 480);
+                //         this.$router.push({ path:'/'})
+                //     })
+                //     .catch((data) => {
+                //         window.setSize(660, 480);
+                //         this.$notify.error({
+                //             title: '请求错误',
+                //             message: data.msg
+                //         });
+                //     });
             }
         }
     }

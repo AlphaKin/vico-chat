@@ -52,6 +52,7 @@ export default {
             this.isLoading = true;
 
             // this.$store.commit('updateUserName', this.loginInfo.userName);
+            // this.$store.commit('updateUserId', 1);
             // this.toMain();
             
             this.$req.post('/auth/signIn/simple', this.loginInfo).apply()
@@ -64,7 +65,6 @@ export default {
                     //连接IM服务
                     this.$IM.connect({host: data.host, port: data.port}, (event) => {
                         let response = event.data.getConnectresp();
-                        console.log(event.data.getCode());
                         if(event.data.getCode() === 1){
                             this.toMain();
                             this.$notify({
@@ -85,7 +85,6 @@ export default {
                     });
                 })
                 .catch((data) => {
-                    console.log(data);
                     this.isLoading = false;
                     this.$notify({ type:'warning', title: '登陆失败', message: data.msg })
                 });

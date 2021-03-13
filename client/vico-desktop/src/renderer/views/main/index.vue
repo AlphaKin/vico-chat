@@ -7,10 +7,11 @@
             <div class="area-list">
                 <last-list :data="sessionData"  v-show="listPlaneViewStatus === 'last-list'"></last-list>
                 <all-list :showUserInfoPlane="switchUserInfoPlane" v-show="listPlaneViewStatus === 'all-list'"></all-list>
+                <group-list :showGroupInfoPlane="switchGroupInfoPlane" v-show="listPlaneViewStatus === 'group-list'"></group-list>
             </div>
             <div class="area-chat">
                 <empty-view v-show="rightPlaneViewStatus === 'empty-view'"></empty-view>
-                <chat-view ref="chatView" v-show="rightPlaneViewStatus === 'chat-view'" :data="chatUserInfo" ></chat-view>
+                <chat-view ref="chatView" v-show="rightPlaneViewStatus === 'chat-view'" :data="chatSessionInfo" ></chat-view>
                 <search-user v-show="rightPlaneViewStatus === 'search-user'"></search-user>
                 <notify-center v-show="rightPlaneViewStatus === 'notify-center'"></notify-center>
             </div>
@@ -21,60 +22,64 @@
                 :data="userInfo">
             </user-info-plane>
         </div>
+        <div class="group-info-wrapper" v-show="switchs.showGroupInfoPlane">
+            <group-info-plane
+                :switchDisplay="switchGroupInfoPlane"
+                :data="groupInfo"
+            ></group-info-plane>
+        </div>
     </div>
 </template>
 <script>
 import leftBar from '../common/leftBar';
 import lastContactsList from '../list/lastContactsListWrapper';
 import allContactsList from '../list/allContactsListWrapper';
+import allGroupsList from '../list/allGroupListWrapper';
 import chatView from '../common/chatView';
 import emptyView from '../common/emptyView';
 import searchUser from '../common/searchUser';
 import notifyCenter from "../common/notifyCenter";
 import userInfoPlane from '../common/userInfoPlane';
+import groupInfoPlane from '../common/groupInfoPlane';
 
 export default {
     components:{
         'left-bar': leftBar,
         'last-list': lastContactsList,
         'all-list': allContactsList,
+        'group-list': allGroupsList,
         'empty-view': emptyView,
         'chat-view': chatView,
         'search-user': searchUser,
         'notify-center': notifyCenter,
-        'user-info-plane': userInfoPlane
+        'user-info-plane': userInfoPlane,
+        'group-info-plane': groupInfoPlane
     },
     data(){
         return{
             listPlaneViewStatus: 'last-list',
             rightPlaneViewStatus: 'empty-view',
             switchs:{
-                showUserInfoPlane: false
+                showUserInfoPlane: false,
+                showGroupInfoPlane: false
             },
             userInfo: {},
-            chatUserInfo: {
+            groupInfo: {},
+            chatSessionInfo: {
                 unreadNum: 1,
                 msgList: [ ],
                 userInfo: {
                     userNickName: '',
                     userInfo: '',
                     userId: 0
+                },
+                groupInfo: {
+
                 }
             },
 
             sessionData: {
-                0: {
-                    unreadNum: 1,
-                    msgList: [
-                        {msg: 'hi',time: Date.parse(new Date())}, 
-                        {msg: '有什么需要帮助吗', time: Date.parse(new Date()) + 100}
-                    ],
-                    userInfo: {
-                        userNickName: 'vico助手',
-                        userInfo: 'vico官方助手',
-                        userId: 0
-                    }
-                }
+                
             }
         }
     },
@@ -87,17 +92,27 @@ export default {
                 this.userInfo = userInfo;
             }
         },
+        // 显示/隐藏群组信息面板
+        switchGroupInfoPlane(value, groupInfo){
+            if(!value) this.switchs.showGroupInfoPlane = false;
+            else if(groupInfo){
+                this.switchs.showGroupInfoPlane = true
+                this.groupInfo = groupInfo;
+            }
+        },
 
         // 显示右侧聊天框
-        showRightPlane(aim, userInfo){
-            let queryUser = this.sessionData[userInfo.id];
+        showRightPlane(aim, chatInfo, isGroup){
+            let aimSessionId = (isGroup ? 'g' : 'u') + chatInfo.id
+            let queryChat = this.sessionData[aimSessionId];
             // 会话列表没有则新建
-            if(!queryUser){
-                this.updateSession(userInfo, null);
+            if(!queryChat){
+                this.updateSession(chatInfo, null, isGroup, null, false);
             }
-            this.chatUserInfo = this.sessionData[userInfo.id]
+            this.chatSessionInfo = this.sessionData[aimSessionId]
             this.rightPlaneViewStatus = aim
             this.switchs.showUserInfoPlane = false
+            this.switchs.showGroupInfoPlane = false
         },
 
         // 切换列表
@@ -105,33 +120,66 @@ export default {
             this.listPlaneViewStatus = aim;
         },
 
-        // 新建会话消息
-        updateSession(userInfo, content, isMine){
-            let tempData = this.sessionData;
-            if(!userInfo){
-                userInfo = this.chatUserInfo.userInfo
+        // 更新会话消息
+        updateSession(aimInfo, content, isGroup, isMine, isInit){
+            let tempSessionData = this.sessionData;
+            let myId = this.$store.state.userInfo.userId
+            if(!aimInfo){
+                aimInfo = (aimInfo == isGroup ? this.chatSessionInfo.groupInfo : this.chatSessionInfo.userInfo)
             }
-            let aim = tempData[userInfo.id];
+            let aimSessionId = (isGroup ? 'g' : 'u') + aimInfo.id
+            let aim = tempSessionData[aimSessionId];
+
+            // 获取时间
+            let time = aimInfo.lastTime ? aimInfo.lastTime : Date.parse(new Date())
+            
+            // 目标
             if(!aim){
-                tempData[userInfo.id] = aim = {}
+                tempSessionData[aimSessionId] = aim = {}
                 aim.unreadNum = 0
-                aim.lastTime = Date.parse(new Date())
+                aim.lastTime = time
             }
+
+            // 记录添加进session
             if(content){
                 if(!aim.msgList) aim.msgList = []
                 aim.msgList.push({
                     msg:content,
-                    time: Date.parse(new Date()),
+                    id: aimInfo.id,
+                    time: time,
                     itemtype: isMine ? 'msg-mine' : 'msg-oth',
                     isnew: false});
-                if(isMine){
-                    this.$IM.Message.send((this.$store.state.userInfo.userId).toString(), (userInfo.id).toString(), content);
+                if(isMine && !isInit){
+                    this.$IM.Message.send(myId.toString(), (aimInfo.id).toString(), content, isGroup);
                 }
             }
-            aim.userInfo = userInfo;
+            if(isGroup) aim.groupInfo = aimInfo;
+            else aim.userInfo = aimInfo
+            
+            // 存入本地数据库
+            if(content && !isInit){
+                this.$db.insert({
+                    aim: aimInfo.id,
+                    from: isMine ? myId : aimInfo.id,
+                    content: content,
+                    time: time,
+                    isgroup: isGroup ? true : false
+                }, (err, doc) => {
+                    if(err) console.log(err);
+                    console.log(doc);
+                })
 
-            this.sessionData = JSON.parse(JSON.stringify(tempData))
-            this.chatUserInfo = aim
+                // SessionChat列表
+                if(!isMine){
+                    let keyName = aimInfo.id + (isGroup ? '_g_lst' : '_u_lst')
+                    if(localStorage.getItem(keyName)) { localStorage.removeItem(keyName) }
+                    console.log('set storage: ' + keyName);
+                    localStorage.setItem(keyName, JSON.stringify({}))
+                }
+            }
+
+            this.sessionData = JSON.parse(JSON.stringify(tempSessionData))
+            this.chatSessionInfo = aim
             this.showListPlane('last-list');
         },
 
@@ -144,21 +192,19 @@ export default {
                 }
             }
             return null;
-        }
+        },
+
+    
     },
     mounted(){
+        this.sessionData = {}
         // 绑定消息接受方法
         this.$IM.registry('text_msg', (event) => {
             let resp = event.data.getTextmsgreq();
-            // this.$notify({
-            //     type: 'info',
-            //     title: resp.getFrom(),
-            //     message: resp.getContent()
-            // });
 
             let user = this.findUser(resp.getFrom());
             user.lastTime = event.data.getTime();
-            user && this.updateSession(user, resp.getContent(), false)
+            user && this.updateSession(user, resp.getContent(), false, false, false)
         });
     }
 }
@@ -181,7 +227,7 @@ export default {
                 width: 60px;
                 height: 100%;
                 z-index: 10;
-                background: lightcoral;
+                // background: lightcoral;
                 box-shadow: 0px 0px 18px 3px rgba(200,200,200,0.4);
                 
                 /* overflow: hidden; */
@@ -206,6 +252,14 @@ export default {
 
             top: calc(50% - 200px);
             left: calc(50% - 150px);
+        }
+        .group-info-wrapper{
+            position: fixed;
+            width: 450px;
+            height: 450px;
+
+            top: calc(50% - 225px);
+            left: calc(50% - 225px);
         }
     }
     

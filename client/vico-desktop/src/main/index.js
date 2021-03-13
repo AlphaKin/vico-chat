@@ -9,6 +9,9 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 
+
+
+
 let mainWindow
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
@@ -18,6 +21,13 @@ function createWindow () {
   /**
    * Initial window options
    */
+  let fs = require('fs')
+  let os = require('os')
+  let dir = require('path').join(os.homedir(), '\VicoChat')
+  if(!fs.existsSync(dir)){
+    fs.mkdirSync(dir)
+  }
+
   mainWindow = new BrowserWindow({
     height: 480,
     width: 660,

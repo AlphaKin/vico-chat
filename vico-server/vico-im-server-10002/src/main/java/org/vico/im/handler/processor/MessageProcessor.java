@@ -31,12 +31,51 @@ public class MessageProcessor implements ImProcessor {
         val message = aggregatedMessage.getTextMsgReq();
 
         // AES解密过程
-
+        
         // ...
 
         System.out.println(message.getFrom() + " -> " + message.getTo() + " : " + message.getContent());
 
-        val session = imSessionManager.getByUserId(message.getTo());
+        if (message.getIsGroup()) {
+            System.out.println(message.getFrom() + " 在群里说: " + message.getContent());
+            C2gMessageDeal(ctx, message);
+        } else {
+            C2cMessageDeal(ctx, message);
+        }
+
+        return new AsyncResult<>(true);
+    }
+
+    // 消息转发
+    @RabbitListener(queues = "${auth.queue}")
+    public void directReceiver(TextMessageRequest object){
+        if(object.getIsGroup()){
+            // 群聊
+        }else{
+            // 单聊
+            val session = imSessionManager.getByUserId(object.getTo());
+            val originSession = imSessionManager.getByUserId(object.getFrom());
+
+            //目标在线
+            if(session != null){
+                val aggregatedMessage = AggregatedMessage.newBuilder()
+                        .setCommandType(CommandType.MESSAGE_TEXT_REQUEST)
+                        .setCode(1)
+                        .setTextMsgReq(object)
+                        .build();
+
+                ByteBuf buff = Unpooled.buffer().writeBytes(aggregatedMessage.toByteArray());
+                session.writeAndFlush(new BinaryWebSocketFrame(buff));
+            }else{
+                //目标离线
+//            redisTemplate.opsForZSet().
+            }
+        }
+    }
+
+    public boolean C2cMessageDeal(ChannelHandlerContext ctx, TextMessageRequest request){
+        // 单聊消息
+        val session = imSessionManager.getByUserId(request.getTo());
 //        if(session != null){
 //            // 在本机上
 //            ByteBuf res = Unpooled.buffer().writeBytes(aggregatedMessage.toByteArray());
@@ -46,24 +85,16 @@ public class MessageProcessor implements ImProcessor {
 //            String routingKey = (String) redisTemplate.opsForHash().get("ROUTING_KEYS", message.getTo());
 //            imSessionManager.forward(routingKey, TextMessageRequest.newBuilder(message).setIsForward(true).build());
 //        }
-        String routingKey = (String) redisTemplate.opsForHash().get("ROUTING_KEYS", message.getTo());
-        imSessionManager.forward(routingKey, TextMessageRequest.newBuilder(message).setIsForward(true).build());
+        String routingKey = (String) redisTemplate.opsForHash().get("ROUTING_KEYS", request.getTo());
+        if(routingKey == null){
+            return false;
+        }
+        imSessionManager.forward(routingKey, TextMessageRequest.newBuilder(request).setIsForward(true).build());
 
-        return new AsyncResult<>(true);
+        return true;
     }
 
-    // 消息转发
-    @RabbitListener(queues = "${auth.queue}")
-    public void directReceiver(TextMessageRequest object){
-        val session = imSessionManager.getByUserId(object.getTo());
-
-        val aggregatedMessage = AggregatedMessage.newBuilder()
-                .setCommandType(CommandType.MESSAGE_TEXT_REQUEST)
-                .setCode(1)
-                .setTextMsgReq(object)
-                .build();
-
-        ByteBuf buff = Unpooled.buffer().writeBytes(aggregatedMessage.toByteArray());
-        session.writeAndFlush(new BinaryWebSocketFrame(buff));
+    public boolean C2gMessageDeal(ChannelHandlerContext ctx, TextMessageRequest request){
+        return true;
     }
 }

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.vico.restful.mapper.GroupMapper">
+  <resultMap id="BaseResultMap" type="org.vico.restful.pojo.Group">
+    <!--@mbg.generated-->
+    <id column="grp_id" jdbcType="BIGINT" property="id" />
+    <result column="grp_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="grp_intro" jdbcType="VARCHAR" property="groupIntro" />
+    <result column="grp_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="grp_own_id" jdbcType="BIGINT" property="ownUserId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    grp_id, grp_name, grp_intro, grp_create_time, grp_own_id
+  </sql>
+
+  <select id="selectByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `group`
+    where grp_id in (
+        select grp_id
+        from gourp_relation
+        where user_id = #{param1,jdbcType=BIGINT}
+    )
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from group
+    where grp_id = #{grpId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from group
+    where grp_id = #{grpId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="grp_id" keyProperty="grpId" parameterType="org.vico.restful.pojo.Group" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into group (grp_name, grp_intro, grp_create_time, 
+      grp_own_id)
+    values (#{grpName,jdbcType=VARCHAR}, #{grpIntro,jdbcType=VARCHAR}, #{grpCreateTime,jdbcType=TIMESTAMP}, 
+      #{grpOwnId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="grp_id" keyProperty="grpId" parameterType="org.vico.restful.pojo.Group" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="grpName != null">
+        grp_name,
+      </if>
+      <if test="grpIntro != null">
+        grp_intro,
+      </if>
+      <if test="grpCreateTime != null">
+        grp_create_time,
+      </if>
+      <if test="grpOwnId != null">
+        grp_own_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="grpName != null">
+        #{grpName,jdbcType=VARCHAR},
+      </if>
+      <if test="grpIntro != null">
+        #{grpIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="grpCreateTime != null">
+        #{grpCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="grpOwnId != null">
+        #{grpOwnId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.vico.restful.pojo.Group">
+    <!--@mbg.generated-->
+    update group
+    <set>
+      <if test="grpName != null">
+        grp_name = #{grpName,jdbcType=VARCHAR},
+      </if>
+      <if test="grpIntro != null">
+        grp_intro = #{grpIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="grpCreateTime != null">
+        grp_create_time = #{grpCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="grpOwnId != null">
+        grp_own_id = #{grpOwnId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where grp_id = #{grpId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.vico.restful.pojo.Group">
+    <!--@mbg.generated-->
+    update group
+    set grp_name = #{grpName,jdbcType=VARCHAR},
+      grp_intro = #{grpIntro,jdbcType=VARCHAR},
+      grp_create_time = #{grpCreateTime,jdbcType=TIMESTAMP},
+      grp_own_id = #{grpOwnId,jdbcType=BIGINT}
+    where grp_id = #{grpId,jdbcType=BIGINT}
+  </update>
+</mapper>
