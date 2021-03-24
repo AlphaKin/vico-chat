@@ -6,7 +6,6 @@ import io.netty.util.AttributeKey;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.vico.im.pojo.ImUser;
 
 @Slf4j
 @Data
@@ -38,10 +37,6 @@ public class ImSession {
         channel.attr(ImSession.SESSION_KEY).set(this);
         return this;
     }
-
-
-
-
 
     //关闭连接
 //    public synchronized void close(){

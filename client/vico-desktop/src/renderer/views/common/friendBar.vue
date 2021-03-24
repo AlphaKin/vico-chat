@@ -2,7 +2,8 @@
     <div class="common-bar" :class="[data.bubbleMode ? 'bubble-style' : 'normal-style']">
         <div class="head-wrapper">
             <div class="head">
-                <el-avatar v-if="!data.isGroup" :size="40" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2742723229,2568203720&fm=26&gp=0.jpg"></el-avatar>
+                <el-avatar v-if="!data.isGroup" :size="40" :src="require('../../assets/pic/userhead/' + this.data.userHead + '.png')"></el-avatar>
+                <!-- <el-avatar v-if="!data.isGroup" :size="40" :src="require('../../assets/pic/userhead/' + this.data.userHead + '.png')"></el-avatar> -->
                 <el-avatar v-if="data.isGroup" :size="40" :src="require('../../assets/pic/groupHead.jpg')"></el-avatar>
             </div>
         </div>
@@ -23,6 +24,7 @@ export default {
     props:{
         data: {
             userNickName: "loading...",
+            userHead: 0,
             headURL: "",
             lastMsg: "",
             unreadNum: 0,

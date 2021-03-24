@@ -12,14 +12,21 @@ import org.springframework.stereotype.Component;
 import org.vico.common.pojo.ImServerMetaInfo;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 @Slf4j
 @Data
 @Component("SessionManager")
 public class ImSessionManager {
-    private ConcurrentHashMap<String, ImSession> sessionMap = new ConcurrentHashMap<>();
-    private ConcurrentHashMap<String, String> idMap = new ConcurrentHashMap<>();
+    private Map<String, ImSession> sessionMap = new ConcurrentHashMap<>();
+    private Map<String, String> idMap = new ConcurrentHashMap<>();
+    private ReentrantReadWriteLock readWriteLock = new ReentrantReadWriteLock(true);
+    private Lock writeLock = readWriteLock.writeLock();
+    private Lock readLock = readWriteLock.readLock();
 
     @Value("${auth.server-meta.prefix}")
     private String serverMetaPrefix;
@@ -44,11 +51,11 @@ public class ImSessionManager {
 
     //添加 Session
     public void addSession(ImSession session){
+        writeLock.lock();
         idMap.put(session.getUserId(), session.getSessionId());
         sessionMap.put(session.getSessionId(), session);
-        log.info("用户[id=" + session.getUserId() + "] 登录");
-        System.out.println(session.getUserId() + " - " + idMap.get(session.getUserId()));
-        System.out.println("查找结果: " + sessionMap.get(idMap.get(session.getUserId())));
+        writeLock.unlock();
+        log.info("用户[id=" + session.getUserId() + "] 登录 | " + sessionMap.size());
     }
 
     //获取 Session
@@ -61,6 +68,7 @@ public class ImSessionManager {
 
     //获取 Session
     public ImSession getByUserId(String userId){
+        readLock.lock();
         if(!idMap.containsKey(userId)){
             return null;
         }
@@ -68,6 +76,7 @@ public class ImSessionManager {
         if(sessionMap.containsKey(sessionId)){
             return sessionMap.get(sessionId);
         }
+        readLock.unlock();
         return null;
     }
 
@@ -77,9 +86,15 @@ public class ImSessionManager {
             return;
         }
         ImSession session = sessionMap.get(sessionId);
+
+        writeLock.lock();
+        redisTemplate.opsForHash().delete("ROUTING_KEYS", session.getUserId());
+        redisTemplate.opsForHash().delete("TOKENS", session.getUserId());
         idMap.remove(session.getUserId());
         sessionMap.remove(sessionId);
-        log.info("用户[id=" + sessionId + "] 退出");
+        writeLock.unlock();
+
+        log.info("用户[id=" + sessionId + "] 退出 | " + sessionMap.size());
     }
 
     public void remove(Channel channel){

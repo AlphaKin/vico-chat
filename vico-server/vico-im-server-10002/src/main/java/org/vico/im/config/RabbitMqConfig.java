@@ -29,15 +29,14 @@ public class RabbitMqConfig {
             @SneakyThrows
             @Override
             protected Message createMessage(Object o, MessageProperties messageProperties) {
-                byte[] data = ((ProtoMessage.TextMessageRequest) o).toByteArray();
-                System.out.println(ProtoMessage.TextMessageRequest.parseFrom(data).getContent());
+                byte[] data = ((ProtoMessage.AggregatedMessage) o).toByteArray();
                 return new Message(data, messageProperties);
             }
 
             @Override
             public Object fromMessage(Message message) throws MessageConversionException {
                 try{
-                    return ProtoMessage.TextMessageRequest.parseFrom(message.getBody());
+                    return ProtoMessage.AggregatedMessage.parseFrom(message.getBody());
                 }catch (InvalidProtocolBufferException e){
                     log.warn("消息格式错误，无法解析");
                     return null;

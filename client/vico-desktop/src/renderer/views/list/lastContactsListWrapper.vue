@@ -28,7 +28,7 @@ export default {
         friendList(){
             let list = []
             for(let key in this.data){
-                let item = this.data[key].userInfo;
+                let item = (this.data[key].userInfo ? this.data[key].userInfo : this.data[key].groupInfo)
                 item.unreadNum = this.data[key].unreadNum
                 item.bubbleMode = true
                 let msgInfo = this.data[key].msgList
@@ -41,7 +41,6 @@ export default {
             list = list.sort((a, b) => {
                 return b.lastTime - a.lastTime
             });
-            console.log(list);
             return list;
         }
     },

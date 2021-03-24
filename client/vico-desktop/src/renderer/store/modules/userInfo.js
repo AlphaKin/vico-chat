@@ -3,12 +3,14 @@ import { stat } from "fs";
 const state = {
     userId: '',
     userName: '',
+    userHead: 0,
     token: undefined
 }
 
 const getters = {
     userId: state => state.userId,
     userName: state => state.userName,
+    userHead: state => state.userHead,
     token: state => state.token
 }
 
@@ -18,6 +20,9 @@ const mutations = {
     },
     updateUserName(state, value){
         state.userName = value;
+    },
+    updateUserHead(state, value){
+        state.userHead = value;
     },
     updateToken(state, value){
         state.token = value;

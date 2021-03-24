@@ -50,16 +50,19 @@ export default {
     methods:{
         login(){
             this.isLoading = true;
+            this.$store.commit('updateUiMode', false);
 
-            // this.$store.commit('updateUserName', this.loginInfo.userName);
-            // this.$store.commit('updateUserId', 1);
-            // this.toMain();
-            
-            this.$req.post('/auth/signIn/simple', this.loginInfo).apply()
+            if(this.$store.state.common.uiMode){
+                this.$store.commit('updateUserName', this.loginInfo.userName);
+                this.$store.commit('updateUserId', 1);
+                this.toMain();
+            }else{
+                this.$req.post('/auth/signIn/simple', this.loginInfo).apply()
                 .then((data) => {
                     this.isLoading = false;
                     this.$store.commit('updateUserId', data.user.id);
                     this.$store.commit('updateUserName', data.user.userName);
+                    this.$store.commit('updateUserHead', data.user.userHead);
                     this.$store.commit('updateToken', data.token);
                     console.log('准备连接IM服务：' + data.host + ':' + data.port);
                     //连接IM服务
@@ -88,6 +91,8 @@ export default {
                     this.isLoading = false;
                     this.$notify({ type:'warning', title: '登陆失败', message: data.msg })
                 });
+            }
+            
         },
         toMain(){
             this.isLoading = false;

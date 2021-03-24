@@ -64,43 +64,45 @@ export default {
             this.showUserInfoPlane(true, userInfo);
         },
         friendListReq(){
+            if(this.$store.state.common.uiMode) return;
+            
             let userId = this.$store.state.userInfo.userId;
             this.$req.post('/restful/friendList', {userId: userId}).apply()
                 .then((data) => {
                     this.friendList = data.users.filter((item) => {
-                        item.msg = 'test'
+                        item.msg = ''
                         item.isActive = false
                         return true
                     })
+
                     this.$store.commit('updateFriendList', JSON.parse(JSON.stringify(this.friendList)))
 
-                    let allstorage = 'All Storage:(' + localStorage.length + ')\n'
-                    for(let i=0; i<localStorage.length; ++i){
-                        let key = localStorage.key(i)
-                        allstorage += (key + ' => ' + localStorage.getItem(key) + '\n')
-                    }
-                    console.log(allstorage);
+                    console.log(this.$store.state.common.friendList);
 
-                    this.friendList.forEach((friend) => {
-                        if(localStorage.getItem(friend.id + '_u_lst')){
-                            try{
-                                this.$db.find({ aim: friend.id }, (err, res) => {
-                                    if(err) { console.log(err); return; }
-                                    res = res.sort((a, b) => {
-                                        return a.time - b.time
-                                    })
-                                    console.log('聊天记录: ' + res.length);
-                                    res.forEach((item) => {
-                                        console.log(item);
-                                        friend.lastTime = item.time
-                                        this.$parent.$parent.updateSession(friend, item.content, false, item.from == userId, true)
-                                    })
-                                })
-                            }catch(err){
-                                console.log(err);
-                            }
-                        }
-                    })
+                    // 读取本地数据
+                    // let allstorage = 'All Storage:(' + localStorage.length + ')\n'
+                    // for(let i=0; i<localStorage.length; ++i){
+                    //     let key = localStorage.key(i)
+                    //     allstorage += (key + ' => ' + localStorage.getItem(key) + '\n')
+                    // }
+                    // this.friendList.forEach((friend) => {
+                    //     if(localStorage.getItem(friend.id + '_u_lst')){
+                    //         try{
+                    //             this.$db.find({ aim: friend.id }, (err, res) => {
+                    //                 if(err) { console.log(err); return; }
+                    //                 res = res.sort((a, b) => {
+                    //                     return a.time - b.time
+                    //                 })
+                    //                 res.forEach((item) => {
+                    //                     friend.lastTime = item.time
+                    //                     this.$parent.$parent.updateSession(friend, item.content, false, item.from == userId, true)
+                    //                 })
+                    //             })
+                    //         }catch(err){
+                    //             console.log(err);
+                    //         }
+                    //     }
+                    // })
                 })
                 .catch((data) => {
                     this.$notify({ type:'warning', title: '错误', message: '获取好友信息失败' })

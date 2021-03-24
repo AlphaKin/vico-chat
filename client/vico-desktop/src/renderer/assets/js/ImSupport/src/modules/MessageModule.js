@@ -19,6 +19,7 @@ class MessageModule extends BaseModule.BaseModule {
         textMsg.setTo(to);
         textMsg.setContent(content);
         textMsg.setIsgroup(isGroup);
+        textMsg.setTime(Date.parse(new Date()));
 
         aggregatedMsg.setCommandtype(ImMessagePb.CommandType.MESSAGE_TEXT_REQUEST);
         aggregatedMsg.setTime(Date.parse(new Date()));

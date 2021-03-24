@@ -37,6 +37,15 @@ export default {
     },
     mounted() {
         setTimeout(()=>{ this.isLoading = false;}, 2000);
+        
+        
+        // if(!this.$store.state.common.uiMode){
+        //     // 绑定好友请求
+        //     this.$IM.registry('friend_req', (event) => {
+        //         let resp = event.data.getFriendreq();
+                
+        //     });
+        // }
     },
     data(){
         return{

@@ -1,22 +1,21 @@
 package org.vico.im.codec;
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.vico.im.constant.PacketHead;
 import org.vico.im.handler.ImDispatcherHandler;
 
 import javax.annotation.Resource;
 
+@Slf4j
 @ChannelHandler.Sharable
 @Component(value = "PacketHeadDecoder")
 public class PacketHeadDecoder extends SimpleChannelInboundHandler<BinaryWebSocketFrame> {
-    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Resource
     ImDispatcherHandler imDispatcher;
@@ -33,13 +32,13 @@ public class PacketHeadDecoder extends SimpleChannelInboundHandler<BinaryWebSock
         }
         int magicNum = byteBuf.readUnsignedShort();
         if(magicNum != PacketHead.MAGIC_NUMBER){
-            logger.warn("数据包格式错误");
+            log.warn("数据包格式错误");
             ctx.close();
         }
 
         int version = byteBuf.readUnsignedShort();
         if(version != PacketHead.PACKET_VERSION){
-            logger.warn("数据包版本错误");
+            log.warn("数据包版本错误");
             ctx.close();
         }
         int length = byteBuf.readUnsignedShort();
@@ -48,7 +47,7 @@ public class PacketHeadDecoder extends SimpleChannelInboundHandler<BinaryWebSock
         }
         if(length > byteBuf.readableBytes()){
             byteBuf.resetReaderIndex();
-            logger.warn("消息内容长度不足");
+            log.warn("消息内容长度不足");
             return;
         }
 
@@ -64,7 +63,6 @@ public class PacketHeadDecoder extends SimpleChannelInboundHandler<BinaryWebSock
         ctx.writeAndFlush(content);
 //        ctx.flush();
 //        future.get();
-
 
         imDispatcher.doDispatcher(ctx, content);
     }

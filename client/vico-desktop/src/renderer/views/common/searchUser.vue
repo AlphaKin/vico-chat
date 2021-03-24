@@ -4,26 +4,25 @@
         <div class="search-wrapper">
             <div class="search-bar">
                 <i class="fa fa-search"></i>
-                <input type="text" />
+                <input type="text" v-model="keyText" />
             </div>
-            <button>搜索</button>
+            <button @click="search()">搜索</button>
         </div>
 
         <div class="body">
             <div class="result-wrapper">
                 <loading-cover v-show="isLoading"></loading-cover>
-                <div class="item-wrapper" v-for="(item, index) in data" :key="index">
-                    <el-avatar :size="40" :src="item.picURL"></el-avatar>
+                <div class="item-wrapper" v-for="(item, index) in searchList" :key="index" @click="openUserPlane(item)">
+                    <el-avatar :size="40" :src="require('../../assets/pic/userhead/' + item.userHead + '.png')"></el-avatar>
                     <h5>
                         <i v-show="item.sex == 0" class="fa fa-venus" style="color: hotpink; font-size: 10px;"></i>
                         <i v-show="item.sex == 1" class="fa fa-mars" style="color: cornflowerblue;  font-size: 10px;"></i>
-                        {{item.name}}
+                        {{item.userNickName}}
                     </h5>
-<!--                    <span>人数: 500</span> -->
-                    <button :class="[item.isFriend ? 'cant-friend' : 'can-friend']">
+                    <!-- <button :class="[item.isFriend ? 'cant-friend' : 'can-friend']">
                         <i v-show="!item.isFriend" class="fa fa-plus" ></i>
                         {{!item.isFriend ? '加好友' : '已是好友'}}
-                    </button>
+                    </button> -->
                 </div>
             </div>
         </div>
@@ -38,47 +37,39 @@ export default {
     mounted() {
         setTimeout(()=>{ this.isLoading = false;}, 2000);
     },
+    methods:{
+        search(){
+            if(this.keyText == '') return;
+            this.$req.post('/restful/getUsersByUserName', {userName: this.keyText}).apply()
+                .then((data) => {
+                    this.searchUsersList = data.users;
+                })
+                .catch((data) => {
+                    this.$notify({ type:'warning', title: '错误', message: '获取信息失败' })
+                })
+        },
+        openUserPlane(user){
+            this.$parent.$parent.switchUserInfoPlane(true, user);
+        }
+    },
     data(){
         return{
             isLoading: true,
-            data:[
-                {
-                    name: 'kin',
-                    sex: 0,
-                    isFriend: false,
-                    picURL: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4131746241,2477555401&fm=11&gp=0.jpg'
-                },
-                {
-                    name: 'ke',
-                    sex: 1,
-                    isFriend: false,
-                    picURL: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2102560265,1665037801&fm=26&gp=0.jpg'
-                },
-                {
-                    name: 'lisa',
-                    sex: 1,
-                    isFriend: true,
-                    picURL: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2813350528,1657210790&fm=11&gp=0.jpg'
-                },
-                {
-                    name: 'lisa',
-                    sex: 1,
-                    isFriend: false,
-                    picURL: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2813350528,1657210790&fm=11&gp=0.jpg'
-                },
-                {
-                    name: 'ke',
-                    sex: 1,
-                    isFriend: false,
-                    picURL: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2102560265,1665037801&fm=26&gp=0.jpg'
-                },
-                {
-                    name: 'lisa',
-                    sex: 1,
-                    isFriend: false,
-                    picURL: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1851283359,3457678391&fm=26&gp=0.jpg'
-                }
-            ]
+            keyText: '',
+            searchUsersList:[ ]
+        }
+    },
+    computed:{
+        searchList() {
+            this.searchUsersList.forEach((user) => {
+                let res = this.$parent.$parent.findAim(user.id, false);
+                user.isFriend = (res != null);
+            });
+            this.searchUsersList.reduce((total, current) => {
+                current.id != this.$store.state.userInfo.userId && total.push(current);
+                return total;
+            }, []);
+            return this.searchUsersList;
         }
     }
 }
@@ -130,6 +121,7 @@ export default {
                 width: 25%;
                 color: white;
                 height: 30px;
+                cursor: pointer;
                 background: $--color-primary;
             }
         }

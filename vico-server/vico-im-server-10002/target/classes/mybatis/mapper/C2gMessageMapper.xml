@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.vico.im.mapper.C2gMessageRecordMapper">
+
+    <resultMap id="BaseResultMap" type="org.vico.im.pojo.MessageRecord">
+        <id property="msgcId" column="msgc_id" jdbcType="BIGINT"/>
+        <id property="msgId" column="msg_id" jdbcType="BIGINT"/>
+        <result property="msgcStatus" column="msgc_status" jdbcType="INTEGER"/>
+        <result property="msgcContent" column="msgc_content" jdbcType="VARCHAR"/>
+        <result property="mtId" column="mt_id" jdbcType="INTEGER"/>
+        <result property="msgcSendtime" column="msgc_sendtime" jdbcType="TIMESTAMP"/>
+        <result property="contentId" column="content_id" jdbcType="BIGINT"/>
+        <result property="fromId" column="from_id" jdbcType="BIGINT"/>
+        <result property="toId" column="to_id" jdbcType="BIGINT"/>
+        <result property="isGroup" column="is_group" jdbcType="BOOLEAN"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        msgc_id,msgc_status,msgc_content,mt_id,msgc_sendtime
+    </sql>
+
+    <sql id="Message_Column_List">
+        msg_id,from_id,to_id,content_id,is_group
+    </sql>
+
+    <sql id="Offline_Message_Column_List">
+        omsg_id,from_id,to_id,content_id,is_group
+    </sql>
+
+    <insert id="insertSingleMessageContent" useGeneratedKeys="true" keyProperty="contentId">
+        insert into c2g_message_content ( <include refid="Base_Column_List"></include> )
+        values (
+            null,
+            #{ msgcStatus },
+            #{ msgcContent },
+            #{ mtId },
+            #{ msgcSendtime }
+        );
+    </insert>
+
+    <insert id="insertSingleMessage">
+        insert into message ( <include refid="Message_Column_List"></include> )
+        values (
+            null,
+            #{ fromId },
+            #{ toId },
+            #{ contentId },
+            #{ isGroup }
+        );
+    </insert>
+
+    <insert id="insertSingleOfflineMessage">
+        insert into offline_message( <include refid="Offline_Message_Column_List"></include> )
+        values (
+            null,
+            #{ fromId },
+            #{ toId },
+            #{ contentId },
+            #{ isGroup }
+        )
+    </insert>
+
+    <select id="selectOfflineMessage" resultType="org.vico.im.pojo.MessageRecord" parameterType="Long">
+        select from_id, to_id, msgc_status, msgc_content, msgc_sendtime from offline_message om, c2g_message_content c2g
+        where is_group = true and to_id = #{ id } and c2g.msgc_id = om.content_id
+    </select>
+
+    <delete id="deleteOfflineMessage" parameterType="Long">
+        delete from offline_message where is_group = true and to_id = #{ id }
+    </delete>
+
+    <select id="selectRoamMessages" resultType="org.vico.im.pojo.MessageRecord">
+        select from_id, to_id, msgc_status, msgc_content, msgc_sendtime from group_relation gr, message m, c2g_message_content c2g
+        where m.is_group = true
+            and gr.user_id = #{ userId }
+            and gr.grp_id = m.to_id
+            and m.content_id = c2g.msgc_id
+            and c2g.msgc_sendtime > #{ timestamp }
+    </select>
+</mapper>

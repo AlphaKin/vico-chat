@@ -89,12 +89,28 @@ public final class ProtoMessage {
     MESSAGE_TEXT_RESPONSE(7),
     /**
      * <pre>
+     *好友 req
+     * </pre>
+     *
+     * <code>FRIEND_REQUEST = 8;</code>
+     */
+    FRIEND_REQUEST(8),
+    /**
+     * <pre>
+     *好友 res
+     * </pre>
+     *
+     * <code>FRIEND_RESPONSE = 9;</code>
+     */
+    FRIEND_RESPONSE(9),
+    /**
+     * <pre>
      *系统消息
      * </pre>
      *
-     * <code>MESSAGE_SYSTEM = 8;</code>
+     * <code>MESSAGE_SYSTEM = 10;</code>
      */
-    MESSAGE_SYSTEM(8),
+    MESSAGE_SYSTEM(10),
     UNRECOGNIZED(-1),
     ;
 
@@ -164,12 +180,28 @@ public final class ProtoMessage {
     public static final int MESSAGE_TEXT_RESPONSE_VALUE = 7;
     /**
      * <pre>
+     *好友 req
+     * </pre>
+     *
+     * <code>FRIEND_REQUEST = 8;</code>
+     */
+    public static final int FRIEND_REQUEST_VALUE = 8;
+    /**
+     * <pre>
+     *好友 res
+     * </pre>
+     *
+     * <code>FRIEND_RESPONSE = 9;</code>
+     */
+    public static final int FRIEND_RESPONSE_VALUE = 9;
+    /**
+     * <pre>
      *系统消息
      * </pre>
      *
-     * <code>MESSAGE_SYSTEM = 8;</code>
+     * <code>MESSAGE_SYSTEM = 10;</code>
      */
-    public static final int MESSAGE_SYSTEM_VALUE = 8;
+    public static final int MESSAGE_SYSTEM_VALUE = 10;
 
 
     public final int getNumber() {
@@ -204,7 +236,9 @@ public final class ProtoMessage {
         case 5: return KEEPALIVE_RESPONSE;
         case 6: return MESSAGE_TEXT_REQUEST;
         case 7: return MESSAGE_TEXT_RESPONSE;
-        case 8: return MESSAGE_SYSTEM;
+        case 8: return FRIEND_REQUEST;
+        case 9: return FRIEND_RESPONSE;
+        case 10: return MESSAGE_SYSTEM;
         default: return null;
       }
     }
@@ -1175,10 +1209,70 @@ public final class ProtoMessage {
 
     /**
      * <pre>
+     *群ID
+     * </pre>
+     *
+     * <code>string groupId = 4;</code>
+     * @return The groupId.
+     */
+    java.lang.String getGroupId();
+    /**
+     * <pre>
+     *群ID
+     * </pre>
+     *
+     * <code>string groupId = 4;</code>
+     * @return The bytes for groupId.
+     */
+    com.google.protobuf.ByteString
+        getGroupIdBytes();
+
+    /**
+     * <pre>
+     *发送者昵称
+     * </pre>
+     *
+     * <code>string fromNickname = 5;</code>
+     * @return The fromNickname.
+     */
+    java.lang.String getFromNickname();
+    /**
+     * <pre>
+     *发送者昵称
+     * </pre>
+     *
+     * <code>string fromNickname = 5;</code>
+     * @return The bytes for fromNickname.
+     */
+    com.google.protobuf.ByteString
+        getFromNicknameBytes();
+
+    /**
+     * <pre>
+     *发送者头像
+     * </pre>
+     *
+     * <code>string headUrl = 6;</code>
+     * @return The headUrl.
+     */
+    java.lang.String getHeadUrl();
+    /**
+     * <pre>
+     *发送者头像
+     * </pre>
+     *
+     * <code>string headUrl = 6;</code>
+     * @return The bytes for headUrl.
+     */
+    com.google.protobuf.ByteString
+        getHeadUrlBytes();
+
+    /**
+     * <pre>
      *消息内容
      * </pre>
      *
-     * <code>string content = 4;</code>
+     * <code>string content = 7;</code>
      * @return The content.
      */
     java.lang.String getContent();
@@ -1187,7 +1281,7 @@ public final class ProtoMessage {
      *消息内容
      * </pre>
      *
-     * <code>string content = 4;</code>
+     * <code>string content = 7;</code>
      * @return The bytes for content.
      */
     com.google.protobuf.ByteString
@@ -1198,20 +1292,30 @@ public final class ProtoMessage {
      *是否为群消息
      * </pre>
      *
-     * <code>bool isGroup = 5;</code>
+     * <code>bool isGroup = 8;</code>
      * @return The isGroup.
      */
     boolean getIsGroup();
 
     /**
      * <pre>
-     *是否被转发
+     *是否为漫游
      * </pre>
      *
-     * <code>bool isForward = 6;</code>
-     * @return The isForward.
+     * <code>bool isRoamed = 9;</code>
+     * @return The isRoamed.
      */
-    boolean getIsForward();
+    boolean getIsRoamed();
+
+    /**
+     * <pre>
+     *时间
+     * </pre>
+     *
+     * <code>uint64 time = 10;</code>
+     * @return The time.
+     */
+    long getTime();
   }
   /**
    * <pre>
@@ -1233,6 +1337,9 @@ public final class ProtoMessage {
       sessionId_ = "";
       from_ = "";
       to_ = "";
+      groupId_ = "";
+      fromNickname_ = "";
+      headUrl_ = "";
       content_ = "";
     }
 
@@ -1287,17 +1394,40 @@ public final class ProtoMessage {
             case 34: {
               java.lang.String s = input.readStringRequireUtf8();
 
+              groupId_ = s;
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              fromNickname_ = s;
+              break;
+            }
+            case 50: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              headUrl_ = s;
+              break;
+            }
+            case 58: {
+              java.lang.String s = input.readStringRequireUtf8();
+
               content_ = s;
               break;
             }
-            case 40: {
+            case 64: {
 
               isGroup_ = input.readBool();
               break;
             }
-            case 48: {
+            case 72: {
 
-              isForward_ = input.readBool();
+              isRoamed_ = input.readBool();
+              break;
+            }
+            case 80: {
+
+              time_ = input.readUInt64();
               break;
             }
             default: {
@@ -1470,14 +1600,152 @@ public final class ProtoMessage {
       }
     }
 
-    public static final int CONTENT_FIELD_NUMBER = 4;
+    public static final int GROUPID_FIELD_NUMBER = 4;
+    private volatile java.lang.Object groupId_;
+    /**
+     * <pre>
+     *群ID
+     * </pre>
+     *
+     * <code>string groupId = 4;</code>
+     * @return The groupId.
+     */
+    @java.lang.Override
+    public java.lang.String getGroupId() {
+      java.lang.Object ref = groupId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        groupId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *群ID
+     * </pre>
+     *
+     * <code>string groupId = 4;</code>
+     * @return The bytes for groupId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getGroupIdBytes() {
+      java.lang.Object ref = groupId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        groupId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FROMNICKNAME_FIELD_NUMBER = 5;
+    private volatile java.lang.Object fromNickname_;
+    /**
+     * <pre>
+     *发送者昵称
+     * </pre>
+     *
+     * <code>string fromNickname = 5;</code>
+     * @return The fromNickname.
+     */
+    @java.lang.Override
+    public java.lang.String getFromNickname() {
+      java.lang.Object ref = fromNickname_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        fromNickname_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *发送者昵称
+     * </pre>
+     *
+     * <code>string fromNickname = 5;</code>
+     * @return The bytes for fromNickname.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getFromNicknameBytes() {
+      java.lang.Object ref = fromNickname_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        fromNickname_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int HEADURL_FIELD_NUMBER = 6;
+    private volatile java.lang.Object headUrl_;
+    /**
+     * <pre>
+     *发送者头像
+     * </pre>
+     *
+     * <code>string headUrl = 6;</code>
+     * @return The headUrl.
+     */
+    @java.lang.Override
+    public java.lang.String getHeadUrl() {
+      java.lang.Object ref = headUrl_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        headUrl_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *发送者头像
+     * </pre>
+     *
+     * <code>string headUrl = 6;</code>
+     * @return The bytes for headUrl.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getHeadUrlBytes() {
+      java.lang.Object ref = headUrl_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        headUrl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CONTENT_FIELD_NUMBER = 7;
     private volatile java.lang.Object content_;
     /**
      * <pre>
      *消息内容
      * </pre>
      *
-     * <code>string content = 4;</code>
+     * <code>string content = 7;</code>
      * @return The content.
      */
     @java.lang.Override
@@ -1498,7 +1766,7 @@ public final class ProtoMessage {
      *消息内容
      * </pre>
      *
-     * <code>string content = 4;</code>
+     * <code>string content = 7;</code>
      * @return The bytes for content.
      */
     @java.lang.Override
@@ -1516,14 +1784,14 @@ public final class ProtoMessage {
       }
     }
 
-    public static final int ISGROUP_FIELD_NUMBER = 5;
+    public static final int ISGROUP_FIELD_NUMBER = 8;
     private boolean isGroup_;
     /**
      * <pre>
      *是否为群消息
      * </pre>
      *
-     * <code>bool isGroup = 5;</code>
+     * <code>bool isGroup = 8;</code>
      * @return The isGroup.
      */
     @java.lang.Override
@@ -1531,19 +1799,34 @@ public final class ProtoMessage {
       return isGroup_;
     }
 
-    public static final int ISFORWARD_FIELD_NUMBER = 6;
-    private boolean isForward_;
+    public static final int ISROAMED_FIELD_NUMBER = 9;
+    private boolean isRoamed_;
     /**
      * <pre>
-     *是否被转发
+     *是否为漫游
      * </pre>
      *
-     * <code>bool isForward = 6;</code>
-     * @return The isForward.
+     * <code>bool isRoamed = 9;</code>
+     * @return The isRoamed.
      */
     @java.lang.Override
-    public boolean getIsForward() {
-      return isForward_;
+    public boolean getIsRoamed() {
+      return isRoamed_;
+    }
+
+    public static final int TIME_FIELD_NUMBER = 10;
+    private long time_;
+    /**
+     * <pre>
+     *时间
+     * </pre>
+     *
+     * <code>uint64 time = 10;</code>
+     * @return The time.
+     */
+    @java.lang.Override
+    public long getTime() {
+      return time_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1569,14 +1852,26 @@ public final class ProtoMessage {
       if (!getToBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, to_);
       }
+      if (!getGroupIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, groupId_);
+      }
+      if (!getFromNicknameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, fromNickname_);
+      }
+      if (!getHeadUrlBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, headUrl_);
+      }
       if (!getContentBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, content_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, content_);
       }
       if (isGroup_ != false) {
-        output.writeBool(5, isGroup_);
+        output.writeBool(8, isGroup_);
       }
-      if (isForward_ != false) {
-        output.writeBool(6, isForward_);
+      if (isRoamed_ != false) {
+        output.writeBool(9, isRoamed_);
+      }
+      if (time_ != 0L) {
+        output.writeUInt64(10, time_);
       }
       unknownFields.writeTo(output);
     }
@@ -1596,16 +1891,29 @@ public final class ProtoMessage {
       if (!getToBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, to_);
       }
+      if (!getGroupIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, groupId_);
+      }
+      if (!getFromNicknameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, fromNickname_);
+      }
+      if (!getHeadUrlBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, headUrl_);
+      }
       if (!getContentBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, content_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, content_);
       }
       if (isGroup_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(5, isGroup_);
+          .computeBoolSize(8, isGroup_);
       }
-      if (isForward_ != false) {
+      if (isRoamed_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(6, isForward_);
+          .computeBoolSize(9, isRoamed_);
+      }
+      if (time_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(10, time_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1628,12 +1936,20 @@ public final class ProtoMessage {
           .equals(other.getFrom())) return false;
       if (!getTo()
           .equals(other.getTo())) return false;
+      if (!getGroupId()
+          .equals(other.getGroupId())) return false;
+      if (!getFromNickname()
+          .equals(other.getFromNickname())) return false;
+      if (!getHeadUrl()
+          .equals(other.getHeadUrl())) return false;
       if (!getContent()
           .equals(other.getContent())) return false;
       if (getIsGroup()
           != other.getIsGroup()) return false;
-      if (getIsForward()
-          != other.getIsForward()) return false;
+      if (getIsRoamed()
+          != other.getIsRoamed()) return false;
+      if (getTime()
+          != other.getTime()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1651,14 +1967,23 @@ public final class ProtoMessage {
       hash = (53 * hash) + getFrom().hashCode();
       hash = (37 * hash) + TO_FIELD_NUMBER;
       hash = (53 * hash) + getTo().hashCode();
+      hash = (37 * hash) + GROUPID_FIELD_NUMBER;
+      hash = (53 * hash) + getGroupId().hashCode();
+      hash = (37 * hash) + FROMNICKNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getFromNickname().hashCode();
+      hash = (37 * hash) + HEADURL_FIELD_NUMBER;
+      hash = (53 * hash) + getHeadUrl().hashCode();
       hash = (37 * hash) + CONTENT_FIELD_NUMBER;
       hash = (53 * hash) + getContent().hashCode();
       hash = (37 * hash) + ISGROUP_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getIsGroup());
-      hash = (37 * hash) + ISFORWARD_FIELD_NUMBER;
+      hash = (37 * hash) + ISROAMED_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-          getIsForward());
+          getIsRoamed());
+      hash = (37 * hash) + TIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getTime());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1802,11 +2127,19 @@ public final class ProtoMessage {
 
         to_ = "";
 
+        groupId_ = "";
+
+        fromNickname_ = "";
+
+        headUrl_ = "";
+
         content_ = "";
 
         isGroup_ = false;
 
-        isForward_ = false;
+        isRoamed_ = false;
+
+        time_ = 0L;
 
         return this;
       }
@@ -1837,9 +2170,13 @@ public final class ProtoMessage {
         result.sessionId_ = sessionId_;
         result.from_ = from_;
         result.to_ = to_;
+        result.groupId_ = groupId_;
+        result.fromNickname_ = fromNickname_;
+        result.headUrl_ = headUrl_;
         result.content_ = content_;
         result.isGroup_ = isGroup_;
-        result.isForward_ = isForward_;
+        result.isRoamed_ = isRoamed_;
+        result.time_ = time_;
         onBuilt();
         return result;
       }
@@ -1900,6 +2237,18 @@ public final class ProtoMessage {
           to_ = other.to_;
           onChanged();
         }
+        if (!other.getGroupId().isEmpty()) {
+          groupId_ = other.groupId_;
+          onChanged();
+        }
+        if (!other.getFromNickname().isEmpty()) {
+          fromNickname_ = other.fromNickname_;
+          onChanged();
+        }
+        if (!other.getHeadUrl().isEmpty()) {
+          headUrl_ = other.headUrl_;
+          onChanged();
+        }
         if (!other.getContent().isEmpty()) {
           content_ = other.content_;
           onChanged();
@@ -1907,8 +2256,11 @@ public final class ProtoMessage {
         if (other.getIsGroup() != false) {
           setIsGroup(other.getIsGroup());
         }
-        if (other.getIsForward() != false) {
-          setIsForward(other.getIsForward());
+        if (other.getIsRoamed() != false) {
+          setIsRoamed(other.getIsRoamed());
+        }
+        if (other.getTime() != 0L) {
+          setTime(other.getTime());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2227,13 +2579,301 @@ public final class ProtoMessage {
         return this;
       }
 
+      private java.lang.Object groupId_ = "";
+      /**
+       * <pre>
+       *群ID
+       * </pre>
+       *
+       * <code>string groupId = 4;</code>
+       * @return The groupId.
+       */
+      public java.lang.String getGroupId() {
+        java.lang.Object ref = groupId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          groupId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *群ID
+       * </pre>
+       *
+       * <code>string groupId = 4;</code>
+       * @return The bytes for groupId.
+       */
+      public com.google.protobuf.ByteString
+          getGroupIdBytes() {
+        java.lang.Object ref = groupId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          groupId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *群ID
+       * </pre>
+       *
+       * <code>string groupId = 4;</code>
+       * @param value The groupId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setGroupId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        groupId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *群ID
+       * </pre>
+       *
+       * <code>string groupId = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearGroupId() {
+        
+        groupId_ = getDefaultInstance().getGroupId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *群ID
+       * </pre>
+       *
+       * <code>string groupId = 4;</code>
+       * @param value The bytes for groupId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setGroupIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        groupId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object fromNickname_ = "";
+      /**
+       * <pre>
+       *发送者昵称
+       * </pre>
+       *
+       * <code>string fromNickname = 5;</code>
+       * @return The fromNickname.
+       */
+      public java.lang.String getFromNickname() {
+        java.lang.Object ref = fromNickname_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          fromNickname_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *发送者昵称
+       * </pre>
+       *
+       * <code>string fromNickname = 5;</code>
+       * @return The bytes for fromNickname.
+       */
+      public com.google.protobuf.ByteString
+          getFromNicknameBytes() {
+        java.lang.Object ref = fromNickname_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          fromNickname_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *发送者昵称
+       * </pre>
+       *
+       * <code>string fromNickname = 5;</code>
+       * @param value The fromNickname to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFromNickname(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        fromNickname_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *发送者昵称
+       * </pre>
+       *
+       * <code>string fromNickname = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFromNickname() {
+        
+        fromNickname_ = getDefaultInstance().getFromNickname();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *发送者昵称
+       * </pre>
+       *
+       * <code>string fromNickname = 5;</code>
+       * @param value The bytes for fromNickname to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFromNicknameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        fromNickname_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object headUrl_ = "";
+      /**
+       * <pre>
+       *发送者头像
+       * </pre>
+       *
+       * <code>string headUrl = 6;</code>
+       * @return The headUrl.
+       */
+      public java.lang.String getHeadUrl() {
+        java.lang.Object ref = headUrl_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          headUrl_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *发送者头像
+       * </pre>
+       *
+       * <code>string headUrl = 6;</code>
+       * @return The bytes for headUrl.
+       */
+      public com.google.protobuf.ByteString
+          getHeadUrlBytes() {
+        java.lang.Object ref = headUrl_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          headUrl_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *发送者头像
+       * </pre>
+       *
+       * <code>string headUrl = 6;</code>
+       * @param value The headUrl to set.
+       * @return This builder for chaining.
+       */
+      public Builder setHeadUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        headUrl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *发送者头像
+       * </pre>
+       *
+       * <code>string headUrl = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearHeadUrl() {
+        
+        headUrl_ = getDefaultInstance().getHeadUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *发送者头像
+       * </pre>
+       *
+       * <code>string headUrl = 6;</code>
+       * @param value The bytes for headUrl to set.
+       * @return This builder for chaining.
+       */
+      public Builder setHeadUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        headUrl_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object content_ = "";
       /**
        * <pre>
        *消息内容
        * </pre>
        *
-       * <code>string content = 4;</code>
+       * <code>string content = 7;</code>
        * @return The content.
        */
       public java.lang.String getContent() {
@@ -2253,7 +2893,7 @@ public final class ProtoMessage {
        *消息内容
        * </pre>
        *
-       * <code>string content = 4;</code>
+       * <code>string content = 7;</code>
        * @return The bytes for content.
        */
       public com.google.protobuf.ByteString
@@ -2274,7 +2914,7 @@ public final class ProtoMessage {
        *消息内容
        * </pre>
        *
-       * <code>string content = 4;</code>
+       * <code>string content = 7;</code>
        * @param value The content to set.
        * @return This builder for chaining.
        */
@@ -2293,7 +2933,7 @@ public final class ProtoMessage {
        *消息内容
        * </pre>
        *
-       * <code>string content = 4;</code>
+       * <code>string content = 7;</code>
        * @return This builder for chaining.
        */
       public Builder clearContent() {
@@ -2307,7 +2947,7 @@ public final class ProtoMessage {
        *消息内容
        * </pre>
        *
-       * <code>string content = 4;</code>
+       * <code>string content = 7;</code>
        * @param value The bytes for content to set.
        * @return This builder for chaining.
        */
@@ -2329,7 +2969,7 @@ public final class ProtoMessage {
        *是否为群消息
        * </pre>
        *
-       * <code>bool isGroup = 5;</code>
+       * <code>bool isGroup = 8;</code>
        * @return The isGroup.
        */
       @java.lang.Override
@@ -2341,7 +2981,7 @@ public final class ProtoMessage {
        *是否为群消息
        * </pre>
        *
-       * <code>bool isGroup = 5;</code>
+       * <code>bool isGroup = 8;</code>
        * @param value The isGroup to set.
        * @return This builder for chaining.
        */
@@ -2356,7 +2996,7 @@ public final class ProtoMessage {
        *是否为群消息
        * </pre>
        *
-       * <code>bool isGroup = 5;</code>
+       * <code>bool isGroup = 8;</code>
        * @return This builder for chaining.
        */
       public Builder clearIsGroup() {
@@ -2366,45 +3006,88 @@ public final class ProtoMessage {
         return this;
       }
 
-      private boolean isForward_ ;
+      private boolean isRoamed_ ;
       /**
        * <pre>
-       *是否被转发
+       *是否为漫游
        * </pre>
        *
-       * <code>bool isForward = 6;</code>
-       * @return The isForward.
+       * <code>bool isRoamed = 9;</code>
+       * @return The isRoamed.
        */
       @java.lang.Override
-      public boolean getIsForward() {
-        return isForward_;
+      public boolean getIsRoamed() {
+        return isRoamed_;
       }
       /**
        * <pre>
-       *是否被转发
+       *是否为漫游
        * </pre>
        *
-       * <code>bool isForward = 6;</code>
-       * @param value The isForward to set.
+       * <code>bool isRoamed = 9;</code>
+       * @param value The isRoamed to set.
        * @return This builder for chaining.
        */
-      public Builder setIsForward(boolean value) {
+      public Builder setIsRoamed(boolean value) {
         
-        isForward_ = value;
+        isRoamed_ = value;
         onChanged();
         return this;
       }
       /**
        * <pre>
-       *是否被转发
+       *是否为漫游
        * </pre>
        *
-       * <code>bool isForward = 6;</code>
+       * <code>bool isRoamed = 9;</code>
        * @return This builder for chaining.
        */
-      public Builder clearIsForward() {
+      public Builder clearIsRoamed() {
         
-        isForward_ = false;
+        isRoamed_ = false;
+        onChanged();
+        return this;
+      }
+
+      private long time_ ;
+      /**
+       * <pre>
+       *时间
+       * </pre>
+       *
+       * <code>uint64 time = 10;</code>
+       * @return The time.
+       */
+      @java.lang.Override
+      public long getTime() {
+        return time_;
+      }
+      /**
+       * <pre>
+       *时间
+       * </pre>
+       *
+       * <code>uint64 time = 10;</code>
+       * @param value The time to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTime(long value) {
+        
+        time_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *时间
+       * </pre>
+       *
+       * <code>uint64 time = 10;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTime() {
+        
+        time_ = 0L;
         onChanged();
         return this;
       }
@@ -2456,6 +3139,1453 @@ public final class ProtoMessage {
 
     @java.lang.Override
     public org.vico.im.proto.ProtoMessage.TextMessageRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface FriendRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:proto.FriendRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     *请求用户ID
+     * </pre>
+     *
+     * <code>string from = 1;</code>
+     * @return The from.
+     */
+    java.lang.String getFrom();
+    /**
+     * <pre>
+     *请求用户ID
+     * </pre>
+     *
+     * <code>string from = 1;</code>
+     * @return The bytes for from.
+     */
+    com.google.protobuf.ByteString
+        getFromBytes();
+
+    /**
+     * <pre>
+     *目标用户ID
+     * </pre>
+     *
+     * <code>string to = 2;</code>
+     * @return The to.
+     */
+    java.lang.String getTo();
+    /**
+     * <pre>
+     *目标用户ID
+     * </pre>
+     *
+     * <code>string to = 2;</code>
+     * @return The bytes for to.
+     */
+    com.google.protobuf.ByteString
+        getToBytes();
+
+    /**
+     * <pre>
+     *发送者昵称
+     * </pre>
+     *
+     * <code>string fromNickname = 3;</code>
+     * @return The fromNickname.
+     */
+    java.lang.String getFromNickname();
+    /**
+     * <pre>
+     *发送者昵称
+     * </pre>
+     *
+     * <code>string fromNickname = 3;</code>
+     * @return The bytes for fromNickname.
+     */
+    com.google.protobuf.ByteString
+        getFromNicknameBytes();
+
+    /**
+     * <pre>
+     *发送者头像
+     * </pre>
+     *
+     * <code>string headUrl = 4;</code>
+     * @return The headUrl.
+     */
+    java.lang.String getHeadUrl();
+    /**
+     * <pre>
+     *发送者头像
+     * </pre>
+     *
+     * <code>string headUrl = 4;</code>
+     * @return The bytes for headUrl.
+     */
+    com.google.protobuf.ByteString
+        getHeadUrlBytes();
+
+    /**
+     * <pre>
+     *请求理由
+     * </pre>
+     *
+     * <code>string reason = 5;</code>
+     * @return The reason.
+     */
+    java.lang.String getReason();
+    /**
+     * <pre>
+     *请求理由
+     * </pre>
+     *
+     * <code>string reason = 5;</code>
+     * @return The bytes for reason.
+     */
+    com.google.protobuf.ByteString
+        getReasonBytes();
+
+    /**
+     * <pre>
+     *时间
+     * </pre>
+     *
+     * <code>uint64 time = 6;</code>
+     * @return The time.
+     */
+    long getTime();
+  }
+  /**
+   * <pre>
+   *好友请求
+   * </pre>
+   *
+   * Protobuf type {@code proto.FriendRequest}
+   */
+  public static final class FriendRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:proto.FriendRequest)
+      FriendRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use FriendRequest.newBuilder() to construct.
+    private FriendRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private FriendRequest() {
+      from_ = "";
+      to_ = "";
+      fromNickname_ = "";
+      headUrl_ = "";
+      reason_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new FriendRequest();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private FriendRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              from_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              to_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              fromNickname_ = s;
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              headUrl_ = s;
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              reason_ = s;
+              break;
+            }
+            case 48: {
+
+              time_ = input.readUInt64();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.vico.im.proto.ProtoMessage.internal_static_proto_FriendRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.vico.im.proto.ProtoMessage.internal_static_proto_FriendRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.vico.im.proto.ProtoMessage.FriendRequest.class, org.vico.im.proto.ProtoMessage.FriendRequest.Builder.class);
+    }
+
+    public static final int FROM_FIELD_NUMBER = 1;
+    private volatile java.lang.Object from_;
+    /**
+     * <pre>
+     *请求用户ID
+     * </pre>
+     *
+     * <code>string from = 1;</code>
+     * @return The from.
+     */
+    @java.lang.Override
+    public java.lang.String getFrom() {
+      java.lang.Object ref = from_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        from_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *请求用户ID
+     * </pre>
+     *
+     * <code>string from = 1;</code>
+     * @return The bytes for from.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getFromBytes() {
+      java.lang.Object ref = from_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        from_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TO_FIELD_NUMBER = 2;
+    private volatile java.lang.Object to_;
+    /**
+     * <pre>
+     *目标用户ID
+     * </pre>
+     *
+     * <code>string to = 2;</code>
+     * @return The to.
+     */
+    @java.lang.Override
+    public java.lang.String getTo() {
+      java.lang.Object ref = to_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        to_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *目标用户ID
+     * </pre>
+     *
+     * <code>string to = 2;</code>
+     * @return The bytes for to.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getToBytes() {
+      java.lang.Object ref = to_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        to_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FROMNICKNAME_FIELD_NUMBER = 3;
+    private volatile java.lang.Object fromNickname_;
+    /**
+     * <pre>
+     *发送者昵称
+     * </pre>
+     *
+     * <code>string fromNickname = 3;</code>
+     * @return The fromNickname.
+     */
+    @java.lang.Override
+    public java.lang.String getFromNickname() {
+      java.lang.Object ref = fromNickname_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        fromNickname_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *发送者昵称
+     * </pre>
+     *
+     * <code>string fromNickname = 3;</code>
+     * @return The bytes for fromNickname.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getFromNicknameBytes() {
+      java.lang.Object ref = fromNickname_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        fromNickname_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int HEADURL_FIELD_NUMBER = 4;
+    private volatile java.lang.Object headUrl_;
+    /**
+     * <pre>
+     *发送者头像
+     * </pre>
+     *
+     * <code>string headUrl = 4;</code>
+     * @return The headUrl.
+     */
+    @java.lang.Override
+    public java.lang.String getHeadUrl() {
+      java.lang.Object ref = headUrl_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        headUrl_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *发送者头像
+     * </pre>
+     *
+     * <code>string headUrl = 4;</code>
+     * @return The bytes for headUrl.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getHeadUrlBytes() {
+      java.lang.Object ref = headUrl_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        headUrl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int REASON_FIELD_NUMBER = 5;
+    private volatile java.lang.Object reason_;
+    /**
+     * <pre>
+     *请求理由
+     * </pre>
+     *
+     * <code>string reason = 5;</code>
+     * @return The reason.
+     */
+    @java.lang.Override
+    public java.lang.String getReason() {
+      java.lang.Object ref = reason_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        reason_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *请求理由
+     * </pre>
+     *
+     * <code>string reason = 5;</code>
+     * @return The bytes for reason.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getReasonBytes() {
+      java.lang.Object ref = reason_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        reason_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TIME_FIELD_NUMBER = 6;
+    private long time_;
+    /**
+     * <pre>
+     *时间
+     * </pre>
+     *
+     * <code>uint64 time = 6;</code>
+     * @return The time.
+     */
+    @java.lang.Override
+    public long getTime() {
+      return time_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getFromBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, from_);
+      }
+      if (!getToBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, to_);
+      }
+      if (!getFromNicknameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, fromNickname_);
+      }
+      if (!getHeadUrlBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, headUrl_);
+      }
+      if (!getReasonBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, reason_);
+      }
+      if (time_ != 0L) {
+        output.writeUInt64(6, time_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getFromBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, from_);
+      }
+      if (!getToBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, to_);
+      }
+      if (!getFromNicknameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, fromNickname_);
+      }
+      if (!getHeadUrlBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, headUrl_);
+      }
+      if (!getReasonBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, reason_);
+      }
+      if (time_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(6, time_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.vico.im.proto.ProtoMessage.FriendRequest)) {
+        return super.equals(obj);
+      }
+      org.vico.im.proto.ProtoMessage.FriendRequest other = (org.vico.im.proto.ProtoMessage.FriendRequest) obj;
+
+      if (!getFrom()
+          .equals(other.getFrom())) return false;
+      if (!getTo()
+          .equals(other.getTo())) return false;
+      if (!getFromNickname()
+          .equals(other.getFromNickname())) return false;
+      if (!getHeadUrl()
+          .equals(other.getHeadUrl())) return false;
+      if (!getReason()
+          .equals(other.getReason())) return false;
+      if (getTime()
+          != other.getTime()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + FROM_FIELD_NUMBER;
+      hash = (53 * hash) + getFrom().hashCode();
+      hash = (37 * hash) + TO_FIELD_NUMBER;
+      hash = (53 * hash) + getTo().hashCode();
+      hash = (37 * hash) + FROMNICKNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getFromNickname().hashCode();
+      hash = (37 * hash) + HEADURL_FIELD_NUMBER;
+      hash = (53 * hash) + getHeadUrl().hashCode();
+      hash = (37 * hash) + REASON_FIELD_NUMBER;
+      hash = (53 * hash) + getReason().hashCode();
+      hash = (37 * hash) + TIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getTime());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.vico.im.proto.ProtoMessage.FriendRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(org.vico.im.proto.ProtoMessage.FriendRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *好友请求
+     * </pre>
+     *
+     * Protobuf type {@code proto.FriendRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:proto.FriendRequest)
+        org.vico.im.proto.ProtoMessage.FriendRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.vico.im.proto.ProtoMessage.internal_static_proto_FriendRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.vico.im.proto.ProtoMessage.internal_static_proto_FriendRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.vico.im.proto.ProtoMessage.FriendRequest.class, org.vico.im.proto.ProtoMessage.FriendRequest.Builder.class);
+      }
+
+      // Construct using org.vico.im.proto.ProtoMessage.FriendRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        from_ = "";
+
+        to_ = "";
+
+        fromNickname_ = "";
+
+        headUrl_ = "";
+
+        reason_ = "";
+
+        time_ = 0L;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.vico.im.proto.ProtoMessage.internal_static_proto_FriendRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public org.vico.im.proto.ProtoMessage.FriendRequest getDefaultInstanceForType() {
+        return org.vico.im.proto.ProtoMessage.FriendRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public org.vico.im.proto.ProtoMessage.FriendRequest build() {
+        org.vico.im.proto.ProtoMessage.FriendRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public org.vico.im.proto.ProtoMessage.FriendRequest buildPartial() {
+        org.vico.im.proto.ProtoMessage.FriendRequest result = new org.vico.im.proto.ProtoMessage.FriendRequest(this);
+        result.from_ = from_;
+        result.to_ = to_;
+        result.fromNickname_ = fromNickname_;
+        result.headUrl_ = headUrl_;
+        result.reason_ = reason_;
+        result.time_ = time_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.vico.im.proto.ProtoMessage.FriendRequest) {
+          return mergeFrom((org.vico.im.proto.ProtoMessage.FriendRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.vico.im.proto.ProtoMessage.FriendRequest other) {
+        if (other == org.vico.im.proto.ProtoMessage.FriendRequest.getDefaultInstance()) return this;
+        if (!other.getFrom().isEmpty()) {
+          from_ = other.from_;
+          onChanged();
+        }
+        if (!other.getTo().isEmpty()) {
+          to_ = other.to_;
+          onChanged();
+        }
+        if (!other.getFromNickname().isEmpty()) {
+          fromNickname_ = other.fromNickname_;
+          onChanged();
+        }
+        if (!other.getHeadUrl().isEmpty()) {
+          headUrl_ = other.headUrl_;
+          onChanged();
+        }
+        if (!other.getReason().isEmpty()) {
+          reason_ = other.reason_;
+          onChanged();
+        }
+        if (other.getTime() != 0L) {
+          setTime(other.getTime());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.vico.im.proto.ProtoMessage.FriendRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.vico.im.proto.ProtoMessage.FriendRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object from_ = "";
+      /**
+       * <pre>
+       *请求用户ID
+       * </pre>
+       *
+       * <code>string from = 1;</code>
+       * @return The from.
+       */
+      public java.lang.String getFrom() {
+        java.lang.Object ref = from_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          from_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *请求用户ID
+       * </pre>
+       *
+       * <code>string from = 1;</code>
+       * @return The bytes for from.
+       */
+      public com.google.protobuf.ByteString
+          getFromBytes() {
+        java.lang.Object ref = from_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          from_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *请求用户ID
+       * </pre>
+       *
+       * <code>string from = 1;</code>
+       * @param value The from to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFrom(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        from_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *请求用户ID
+       * </pre>
+       *
+       * <code>string from = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFrom() {
+        
+        from_ = getDefaultInstance().getFrom();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *请求用户ID
+       * </pre>
+       *
+       * <code>string from = 1;</code>
+       * @param value The bytes for from to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFromBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        from_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object to_ = "";
+      /**
+       * <pre>
+       *目标用户ID
+       * </pre>
+       *
+       * <code>string to = 2;</code>
+       * @return The to.
+       */
+      public java.lang.String getTo() {
+        java.lang.Object ref = to_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          to_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *目标用户ID
+       * </pre>
+       *
+       * <code>string to = 2;</code>
+       * @return The bytes for to.
+       */
+      public com.google.protobuf.ByteString
+          getToBytes() {
+        java.lang.Object ref = to_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          to_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *目标用户ID
+       * </pre>
+       *
+       * <code>string to = 2;</code>
+       * @param value The to to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTo(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        to_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *目标用户ID
+       * </pre>
+       *
+       * <code>string to = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTo() {
+        
+        to_ = getDefaultInstance().getTo();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *目标用户ID
+       * </pre>
+       *
+       * <code>string to = 2;</code>
+       * @param value The bytes for to to set.
+       * @return This builder for chaining.
+       */
+      public Builder setToBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        to_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object fromNickname_ = "";
+      /**
+       * <pre>
+       *发送者昵称
+       * </pre>
+       *
+       * <code>string fromNickname = 3;</code>
+       * @return The fromNickname.
+       */
+      public java.lang.String getFromNickname() {
+        java.lang.Object ref = fromNickname_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          fromNickname_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *发送者昵称
+       * </pre>
+       *
+       * <code>string fromNickname = 3;</code>
+       * @return The bytes for fromNickname.
+       */
+      public com.google.protobuf.ByteString
+          getFromNicknameBytes() {
+        java.lang.Object ref = fromNickname_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          fromNickname_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *发送者昵称
+       * </pre>
+       *
+       * <code>string fromNickname = 3;</code>
+       * @param value The fromNickname to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFromNickname(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        fromNickname_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *发送者昵称
+       * </pre>
+       *
+       * <code>string fromNickname = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFromNickname() {
+        
+        fromNickname_ = getDefaultInstance().getFromNickname();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *发送者昵称
+       * </pre>
+       *
+       * <code>string fromNickname = 3;</code>
+       * @param value The bytes for fromNickname to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFromNicknameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        fromNickname_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object headUrl_ = "";
+      /**
+       * <pre>
+       *发送者头像
+       * </pre>
+       *
+       * <code>string headUrl = 4;</code>
+       * @return The headUrl.
+       */
+      public java.lang.String getHeadUrl() {
+        java.lang.Object ref = headUrl_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          headUrl_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *发送者头像
+       * </pre>
+       *
+       * <code>string headUrl = 4;</code>
+       * @return The bytes for headUrl.
+       */
+      public com.google.protobuf.ByteString
+          getHeadUrlBytes() {
+        java.lang.Object ref = headUrl_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          headUrl_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *发送者头像
+       * </pre>
+       *
+       * <code>string headUrl = 4;</code>
+       * @param value The headUrl to set.
+       * @return This builder for chaining.
+       */
+      public Builder setHeadUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        headUrl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *发送者头像
+       * </pre>
+       *
+       * <code>string headUrl = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearHeadUrl() {
+        
+        headUrl_ = getDefaultInstance().getHeadUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *发送者头像
+       * </pre>
+       *
+       * <code>string headUrl = 4;</code>
+       * @param value The bytes for headUrl to set.
+       * @return This builder for chaining.
+       */
+      public Builder setHeadUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        headUrl_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object reason_ = "";
+      /**
+       * <pre>
+       *请求理由
+       * </pre>
+       *
+       * <code>string reason = 5;</code>
+       * @return The reason.
+       */
+      public java.lang.String getReason() {
+        java.lang.Object ref = reason_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          reason_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *请求理由
+       * </pre>
+       *
+       * <code>string reason = 5;</code>
+       * @return The bytes for reason.
+       */
+      public com.google.protobuf.ByteString
+          getReasonBytes() {
+        java.lang.Object ref = reason_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          reason_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *请求理由
+       * </pre>
+       *
+       * <code>string reason = 5;</code>
+       * @param value The reason to set.
+       * @return This builder for chaining.
+       */
+      public Builder setReason(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        reason_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *请求理由
+       * </pre>
+       *
+       * <code>string reason = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearReason() {
+        
+        reason_ = getDefaultInstance().getReason();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *请求理由
+       * </pre>
+       *
+       * <code>string reason = 5;</code>
+       * @param value The bytes for reason to set.
+       * @return This builder for chaining.
+       */
+      public Builder setReasonBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        reason_ = value;
+        onChanged();
+        return this;
+      }
+
+      private long time_ ;
+      /**
+       * <pre>
+       *时间
+       * </pre>
+       *
+       * <code>uint64 time = 6;</code>
+       * @return The time.
+       */
+      @java.lang.Override
+      public long getTime() {
+        return time_;
+      }
+      /**
+       * <pre>
+       *时间
+       * </pre>
+       *
+       * <code>uint64 time = 6;</code>
+       * @param value The time to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTime(long value) {
+        
+        time_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *时间
+       * </pre>
+       *
+       * <code>uint64 time = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTime() {
+        
+        time_ = 0L;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:proto.FriendRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:proto.FriendRequest)
+    private static final org.vico.im.proto.ProtoMessage.FriendRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new org.vico.im.proto.ProtoMessage.FriendRequest();
+    }
+
+    public static org.vico.im.proto.ProtoMessage.FriendRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<FriendRequest>
+        PARSER = new com.google.protobuf.AbstractParser<FriendRequest>() {
+      @java.lang.Override
+      public FriendRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new FriendRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<FriendRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FriendRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public org.vico.im.proto.ProtoMessage.FriendRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -3828,6 +5958,523 @@ public final class ProtoMessage {
 
   }
 
+  public interface FriendResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:proto.FriendResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * 结果
+     * </pre>
+     *
+     * <code>bool res = 1;</code>
+     * @return The res.
+     */
+    boolean getRes();
+  }
+  /**
+   * <pre>
+   *好友请求响应
+   * </pre>
+   *
+   * Protobuf type {@code proto.FriendResponse}
+   */
+  public static final class FriendResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:proto.FriendResponse)
+      FriendResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use FriendResponse.newBuilder() to construct.
+    private FriendResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private FriendResponse() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new FriendResponse();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private FriendResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              res_ = input.readBool();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.vico.im.proto.ProtoMessage.internal_static_proto_FriendResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.vico.im.proto.ProtoMessage.internal_static_proto_FriendResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.vico.im.proto.ProtoMessage.FriendResponse.class, org.vico.im.proto.ProtoMessage.FriendResponse.Builder.class);
+    }
+
+    public static final int RES_FIELD_NUMBER = 1;
+    private boolean res_;
+    /**
+     * <pre>
+     * 结果
+     * </pre>
+     *
+     * <code>bool res = 1;</code>
+     * @return The res.
+     */
+    @java.lang.Override
+    public boolean getRes() {
+      return res_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (res_ != false) {
+        output.writeBool(1, res_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (res_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(1, res_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.vico.im.proto.ProtoMessage.FriendResponse)) {
+        return super.equals(obj);
+      }
+      org.vico.im.proto.ProtoMessage.FriendResponse other = (org.vico.im.proto.ProtoMessage.FriendResponse) obj;
+
+      if (getRes()
+          != other.getRes()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + RES_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getRes());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.vico.im.proto.ProtoMessage.FriendResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.vico.im.proto.ProtoMessage.FriendResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(org.vico.im.proto.ProtoMessage.FriendResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *好友请求响应
+     * </pre>
+     *
+     * Protobuf type {@code proto.FriendResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:proto.FriendResponse)
+        org.vico.im.proto.ProtoMessage.FriendResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.vico.im.proto.ProtoMessage.internal_static_proto_FriendResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.vico.im.proto.ProtoMessage.internal_static_proto_FriendResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.vico.im.proto.ProtoMessage.FriendResponse.class, org.vico.im.proto.ProtoMessage.FriendResponse.Builder.class);
+      }
+
+      // Construct using org.vico.im.proto.ProtoMessage.FriendResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        res_ = false;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.vico.im.proto.ProtoMessage.internal_static_proto_FriendResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public org.vico.im.proto.ProtoMessage.FriendResponse getDefaultInstanceForType() {
+        return org.vico.im.proto.ProtoMessage.FriendResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public org.vico.im.proto.ProtoMessage.FriendResponse build() {
+        org.vico.im.proto.ProtoMessage.FriendResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public org.vico.im.proto.ProtoMessage.FriendResponse buildPartial() {
+        org.vico.im.proto.ProtoMessage.FriendResponse result = new org.vico.im.proto.ProtoMessage.FriendResponse(this);
+        result.res_ = res_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.vico.im.proto.ProtoMessage.FriendResponse) {
+          return mergeFrom((org.vico.im.proto.ProtoMessage.FriendResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.vico.im.proto.ProtoMessage.FriendResponse other) {
+        if (other == org.vico.im.proto.ProtoMessage.FriendResponse.getDefaultInstance()) return this;
+        if (other.getRes() != false) {
+          setRes(other.getRes());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.vico.im.proto.ProtoMessage.FriendResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.vico.im.proto.ProtoMessage.FriendResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private boolean res_ ;
+      /**
+       * <pre>
+       * 结果
+       * </pre>
+       *
+       * <code>bool res = 1;</code>
+       * @return The res.
+       */
+      @java.lang.Override
+      public boolean getRes() {
+        return res_;
+      }
+      /**
+       * <pre>
+       * 结果
+       * </pre>
+       *
+       * <code>bool res = 1;</code>
+       * @param value The res to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRes(boolean value) {
+        
+        res_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 结果
+       * </pre>
+       *
+       * <code>bool res = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearRes() {
+        
+        res_ = false;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:proto.FriendResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:proto.FriendResponse)
+    private static final org.vico.im.proto.ProtoMessage.FriendResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new org.vico.im.proto.ProtoMessage.FriendResponse();
+    }
+
+    public static org.vico.im.proto.ProtoMessage.FriendResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<FriendResponse>
+        PARSER = new com.google.protobuf.AbstractParser<FriendResponse>() {
+      @java.lang.Override
+      public FriendResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new FriendResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<FriendResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FriendResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public org.vico.im.proto.ProtoMessage.FriendResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface AggregatedMessageOrBuilder extends
       // @@protoc_insertion_point(interface_extends:proto.AggregatedMessage)
       com.google.protobuf.MessageOrBuilder {
@@ -3853,7 +6500,7 @@ public final class ProtoMessage {
 
     /**
      * <pre>
-     *状态码
+     * 状态码
      * </pre>
      *
      * <code>int32 code = 2;</code>
@@ -3863,7 +6510,7 @@ public final class ProtoMessage {
 
     /**
      * <pre>
-     *提示
+     * 提示
      * </pre>
      *
      * <code>string msg = 3;</code>
@@ -3872,7 +6519,7 @@ public final class ProtoMessage {
     java.lang.String getMsg();
     /**
      * <pre>
-     *提示
+     * 提示
      * </pre>
      *
      * <code>string msg = 3;</code>
@@ -3886,7 +6533,7 @@ public final class ProtoMessage {
      * 连接消息
      * </pre>
      *
-     * <code>.proto.ConnectRequest connectReq = 5;</code>
+     * <code>.proto.ConnectRequest connectReq = 4;</code>
      * @return Whether the connectReq field is set.
      */
     boolean hasConnectReq();
@@ -3895,7 +6542,7 @@ public final class ProtoMessage {
      * 连接消息
      * </pre>
      *
-     * <code>.proto.ConnectRequest connectReq = 5;</code>
+     * <code>.proto.ConnectRequest connectReq = 4;</code>
      * @return The connectReq.
      */
     org.vico.im.proto.ProtoMessage.ConnectRequest getConnectReq();
@@ -3904,9 +6551,36 @@ public final class ProtoMessage {
      * 连接消息
      * </pre>
      *
-     * <code>.proto.ConnectRequest connectReq = 5;</code>
+     * <code>.proto.ConnectRequest connectReq = 4;</code>
      */
     org.vico.im.proto.ProtoMessage.ConnectRequestOrBuilder getConnectReqOrBuilder();
+
+    /**
+     * <pre>
+     * 连接响应
+     * </pre>
+     *
+     * <code>.proto.ConnectResponse connectResp = 5;</code>
+     * @return Whether the connectResp field is set.
+     */
+    boolean hasConnectResp();
+    /**
+     * <pre>
+     * 连接响应
+     * </pre>
+     *
+     * <code>.proto.ConnectResponse connectResp = 5;</code>
+     * @return The connectResp.
+     */
+    org.vico.im.proto.ProtoMessage.ConnectResponse getConnectResp();
+    /**
+     * <pre>
+     * 连接响应
+     * </pre>
+     *
+     * <code>.proto.ConnectResponse connectResp = 5;</code>
+     */
+    org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder getConnectRespOrBuilder();
 
     /**
      * <pre>
@@ -3937,37 +6611,10 @@ public final class ProtoMessage {
 
     /**
      * <pre>
-     * 连接响应
-     * </pre>
-     *
-     * <code>.proto.ConnectResponse connectResp = 7;</code>
-     * @return Whether the connectResp field is set.
-     */
-    boolean hasConnectResp();
-    /**
-     * <pre>
-     * 连接响应
-     * </pre>
-     *
-     * <code>.proto.ConnectResponse connectResp = 7;</code>
-     * @return The connectResp.
-     */
-    org.vico.im.proto.ProtoMessage.ConnectResponse getConnectResp();
-    /**
-     * <pre>
-     * 连接响应
-     * </pre>
-     *
-     * <code>.proto.ConnectResponse connectResp = 7;</code>
-     */
-    org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder getConnectRespOrBuilder();
-
-    /**
-     * <pre>
      * 消息响应
      * </pre>
      *
-     * <code>.proto.MessageResponse messageResp = 8;</code>
+     * <code>.proto.MessageResponse messageResp = 7;</code>
      * @return Whether the messageResp field is set.
      */
     boolean hasMessageResp();
@@ -3976,7 +6623,7 @@ public final class ProtoMessage {
      * 消息响应
      * </pre>
      *
-     * <code>.proto.MessageResponse messageResp = 8;</code>
+     * <code>.proto.MessageResponse messageResp = 7;</code>
      * @return The messageResp.
      */
     org.vico.im.proto.ProtoMessage.MessageResponse getMessageResp();
@@ -3985,16 +6632,80 @@ public final class ProtoMessage {
      * 消息响应
      * </pre>
      *
-     * <code>.proto.MessageResponse messageResp = 8;</code>
+     * <code>.proto.MessageResponse messageResp = 7;</code>
      */
     org.vico.im.proto.ProtoMessage.MessageResponseOrBuilder getMessageRespOrBuilder();
+
+    /**
+     * <pre>
+     * 好友请求
+     * </pre>
+     *
+     * <code>.proto.FriendRequest friendReq = 8;</code>
+     * @return Whether the friendReq field is set.
+     */
+    boolean hasFriendReq();
+    /**
+     * <pre>
+     * 好友请求
+     * </pre>
+     *
+     * <code>.proto.FriendRequest friendReq = 8;</code>
+     * @return The friendReq.
+     */
+    org.vico.im.proto.ProtoMessage.FriendRequest getFriendReq();
+    /**
+     * <pre>
+     * 好友请求
+     * </pre>
+     *
+     * <code>.proto.FriendRequest friendReq = 8;</code>
+     */
+    org.vico.im.proto.ProtoMessage.FriendRequestOrBuilder getFriendReqOrBuilder();
+
+    /**
+     * <pre>
+     * 好友响应
+     * </pre>
+     *
+     * <code>.proto.FriendResponse friendResp = 9;</code>
+     * @return Whether the friendResp field is set.
+     */
+    boolean hasFriendResp();
+    /**
+     * <pre>
+     * 好友响应
+     * </pre>
+     *
+     * <code>.proto.FriendResponse friendResp = 9;</code>
+     * @return The friendResp.
+     */
+    org.vico.im.proto.ProtoMessage.FriendResponse getFriendResp();
+    /**
+     * <pre>
+     * 好友响应
+     * </pre>
+     *
+     * <code>.proto.FriendResponse friendResp = 9;</code>
+     */
+    org.vico.im.proto.ProtoMessage.FriendResponseOrBuilder getFriendRespOrBuilder();
+
+    /**
+     * <pre>
+     *是否被转发
+     * </pre>
+     *
+     * <code>bool isForward = 10;</code>
+     * @return The isForward.
+     */
+    boolean getIsForward();
 
     /**
      * <pre>
      *时间
      * </pre>
      *
-     * <code>uint64 time = 9;</code>
+     * <code>uint64 time = 11;</code>
      * @return The time.
      */
     long getTime();
@@ -4067,7 +6778,7 @@ public final class ProtoMessage {
               msg_ = s;
               break;
             }
-            case 42: {
+            case 34: {
               org.vico.im.proto.ProtoMessage.ConnectRequest.Builder subBuilder = null;
               if (connectReq_ != null) {
                 subBuilder = connectReq_.toBuilder();
@@ -4076,6 +6787,19 @@ public final class ProtoMessage {
               if (subBuilder != null) {
                 subBuilder.mergeFrom(connectReq_);
                 connectReq_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 42: {
+              org.vico.im.proto.ProtoMessage.ConnectResponse.Builder subBuilder = null;
+              if (connectResp_ != null) {
+                subBuilder = connectResp_.toBuilder();
+              }
+              connectResp_ = input.readMessage(org.vico.im.proto.ProtoMessage.ConnectResponse.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(connectResp_);
+                connectResp_ = subBuilder.buildPartial();
               }
 
               break;
@@ -4094,19 +6818,6 @@ public final class ProtoMessage {
               break;
             }
             case 58: {
-              org.vico.im.proto.ProtoMessage.ConnectResponse.Builder subBuilder = null;
-              if (connectResp_ != null) {
-                subBuilder = connectResp_.toBuilder();
-              }
-              connectResp_ = input.readMessage(org.vico.im.proto.ProtoMessage.ConnectResponse.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(connectResp_);
-                connectResp_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 66: {
               org.vico.im.proto.ProtoMessage.MessageResponse.Builder subBuilder = null;
               if (messageResp_ != null) {
                 subBuilder = messageResp_.toBuilder();
@@ -4119,7 +6830,38 @@ public final class ProtoMessage {
 
               break;
             }
-            case 72: {
+            case 66: {
+              org.vico.im.proto.ProtoMessage.FriendRequest.Builder subBuilder = null;
+              if (friendReq_ != null) {
+                subBuilder = friendReq_.toBuilder();
+              }
+              friendReq_ = input.readMessage(org.vico.im.proto.ProtoMessage.FriendRequest.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(friendReq_);
+                friendReq_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 74: {
+              org.vico.im.proto.ProtoMessage.FriendResponse.Builder subBuilder = null;
+              if (friendResp_ != null) {
+                subBuilder = friendResp_.toBuilder();
+              }
+              friendResp_ = input.readMessage(org.vico.im.proto.ProtoMessage.FriendResponse.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(friendResp_);
+                friendResp_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 80: {
+
+              isForward_ = input.readBool();
+              break;
+            }
+            case 88: {
 
               time_ = input.readUInt64();
               break;
@@ -4187,7 +6929,7 @@ public final class ProtoMessage {
     private int code_;
     /**
      * <pre>
-     *状态码
+     * 状态码
      * </pre>
      *
      * <code>int32 code = 2;</code>
@@ -4202,7 +6944,7 @@ public final class ProtoMessage {
     private volatile java.lang.Object msg_;
     /**
      * <pre>
-     *提示
+     * 提示
      * </pre>
      *
      * <code>string msg = 3;</code>
@@ -4223,7 +6965,7 @@ public final class ProtoMessage {
     }
     /**
      * <pre>
-     *提示
+     * 提示
      * </pre>
      *
      * <code>string msg = 3;</code>
@@ -4244,14 +6986,14 @@ public final class ProtoMessage {
       }
     }
 
-    public static final int CONNECTREQ_FIELD_NUMBER = 5;
+    public static final int CONNECTREQ_FIELD_NUMBER = 4;
     private org.vico.im.proto.ProtoMessage.ConnectRequest connectReq_;
     /**
      * <pre>
      * 连接消息
      * </pre>
      *
-     * <code>.proto.ConnectRequest connectReq = 5;</code>
+     * <code>.proto.ConnectRequest connectReq = 4;</code>
      * @return Whether the connectReq field is set.
      */
     @java.lang.Override
@@ -4263,7 +7005,7 @@ public final class ProtoMessage {
      * 连接消息
      * </pre>
      *
-     * <code>.proto.ConnectRequest connectReq = 5;</code>
+     * <code>.proto.ConnectRequest connectReq = 4;</code>
      * @return The connectReq.
      */
     @java.lang.Override
@@ -4275,11 +7017,49 @@ public final class ProtoMessage {
      * 连接消息
      * </pre>
      *
-     * <code>.proto.ConnectRequest connectReq = 5;</code>
+     * <code>.proto.ConnectRequest connectReq = 4;</code>
      */
     @java.lang.Override
     public org.vico.im.proto.ProtoMessage.ConnectRequestOrBuilder getConnectReqOrBuilder() {
       return getConnectReq();
+    }
+
+    public static final int CONNECTRESP_FIELD_NUMBER = 5;
+    private org.vico.im.proto.ProtoMessage.ConnectResponse connectResp_;
+    /**
+     * <pre>
+     * 连接响应
+     * </pre>
+     *
+     * <code>.proto.ConnectResponse connectResp = 5;</code>
+     * @return Whether the connectResp field is set.
+     */
+    @java.lang.Override
+    public boolean hasConnectResp() {
+      return connectResp_ != null;
+    }
+    /**
+     * <pre>
+     * 连接响应
+     * </pre>
+     *
+     * <code>.proto.ConnectResponse connectResp = 5;</code>
+     * @return The connectResp.
+     */
+    @java.lang.Override
+    public org.vico.im.proto.ProtoMessage.ConnectResponse getConnectResp() {
+      return connectResp_ == null ? org.vico.im.proto.ProtoMessage.ConnectResponse.getDefaultInstance() : connectResp_;
+    }
+    /**
+     * <pre>
+     * 连接响应
+     * </pre>
+     *
+     * <code>.proto.ConnectResponse connectResp = 5;</code>
+     */
+    @java.lang.Override
+    public org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder getConnectRespOrBuilder() {
+      return getConnectResp();
     }
 
     public static final int TEXTMSGREQ_FIELD_NUMBER = 6;
@@ -4320,52 +7100,14 @@ public final class ProtoMessage {
       return getTextMsgReq();
     }
 
-    public static final int CONNECTRESP_FIELD_NUMBER = 7;
-    private org.vico.im.proto.ProtoMessage.ConnectResponse connectResp_;
-    /**
-     * <pre>
-     * 连接响应
-     * </pre>
-     *
-     * <code>.proto.ConnectResponse connectResp = 7;</code>
-     * @return Whether the connectResp field is set.
-     */
-    @java.lang.Override
-    public boolean hasConnectResp() {
-      return connectResp_ != null;
-    }
-    /**
-     * <pre>
-     * 连接响应
-     * </pre>
-     *
-     * <code>.proto.ConnectResponse connectResp = 7;</code>
-     * @return The connectResp.
-     */
-    @java.lang.Override
-    public org.vico.im.proto.ProtoMessage.ConnectResponse getConnectResp() {
-      return connectResp_ == null ? org.vico.im.proto.ProtoMessage.ConnectResponse.getDefaultInstance() : connectResp_;
-    }
-    /**
-     * <pre>
-     * 连接响应
-     * </pre>
-     *
-     * <code>.proto.ConnectResponse connectResp = 7;</code>
-     */
-    @java.lang.Override
-    public org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder getConnectRespOrBuilder() {
-      return getConnectResp();
-    }
-
-    public static final int MESSAGERESP_FIELD_NUMBER = 8;
+    public static final int MESSAGERESP_FIELD_NUMBER = 7;
     private org.vico.im.proto.ProtoMessage.MessageResponse messageResp_;
     /**
      * <pre>
      * 消息响应
      * </pre>
      *
-     * <code>.proto.MessageResponse messageResp = 8;</code>
+     * <code>.proto.MessageResponse messageResp = 7;</code>
      * @return Whether the messageResp field is set.
      */
     @java.lang.Override
@@ -4377,7 +7119,7 @@ public final class ProtoMessage {
      * 消息响应
      * </pre>
      *
-     * <code>.proto.MessageResponse messageResp = 8;</code>
+     * <code>.proto.MessageResponse messageResp = 7;</code>
      * @return The messageResp.
      */
     @java.lang.Override
@@ -4389,21 +7131,112 @@ public final class ProtoMessage {
      * 消息响应
      * </pre>
      *
-     * <code>.proto.MessageResponse messageResp = 8;</code>
+     * <code>.proto.MessageResponse messageResp = 7;</code>
      */
     @java.lang.Override
     public org.vico.im.proto.ProtoMessage.MessageResponseOrBuilder getMessageRespOrBuilder() {
       return getMessageResp();
     }
 
-    public static final int TIME_FIELD_NUMBER = 9;
+    public static final int FRIENDREQ_FIELD_NUMBER = 8;
+    private org.vico.im.proto.ProtoMessage.FriendRequest friendReq_;
+    /**
+     * <pre>
+     * 好友请求
+     * </pre>
+     *
+     * <code>.proto.FriendRequest friendReq = 8;</code>
+     * @return Whether the friendReq field is set.
+     */
+    @java.lang.Override
+    public boolean hasFriendReq() {
+      return friendReq_ != null;
+    }
+    /**
+     * <pre>
+     * 好友请求
+     * </pre>
+     *
+     * <code>.proto.FriendRequest friendReq = 8;</code>
+     * @return The friendReq.
+     */
+    @java.lang.Override
+    public org.vico.im.proto.ProtoMessage.FriendRequest getFriendReq() {
+      return friendReq_ == null ? org.vico.im.proto.ProtoMessage.FriendRequest.getDefaultInstance() : friendReq_;
+    }
+    /**
+     * <pre>
+     * 好友请求
+     * </pre>
+     *
+     * <code>.proto.FriendRequest friendReq = 8;</code>
+     */
+    @java.lang.Override
+    public org.vico.im.proto.ProtoMessage.FriendRequestOrBuilder getFriendReqOrBuilder() {
+      return getFriendReq();
+    }
+
+    public static final int FRIENDRESP_FIELD_NUMBER = 9;
+    private org.vico.im.proto.ProtoMessage.FriendResponse friendResp_;
+    /**
+     * <pre>
+     * 好友响应
+     * </pre>
+     *
+     * <code>.proto.FriendResponse friendResp = 9;</code>
+     * @return Whether the friendResp field is set.
+     */
+    @java.lang.Override
+    public boolean hasFriendResp() {
+      return friendResp_ != null;
+    }
+    /**
+     * <pre>
+     * 好友响应
+     * </pre>
+     *
+     * <code>.proto.FriendResponse friendResp = 9;</code>
+     * @return The friendResp.
+     */
+    @java.lang.Override
+    public org.vico.im.proto.ProtoMessage.FriendResponse getFriendResp() {
+      return friendResp_ == null ? org.vico.im.proto.ProtoMessage.FriendResponse.getDefaultInstance() : friendResp_;
+    }
+    /**
+     * <pre>
+     * 好友响应
+     * </pre>
+     *
+     * <code>.proto.FriendResponse friendResp = 9;</code>
+     */
+    @java.lang.Override
+    public org.vico.im.proto.ProtoMessage.FriendResponseOrBuilder getFriendRespOrBuilder() {
+      return getFriendResp();
+    }
+
+    public static final int ISFORWARD_FIELD_NUMBER = 10;
+    private boolean isForward_;
+    /**
+     * <pre>
+     *是否被转发
+     * </pre>
+     *
+     * <code>bool isForward = 10;</code>
+     * @return The isForward.
+     */
+    @java.lang.Override
+    public boolean getIsForward() {
+      return isForward_;
+    }
+
+    public static final int TIME_FIELD_NUMBER = 11;
     private long time_;
     /**
      * <pre>
      *时间
      * </pre>
      *
-     * <code>uint64 time = 9;</code>
+     * <code>uint64 time = 11;</code>
      * @return The time.
      */
     @java.lang.Override
@@ -4435,19 +7268,28 @@ public final class ProtoMessage {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, msg_);
       }
       if (connectReq_ != null) {
-        output.writeMessage(5, getConnectReq());
+        output.writeMessage(4, getConnectReq());
+      }
+      if (connectResp_ != null) {
+        output.writeMessage(5, getConnectResp());
       }
       if (textMsgReq_ != null) {
         output.writeMessage(6, getTextMsgReq());
       }
-      if (connectResp_ != null) {
-        output.writeMessage(7, getConnectResp());
-      }
       if (messageResp_ != null) {
-        output.writeMessage(8, getMessageResp());
+        output.writeMessage(7, getMessageResp());
+      }
+      if (friendReq_ != null) {
+        output.writeMessage(8, getFriendReq());
+      }
+      if (friendResp_ != null) {
+        output.writeMessage(9, getFriendResp());
+      }
+      if (isForward_ != false) {
+        output.writeBool(10, isForward_);
       }
       if (time_ != 0L) {
-        output.writeUInt64(9, time_);
+        output.writeUInt64(11, time_);
       }
       unknownFields.writeTo(output);
     }
@@ -4471,23 +7313,35 @@ public final class ProtoMessage {
       }
       if (connectReq_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, getConnectReq());
+          .computeMessageSize(4, getConnectReq());
+      }
+      if (connectResp_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, getConnectResp());
       }
       if (textMsgReq_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, getTextMsgReq());
       }
-      if (connectResp_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, getConnectResp());
-      }
       if (messageResp_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, getMessageResp());
+          .computeMessageSize(7, getMessageResp());
+      }
+      if (friendReq_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, getFriendReq());
+      }
+      if (friendResp_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, getFriendResp());
+      }
+      if (isForward_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(10, isForward_);
       }
       if (time_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(9, time_);
+          .computeUInt64Size(11, time_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4514,21 +7368,33 @@ public final class ProtoMessage {
         if (!getConnectReq()
             .equals(other.getConnectReq())) return false;
       }
-      if (hasTextMsgReq() != other.hasTextMsgReq()) return false;
-      if (hasTextMsgReq()) {
-        if (!getTextMsgReq()
-            .equals(other.getTextMsgReq())) return false;
-      }
       if (hasConnectResp() != other.hasConnectResp()) return false;
       if (hasConnectResp()) {
         if (!getConnectResp()
             .equals(other.getConnectResp())) return false;
+      }
+      if (hasTextMsgReq() != other.hasTextMsgReq()) return false;
+      if (hasTextMsgReq()) {
+        if (!getTextMsgReq()
+            .equals(other.getTextMsgReq())) return false;
       }
       if (hasMessageResp() != other.hasMessageResp()) return false;
       if (hasMessageResp()) {
         if (!getMessageResp()
             .equals(other.getMessageResp())) return false;
       }
+      if (hasFriendReq() != other.hasFriendReq()) return false;
+      if (hasFriendReq()) {
+        if (!getFriendReq()
+            .equals(other.getFriendReq())) return false;
+      }
+      if (hasFriendResp() != other.hasFriendResp()) return false;
+      if (hasFriendResp()) {
+        if (!getFriendResp()
+            .equals(other.getFriendResp())) return false;
+      }
+      if (getIsForward()
+          != other.getIsForward()) return false;
       if (getTime()
           != other.getTime()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -4552,18 +7418,29 @@ public final class ProtoMessage {
         hash = (37 * hash) + CONNECTREQ_FIELD_NUMBER;
         hash = (53 * hash) + getConnectReq().hashCode();
       }
-      if (hasTextMsgReq()) {
-        hash = (37 * hash) + TEXTMSGREQ_FIELD_NUMBER;
-        hash = (53 * hash) + getTextMsgReq().hashCode();
-      }
       if (hasConnectResp()) {
         hash = (37 * hash) + CONNECTRESP_FIELD_NUMBER;
         hash = (53 * hash) + getConnectResp().hashCode();
+      }
+      if (hasTextMsgReq()) {
+        hash = (37 * hash) + TEXTMSGREQ_FIELD_NUMBER;
+        hash = (53 * hash) + getTextMsgReq().hashCode();
       }
       if (hasMessageResp()) {
         hash = (37 * hash) + MESSAGERESP_FIELD_NUMBER;
         hash = (53 * hash) + getMessageResp().hashCode();
       }
+      if (hasFriendReq()) {
+        hash = (37 * hash) + FRIENDREQ_FIELD_NUMBER;
+        hash = (53 * hash) + getFriendReq().hashCode();
+      }
+      if (hasFriendResp()) {
+        hash = (37 * hash) + FRIENDRESP_FIELD_NUMBER;
+        hash = (53 * hash) + getFriendResp().hashCode();
+      }
+      hash = (37 * hash) + ISFORWARD_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getIsForward());
       hash = (37 * hash) + TIME_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getTime());
@@ -4716,17 +7593,17 @@ public final class ProtoMessage {
           connectReq_ = null;
           connectReqBuilder_ = null;
         }
-        if (textMsgReqBuilder_ == null) {
-          textMsgReq_ = null;
-        } else {
-          textMsgReq_ = null;
-          textMsgReqBuilder_ = null;
-        }
         if (connectRespBuilder_ == null) {
           connectResp_ = null;
         } else {
           connectResp_ = null;
           connectRespBuilder_ = null;
+        }
+        if (textMsgReqBuilder_ == null) {
+          textMsgReq_ = null;
+        } else {
+          textMsgReq_ = null;
+          textMsgReqBuilder_ = null;
         }
         if (messageRespBuilder_ == null) {
           messageResp_ = null;
@@ -4734,6 +7611,20 @@ public final class ProtoMessage {
           messageResp_ = null;
           messageRespBuilder_ = null;
         }
+        if (friendReqBuilder_ == null) {
+          friendReq_ = null;
+        } else {
+          friendReq_ = null;
+          friendReqBuilder_ = null;
+        }
+        if (friendRespBuilder_ == null) {
+          friendResp_ = null;
+        } else {
+          friendResp_ = null;
+          friendRespBuilder_ = null;
+        }
+        isForward_ = false;
+
         time_ = 0L;
 
         return this;
@@ -4770,21 +7661,32 @@ public final class ProtoMessage {
         } else {
           result.connectReq_ = connectReqBuilder_.build();
         }
-        if (textMsgReqBuilder_ == null) {
-          result.textMsgReq_ = textMsgReq_;
-        } else {
-          result.textMsgReq_ = textMsgReqBuilder_.build();
-        }
         if (connectRespBuilder_ == null) {
           result.connectResp_ = connectResp_;
         } else {
           result.connectResp_ = connectRespBuilder_.build();
+        }
+        if (textMsgReqBuilder_ == null) {
+          result.textMsgReq_ = textMsgReq_;
+        } else {
+          result.textMsgReq_ = textMsgReqBuilder_.build();
         }
         if (messageRespBuilder_ == null) {
           result.messageResp_ = messageResp_;
         } else {
           result.messageResp_ = messageRespBuilder_.build();
         }
+        if (friendReqBuilder_ == null) {
+          result.friendReq_ = friendReq_;
+        } else {
+          result.friendReq_ = friendReqBuilder_.build();
+        }
+        if (friendRespBuilder_ == null) {
+          result.friendResp_ = friendResp_;
+        } else {
+          result.friendResp_ = friendRespBuilder_.build();
+        }
+        result.isForward_ = isForward_;
         result.time_ = time_;
         onBuilt();
         return result;
@@ -4847,14 +7749,23 @@ public final class ProtoMessage {
         if (other.hasConnectReq()) {
           mergeConnectReq(other.getConnectReq());
         }
-        if (other.hasTextMsgReq()) {
-          mergeTextMsgReq(other.getTextMsgReq());
-        }
         if (other.hasConnectResp()) {
           mergeConnectResp(other.getConnectResp());
         }
+        if (other.hasTextMsgReq()) {
+          mergeTextMsgReq(other.getTextMsgReq());
+        }
         if (other.hasMessageResp()) {
           mergeMessageResp(other.getMessageResp());
+        }
+        if (other.hasFriendReq()) {
+          mergeFriendReq(other.getFriendReq());
+        }
+        if (other.hasFriendResp()) {
+          mergeFriendResp(other.getFriendResp());
+        }
+        if (other.getIsForward() != false) {
+          setIsForward(other.getIsForward());
         }
         if (other.getTime() != 0L) {
           setTime(other.getTime());
@@ -4965,7 +7876,7 @@ public final class ProtoMessage {
       private int code_ ;
       /**
        * <pre>
-       *状态码
+       * 状态码
        * </pre>
        *
        * <code>int32 code = 2;</code>
@@ -4977,7 +7888,7 @@ public final class ProtoMessage {
       }
       /**
        * <pre>
-       *状态码
+       * 状态码
        * </pre>
        *
        * <code>int32 code = 2;</code>
@@ -4992,7 +7903,7 @@ public final class ProtoMessage {
       }
       /**
        * <pre>
-       *状态码
+       * 状态码
        * </pre>
        *
        * <code>int32 code = 2;</code>
@@ -5008,7 +7919,7 @@ public final class ProtoMessage {
       private java.lang.Object msg_ = "";
       /**
        * <pre>
-       *提示
+       * 提示
        * </pre>
        *
        * <code>string msg = 3;</code>
@@ -5028,7 +7939,7 @@ public final class ProtoMessage {
       }
       /**
        * <pre>
-       *提示
+       * 提示
        * </pre>
        *
        * <code>string msg = 3;</code>
@@ -5049,7 +7960,7 @@ public final class ProtoMessage {
       }
       /**
        * <pre>
-       *提示
+       * 提示
        * </pre>
        *
        * <code>string msg = 3;</code>
@@ -5068,7 +7979,7 @@ public final class ProtoMessage {
       }
       /**
        * <pre>
-       *提示
+       * 提示
        * </pre>
        *
        * <code>string msg = 3;</code>
@@ -5082,7 +7993,7 @@ public final class ProtoMessage {
       }
       /**
        * <pre>
-       *提示
+       * 提示
        * </pre>
        *
        * <code>string msg = 3;</code>
@@ -5109,7 +8020,7 @@ public final class ProtoMessage {
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectReq = 5;</code>
+       * <code>.proto.ConnectRequest connectReq = 4;</code>
        * @return Whether the connectReq field is set.
        */
       public boolean hasConnectReq() {
@@ -5120,7 +8031,7 @@ public final class ProtoMessage {
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectReq = 5;</code>
+       * <code>.proto.ConnectRequest connectReq = 4;</code>
        * @return The connectReq.
        */
       public org.vico.im.proto.ProtoMessage.ConnectRequest getConnectReq() {
@@ -5135,7 +8046,7 @@ public final class ProtoMessage {
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectReq = 5;</code>
+       * <code>.proto.ConnectRequest connectReq = 4;</code>
        */
       public Builder setConnectReq(org.vico.im.proto.ProtoMessage.ConnectRequest value) {
         if (connectReqBuilder_ == null) {
@@ -5155,7 +8066,7 @@ public final class ProtoMessage {
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectReq = 5;</code>
+       * <code>.proto.ConnectRequest connectReq = 4;</code>
        */
       public Builder setConnectReq(
           org.vico.im.proto.ProtoMessage.ConnectRequest.Builder builderForValue) {
@@ -5173,7 +8084,7 @@ public final class ProtoMessage {
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectReq = 5;</code>
+       * <code>.proto.ConnectRequest connectReq = 4;</code>
        */
       public Builder mergeConnectReq(org.vico.im.proto.ProtoMessage.ConnectRequest value) {
         if (connectReqBuilder_ == null) {
@@ -5195,7 +8106,7 @@ public final class ProtoMessage {
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectReq = 5;</code>
+       * <code>.proto.ConnectRequest connectReq = 4;</code>
        */
       public Builder clearConnectReq() {
         if (connectReqBuilder_ == null) {
@@ -5213,7 +8124,7 @@ public final class ProtoMessage {
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectReq = 5;</code>
+       * <code>.proto.ConnectRequest connectReq = 4;</code>
        */
       public org.vico.im.proto.ProtoMessage.ConnectRequest.Builder getConnectReqBuilder() {
         
@@ -5225,7 +8136,7 @@ public final class ProtoMessage {
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectReq = 5;</code>
+       * <code>.proto.ConnectRequest connectReq = 4;</code>
        */
       public org.vico.im.proto.ProtoMessage.ConnectRequestOrBuilder getConnectReqOrBuilder() {
         if (connectReqBuilder_ != null) {
@@ -5240,7 +8151,7 @@ public final class ProtoMessage {
        * 连接消息
        * </pre>
        *
-       * <code>.proto.ConnectRequest connectReq = 5;</code>
+       * <code>.proto.ConnectRequest connectReq = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           org.vico.im.proto.ProtoMessage.ConnectRequest, org.vico.im.proto.ProtoMessage.ConnectRequest.Builder, org.vico.im.proto.ProtoMessage.ConnectRequestOrBuilder> 
@@ -5254,6 +8165,161 @@ public final class ProtoMessage {
           connectReq_ = null;
         }
         return connectReqBuilder_;
+      }
+
+      private org.vico.im.proto.ProtoMessage.ConnectResponse connectResp_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.vico.im.proto.ProtoMessage.ConnectResponse, org.vico.im.proto.ProtoMessage.ConnectResponse.Builder, org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder> connectRespBuilder_;
+      /**
+       * <pre>
+       * 连接响应
+       * </pre>
+       *
+       * <code>.proto.ConnectResponse connectResp = 5;</code>
+       * @return Whether the connectResp field is set.
+       */
+      public boolean hasConnectResp() {
+        return connectRespBuilder_ != null || connectResp_ != null;
+      }
+      /**
+       * <pre>
+       * 连接响应
+       * </pre>
+       *
+       * <code>.proto.ConnectResponse connectResp = 5;</code>
+       * @return The connectResp.
+       */
+      public org.vico.im.proto.ProtoMessage.ConnectResponse getConnectResp() {
+        if (connectRespBuilder_ == null) {
+          return connectResp_ == null ? org.vico.im.proto.ProtoMessage.ConnectResponse.getDefaultInstance() : connectResp_;
+        } else {
+          return connectRespBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * 连接响应
+       * </pre>
+       *
+       * <code>.proto.ConnectResponse connectResp = 5;</code>
+       */
+      public Builder setConnectResp(org.vico.im.proto.ProtoMessage.ConnectResponse value) {
+        if (connectRespBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          connectResp_ = value;
+          onChanged();
+        } else {
+          connectRespBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 连接响应
+       * </pre>
+       *
+       * <code>.proto.ConnectResponse connectResp = 5;</code>
+       */
+      public Builder setConnectResp(
+          org.vico.im.proto.ProtoMessage.ConnectResponse.Builder builderForValue) {
+        if (connectRespBuilder_ == null) {
+          connectResp_ = builderForValue.build();
+          onChanged();
+        } else {
+          connectRespBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 连接响应
+       * </pre>
+       *
+       * <code>.proto.ConnectResponse connectResp = 5;</code>
+       */
+      public Builder mergeConnectResp(org.vico.im.proto.ProtoMessage.ConnectResponse value) {
+        if (connectRespBuilder_ == null) {
+          if (connectResp_ != null) {
+            connectResp_ =
+              org.vico.im.proto.ProtoMessage.ConnectResponse.newBuilder(connectResp_).mergeFrom(value).buildPartial();
+          } else {
+            connectResp_ = value;
+          }
+          onChanged();
+        } else {
+          connectRespBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 连接响应
+       * </pre>
+       *
+       * <code>.proto.ConnectResponse connectResp = 5;</code>
+       */
+      public Builder clearConnectResp() {
+        if (connectRespBuilder_ == null) {
+          connectResp_ = null;
+          onChanged();
+        } else {
+          connectResp_ = null;
+          connectRespBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 连接响应
+       * </pre>
+       *
+       * <code>.proto.ConnectResponse connectResp = 5;</code>
+       */
+      public org.vico.im.proto.ProtoMessage.ConnectResponse.Builder getConnectRespBuilder() {
+        
+        onChanged();
+        return getConnectRespFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * 连接响应
+       * </pre>
+       *
+       * <code>.proto.ConnectResponse connectResp = 5;</code>
+       */
+      public org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder getConnectRespOrBuilder() {
+        if (connectRespBuilder_ != null) {
+          return connectRespBuilder_.getMessageOrBuilder();
+        } else {
+          return connectResp_ == null ?
+              org.vico.im.proto.ProtoMessage.ConnectResponse.getDefaultInstance() : connectResp_;
+        }
+      }
+      /**
+       * <pre>
+       * 连接响应
+       * </pre>
+       *
+       * <code>.proto.ConnectResponse connectResp = 5;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.vico.im.proto.ProtoMessage.ConnectResponse, org.vico.im.proto.ProtoMessage.ConnectResponse.Builder, org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder> 
+          getConnectRespFieldBuilder() {
+        if (connectRespBuilder_ == null) {
+          connectRespBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              org.vico.im.proto.ProtoMessage.ConnectResponse, org.vico.im.proto.ProtoMessage.ConnectResponse.Builder, org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder>(
+                  getConnectResp(),
+                  getParentForChildren(),
+                  isClean());
+          connectResp_ = null;
+        }
+        return connectRespBuilder_;
       }
 
       private org.vico.im.proto.ProtoMessage.TextMessageRequest textMsgReq_;
@@ -5411,161 +8477,6 @@ public final class ProtoMessage {
         return textMsgReqBuilder_;
       }
 
-      private org.vico.im.proto.ProtoMessage.ConnectResponse connectResp_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          org.vico.im.proto.ProtoMessage.ConnectResponse, org.vico.im.proto.ProtoMessage.ConnectResponse.Builder, org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder> connectRespBuilder_;
-      /**
-       * <pre>
-       * 连接响应
-       * </pre>
-       *
-       * <code>.proto.ConnectResponse connectResp = 7;</code>
-       * @return Whether the connectResp field is set.
-       */
-      public boolean hasConnectResp() {
-        return connectRespBuilder_ != null || connectResp_ != null;
-      }
-      /**
-       * <pre>
-       * 连接响应
-       * </pre>
-       *
-       * <code>.proto.ConnectResponse connectResp = 7;</code>
-       * @return The connectResp.
-       */
-      public org.vico.im.proto.ProtoMessage.ConnectResponse getConnectResp() {
-        if (connectRespBuilder_ == null) {
-          return connectResp_ == null ? org.vico.im.proto.ProtoMessage.ConnectResponse.getDefaultInstance() : connectResp_;
-        } else {
-          return connectRespBuilder_.getMessage();
-        }
-      }
-      /**
-       * <pre>
-       * 连接响应
-       * </pre>
-       *
-       * <code>.proto.ConnectResponse connectResp = 7;</code>
-       */
-      public Builder setConnectResp(org.vico.im.proto.ProtoMessage.ConnectResponse value) {
-        if (connectRespBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          connectResp_ = value;
-          onChanged();
-        } else {
-          connectRespBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       * 连接响应
-       * </pre>
-       *
-       * <code>.proto.ConnectResponse connectResp = 7;</code>
-       */
-      public Builder setConnectResp(
-          org.vico.im.proto.ProtoMessage.ConnectResponse.Builder builderForValue) {
-        if (connectRespBuilder_ == null) {
-          connectResp_ = builderForValue.build();
-          onChanged();
-        } else {
-          connectRespBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       * 连接响应
-       * </pre>
-       *
-       * <code>.proto.ConnectResponse connectResp = 7;</code>
-       */
-      public Builder mergeConnectResp(org.vico.im.proto.ProtoMessage.ConnectResponse value) {
-        if (connectRespBuilder_ == null) {
-          if (connectResp_ != null) {
-            connectResp_ =
-              org.vico.im.proto.ProtoMessage.ConnectResponse.newBuilder(connectResp_).mergeFrom(value).buildPartial();
-          } else {
-            connectResp_ = value;
-          }
-          onChanged();
-        } else {
-          connectRespBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       * 连接响应
-       * </pre>
-       *
-       * <code>.proto.ConnectResponse connectResp = 7;</code>
-       */
-      public Builder clearConnectResp() {
-        if (connectRespBuilder_ == null) {
-          connectResp_ = null;
-          onChanged();
-        } else {
-          connectResp_ = null;
-          connectRespBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       * 连接响应
-       * </pre>
-       *
-       * <code>.proto.ConnectResponse connectResp = 7;</code>
-       */
-      public org.vico.im.proto.ProtoMessage.ConnectResponse.Builder getConnectRespBuilder() {
-        
-        onChanged();
-        return getConnectRespFieldBuilder().getBuilder();
-      }
-      /**
-       * <pre>
-       * 连接响应
-       * </pre>
-       *
-       * <code>.proto.ConnectResponse connectResp = 7;</code>
-       */
-      public org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder getConnectRespOrBuilder() {
-        if (connectRespBuilder_ != null) {
-          return connectRespBuilder_.getMessageOrBuilder();
-        } else {
-          return connectResp_ == null ?
-              org.vico.im.proto.ProtoMessage.ConnectResponse.getDefaultInstance() : connectResp_;
-        }
-      }
-      /**
-       * <pre>
-       * 连接响应
-       * </pre>
-       *
-       * <code>.proto.ConnectResponse connectResp = 7;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          org.vico.im.proto.ProtoMessage.ConnectResponse, org.vico.im.proto.ProtoMessage.ConnectResponse.Builder, org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder> 
-          getConnectRespFieldBuilder() {
-        if (connectRespBuilder_ == null) {
-          connectRespBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              org.vico.im.proto.ProtoMessage.ConnectResponse, org.vico.im.proto.ProtoMessage.ConnectResponse.Builder, org.vico.im.proto.ProtoMessage.ConnectResponseOrBuilder>(
-                  getConnectResp(),
-                  getParentForChildren(),
-                  isClean());
-          connectResp_ = null;
-        }
-        return connectRespBuilder_;
-      }
-
       private org.vico.im.proto.ProtoMessage.MessageResponse messageResp_;
       private com.google.protobuf.SingleFieldBuilderV3<
           org.vico.im.proto.ProtoMessage.MessageResponse, org.vico.im.proto.ProtoMessage.MessageResponse.Builder, org.vico.im.proto.ProtoMessage.MessageResponseOrBuilder> messageRespBuilder_;
@@ -5574,7 +8485,7 @@ public final class ProtoMessage {
        * 消息响应
        * </pre>
        *
-       * <code>.proto.MessageResponse messageResp = 8;</code>
+       * <code>.proto.MessageResponse messageResp = 7;</code>
        * @return Whether the messageResp field is set.
        */
       public boolean hasMessageResp() {
@@ -5585,7 +8496,7 @@ public final class ProtoMessage {
        * 消息响应
        * </pre>
        *
-       * <code>.proto.MessageResponse messageResp = 8;</code>
+       * <code>.proto.MessageResponse messageResp = 7;</code>
        * @return The messageResp.
        */
       public org.vico.im.proto.ProtoMessage.MessageResponse getMessageResp() {
@@ -5600,7 +8511,7 @@ public final class ProtoMessage {
        * 消息响应
        * </pre>
        *
-       * <code>.proto.MessageResponse messageResp = 8;</code>
+       * <code>.proto.MessageResponse messageResp = 7;</code>
        */
       public Builder setMessageResp(org.vico.im.proto.ProtoMessage.MessageResponse value) {
         if (messageRespBuilder_ == null) {
@@ -5620,7 +8531,7 @@ public final class ProtoMessage {
        * 消息响应
        * </pre>
        *
-       * <code>.proto.MessageResponse messageResp = 8;</code>
+       * <code>.proto.MessageResponse messageResp = 7;</code>
        */
       public Builder setMessageResp(
           org.vico.im.proto.ProtoMessage.MessageResponse.Builder builderForValue) {
@@ -5638,7 +8549,7 @@ public final class ProtoMessage {
        * 消息响应
        * </pre>
        *
-       * <code>.proto.MessageResponse messageResp = 8;</code>
+       * <code>.proto.MessageResponse messageResp = 7;</code>
        */
       public Builder mergeMessageResp(org.vico.im.proto.ProtoMessage.MessageResponse value) {
         if (messageRespBuilder_ == null) {
@@ -5660,7 +8571,7 @@ public final class ProtoMessage {
        * 消息响应
        * </pre>
        *
-       * <code>.proto.MessageResponse messageResp = 8;</code>
+       * <code>.proto.MessageResponse messageResp = 7;</code>
        */
       public Builder clearMessageResp() {
         if (messageRespBuilder_ == null) {
@@ -5678,7 +8589,7 @@ public final class ProtoMessage {
        * 消息响应
        * </pre>
        *
-       * <code>.proto.MessageResponse messageResp = 8;</code>
+       * <code>.proto.MessageResponse messageResp = 7;</code>
        */
       public org.vico.im.proto.ProtoMessage.MessageResponse.Builder getMessageRespBuilder() {
         
@@ -5690,7 +8601,7 @@ public final class ProtoMessage {
        * 消息响应
        * </pre>
        *
-       * <code>.proto.MessageResponse messageResp = 8;</code>
+       * <code>.proto.MessageResponse messageResp = 7;</code>
        */
       public org.vico.im.proto.ProtoMessage.MessageResponseOrBuilder getMessageRespOrBuilder() {
         if (messageRespBuilder_ != null) {
@@ -5705,7 +8616,7 @@ public final class ProtoMessage {
        * 消息响应
        * </pre>
        *
-       * <code>.proto.MessageResponse messageResp = 8;</code>
+       * <code>.proto.MessageResponse messageResp = 7;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           org.vico.im.proto.ProtoMessage.MessageResponse, org.vico.im.proto.ProtoMessage.MessageResponse.Builder, org.vico.im.proto.ProtoMessage.MessageResponseOrBuilder> 
@@ -5721,13 +8632,366 @@ public final class ProtoMessage {
         return messageRespBuilder_;
       }
 
+      private org.vico.im.proto.ProtoMessage.FriendRequest friendReq_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.vico.im.proto.ProtoMessage.FriendRequest, org.vico.im.proto.ProtoMessage.FriendRequest.Builder, org.vico.im.proto.ProtoMessage.FriendRequestOrBuilder> friendReqBuilder_;
+      /**
+       * <pre>
+       * 好友请求
+       * </pre>
+       *
+       * <code>.proto.FriendRequest friendReq = 8;</code>
+       * @return Whether the friendReq field is set.
+       */
+      public boolean hasFriendReq() {
+        return friendReqBuilder_ != null || friendReq_ != null;
+      }
+      /**
+       * <pre>
+       * 好友请求
+       * </pre>
+       *
+       * <code>.proto.FriendRequest friendReq = 8;</code>
+       * @return The friendReq.
+       */
+      public org.vico.im.proto.ProtoMessage.FriendRequest getFriendReq() {
+        if (friendReqBuilder_ == null) {
+          return friendReq_ == null ? org.vico.im.proto.ProtoMessage.FriendRequest.getDefaultInstance() : friendReq_;
+        } else {
+          return friendReqBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * 好友请求
+       * </pre>
+       *
+       * <code>.proto.FriendRequest friendReq = 8;</code>
+       */
+      public Builder setFriendReq(org.vico.im.proto.ProtoMessage.FriendRequest value) {
+        if (friendReqBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          friendReq_ = value;
+          onChanged();
+        } else {
+          friendReqBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 好友请求
+       * </pre>
+       *
+       * <code>.proto.FriendRequest friendReq = 8;</code>
+       */
+      public Builder setFriendReq(
+          org.vico.im.proto.ProtoMessage.FriendRequest.Builder builderForValue) {
+        if (friendReqBuilder_ == null) {
+          friendReq_ = builderForValue.build();
+          onChanged();
+        } else {
+          friendReqBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 好友请求
+       * </pre>
+       *
+       * <code>.proto.FriendRequest friendReq = 8;</code>
+       */
+      public Builder mergeFriendReq(org.vico.im.proto.ProtoMessage.FriendRequest value) {
+        if (friendReqBuilder_ == null) {
+          if (friendReq_ != null) {
+            friendReq_ =
+              org.vico.im.proto.ProtoMessage.FriendRequest.newBuilder(friendReq_).mergeFrom(value).buildPartial();
+          } else {
+            friendReq_ = value;
+          }
+          onChanged();
+        } else {
+          friendReqBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 好友请求
+       * </pre>
+       *
+       * <code>.proto.FriendRequest friendReq = 8;</code>
+       */
+      public Builder clearFriendReq() {
+        if (friendReqBuilder_ == null) {
+          friendReq_ = null;
+          onChanged();
+        } else {
+          friendReq_ = null;
+          friendReqBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 好友请求
+       * </pre>
+       *
+       * <code>.proto.FriendRequest friendReq = 8;</code>
+       */
+      public org.vico.im.proto.ProtoMessage.FriendRequest.Builder getFriendReqBuilder() {
+        
+        onChanged();
+        return getFriendReqFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * 好友请求
+       * </pre>
+       *
+       * <code>.proto.FriendRequest friendReq = 8;</code>
+       */
+      public org.vico.im.proto.ProtoMessage.FriendRequestOrBuilder getFriendReqOrBuilder() {
+        if (friendReqBuilder_ != null) {
+          return friendReqBuilder_.getMessageOrBuilder();
+        } else {
+          return friendReq_ == null ?
+              org.vico.im.proto.ProtoMessage.FriendRequest.getDefaultInstance() : friendReq_;
+        }
+      }
+      /**
+       * <pre>
+       * 好友请求
+       * </pre>
+       *
+       * <code>.proto.FriendRequest friendReq = 8;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.vico.im.proto.ProtoMessage.FriendRequest, org.vico.im.proto.ProtoMessage.FriendRequest.Builder, org.vico.im.proto.ProtoMessage.FriendRequestOrBuilder> 
+          getFriendReqFieldBuilder() {
+        if (friendReqBuilder_ == null) {
+          friendReqBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              org.vico.im.proto.ProtoMessage.FriendRequest, org.vico.im.proto.ProtoMessage.FriendRequest.Builder, org.vico.im.proto.ProtoMessage.FriendRequestOrBuilder>(
+                  getFriendReq(),
+                  getParentForChildren(),
+                  isClean());
+          friendReq_ = null;
+        }
+        return friendReqBuilder_;
+      }
+
+      private org.vico.im.proto.ProtoMessage.FriendResponse friendResp_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.vico.im.proto.ProtoMessage.FriendResponse, org.vico.im.proto.ProtoMessage.FriendResponse.Builder, org.vico.im.proto.ProtoMessage.FriendResponseOrBuilder> friendRespBuilder_;
+      /**
+       * <pre>
+       * 好友响应
+       * </pre>
+       *
+       * <code>.proto.FriendResponse friendResp = 9;</code>
+       * @return Whether the friendResp field is set.
+       */
+      public boolean hasFriendResp() {
+        return friendRespBuilder_ != null || friendResp_ != null;
+      }
+      /**
+       * <pre>
+       * 好友响应
+       * </pre>
+       *
+       * <code>.proto.FriendResponse friendResp = 9;</code>
+       * @return The friendResp.
+       */
+      public org.vico.im.proto.ProtoMessage.FriendResponse getFriendResp() {
+        if (friendRespBuilder_ == null) {
+          return friendResp_ == null ? org.vico.im.proto.ProtoMessage.FriendResponse.getDefaultInstance() : friendResp_;
+        } else {
+          return friendRespBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * 好友响应
+       * </pre>
+       *
+       * <code>.proto.FriendResponse friendResp = 9;</code>
+       */
+      public Builder setFriendResp(org.vico.im.proto.ProtoMessage.FriendResponse value) {
+        if (friendRespBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          friendResp_ = value;
+          onChanged();
+        } else {
+          friendRespBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 好友响应
+       * </pre>
+       *
+       * <code>.proto.FriendResponse friendResp = 9;</code>
+       */
+      public Builder setFriendResp(
+          org.vico.im.proto.ProtoMessage.FriendResponse.Builder builderForValue) {
+        if (friendRespBuilder_ == null) {
+          friendResp_ = builderForValue.build();
+          onChanged();
+        } else {
+          friendRespBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 好友响应
+       * </pre>
+       *
+       * <code>.proto.FriendResponse friendResp = 9;</code>
+       */
+      public Builder mergeFriendResp(org.vico.im.proto.ProtoMessage.FriendResponse value) {
+        if (friendRespBuilder_ == null) {
+          if (friendResp_ != null) {
+            friendResp_ =
+              org.vico.im.proto.ProtoMessage.FriendResponse.newBuilder(friendResp_).mergeFrom(value).buildPartial();
+          } else {
+            friendResp_ = value;
+          }
+          onChanged();
+        } else {
+          friendRespBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 好友响应
+       * </pre>
+       *
+       * <code>.proto.FriendResponse friendResp = 9;</code>
+       */
+      public Builder clearFriendResp() {
+        if (friendRespBuilder_ == null) {
+          friendResp_ = null;
+          onChanged();
+        } else {
+          friendResp_ = null;
+          friendRespBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * 好友响应
+       * </pre>
+       *
+       * <code>.proto.FriendResponse friendResp = 9;</code>
+       */
+      public org.vico.im.proto.ProtoMessage.FriendResponse.Builder getFriendRespBuilder() {
+        
+        onChanged();
+        return getFriendRespFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * 好友响应
+       * </pre>
+       *
+       * <code>.proto.FriendResponse friendResp = 9;</code>
+       */
+      public org.vico.im.proto.ProtoMessage.FriendResponseOrBuilder getFriendRespOrBuilder() {
+        if (friendRespBuilder_ != null) {
+          return friendRespBuilder_.getMessageOrBuilder();
+        } else {
+          return friendResp_ == null ?
+              org.vico.im.proto.ProtoMessage.FriendResponse.getDefaultInstance() : friendResp_;
+        }
+      }
+      /**
+       * <pre>
+       * 好友响应
+       * </pre>
+       *
+       * <code>.proto.FriendResponse friendResp = 9;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.vico.im.proto.ProtoMessage.FriendResponse, org.vico.im.proto.ProtoMessage.FriendResponse.Builder, org.vico.im.proto.ProtoMessage.FriendResponseOrBuilder> 
+          getFriendRespFieldBuilder() {
+        if (friendRespBuilder_ == null) {
+          friendRespBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              org.vico.im.proto.ProtoMessage.FriendResponse, org.vico.im.proto.ProtoMessage.FriendResponse.Builder, org.vico.im.proto.ProtoMessage.FriendResponseOrBuilder>(
+                  getFriendResp(),
+                  getParentForChildren(),
+                  isClean());
+          friendResp_ = null;
+        }
+        return friendRespBuilder_;
+      }
+
+      private boolean isForward_ ;
+      /**
+       * <pre>
+       *是否被转发
+       * </pre>
+       *
+       * <code>bool isForward = 10;</code>
+       * @return The isForward.
+       */
+      @java.lang.Override
+      public boolean getIsForward() {
+        return isForward_;
+      }
+      /**
+       * <pre>
+       *是否被转发
+       * </pre>
+       *
+       * <code>bool isForward = 10;</code>
+       * @param value The isForward to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIsForward(boolean value) {
+        
+        isForward_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *是否被转发
+       * </pre>
+       *
+       * <code>bool isForward = 10;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearIsForward() {
+        
+        isForward_ = false;
+        onChanged();
+        return this;
+      }
+
       private long time_ ;
       /**
        * <pre>
        *时间
        * </pre>
        *
-       * <code>uint64 time = 9;</code>
+       * <code>uint64 time = 11;</code>
        * @return The time.
        */
       @java.lang.Override
@@ -5739,7 +9003,7 @@ public final class ProtoMessage {
        *时间
        * </pre>
        *
-       * <code>uint64 time = 9;</code>
+       * <code>uint64 time = 11;</code>
        * @param value The time to set.
        * @return This builder for chaining.
        */
@@ -5754,7 +9018,7 @@ public final class ProtoMessage {
        *时间
        * </pre>
        *
-       * <code>uint64 time = 9;</code>
+       * <code>uint64 time = 11;</code>
        * @return This builder for chaining.
        */
       public Builder clearTime() {
@@ -5827,6 +9091,11 @@ public final class ProtoMessage {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_proto_TextMessageRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_proto_FriendRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_proto_FriendRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_proto_MessageResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -5836,6 +9105,11 @@ public final class ProtoMessage {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_proto_ConnectResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_proto_FriendResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_proto_FriendResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_proto_AggregatedMessage_descriptor;
   private static final 
@@ -5851,28 +9125,37 @@ public final class ProtoMessage {
   static {
     java.lang.String[] descriptorData = {
       "\n\022ProtoMessage.proto\022\005proto\".\n\016ConnectRe" +
-      "quest\022\016\n\006userId\030\001 \001(\t\022\014\n\004time\030\002 \001(\004\"v\n\022T" +
-      "extMessageRequest\022\021\n\tsessionId\030\001 \001(\t\022\014\n\004" +
-      "from\030\002 \001(\t\022\n\n\002to\030\003 \001(\t\022\017\n\007content\030\004 \001(\t\022" +
-      "\017\n\007isGroup\030\005 \001(\010\022\021\n\tisForward\030\006 \001(\010\"7\n\017M" +
-      "essageResponse\022$\n\006status\030\001 \001(\0162\024.proto.M" +
-      "essageStatus\"1\n\017ConnectResponse\022\021\n\tsessi" +
-      "onId\030\001 \001(\t\022\013\n\003key\030\002 \001(\t\"\231\002\n\021AggregatedMe" +
-      "ssage\022\'\n\013commandType\030\001 \001(\0162\022.proto.Comma" +
-      "ndType\022\014\n\004code\030\002 \001(\005\022\013\n\003msg\030\003 \001(\t\022)\n\ncon" +
-      "nectReq\030\005 \001(\0132\025.proto.ConnectRequest\022-\n\n" +
-      "textMsgReq\030\006 \001(\0132\031.proto.TextMessageRequ" +
-      "est\022+\n\013connectResp\030\007 \001(\0132\026.proto.Connect" +
-      "Response\022+\n\013messageResp\030\010 \001(\0132\026.proto.Me" +
-      "ssageResponse\022\014\n\004time\030\t \001(\004*\331\001\n\013CommandT" +
-      "ype\022\023\n\017CONNECT_REQUEST\020\000\022\024\n\020CONNECT_RESP" +
-      "ONSE\020\001\022\022\n\016LOGOUT_REQUEST\020\002\022\023\n\017LOGOUT_RES" +
-      "PONSE\020\003\022\025\n\021KEEPALIVE_REQUEST\020\004\022\026\n\022KEEPAL" +
-      "IVE_RESPONSE\020\005\022\030\n\024MESSAGE_TEXT_REQUEST\020\006" +
-      "\022\031\n\025MESSAGE_TEXT_RESPONSE\020\007\022\022\n\016MESSAGE_S" +
-      "YSTEM\020\010*5\n\rMessageStatus\022\014\n\010RECEIVED\020\000\022\010" +
-      "\n\004READ\020\001\022\014\n\010REJECTED\020\002B!\n\021org.vico.im.pr" +
-      "otoB\014ProtoMessageb\006proto3"
+      "quest\022\016\n\006userId\030\001 \001(\t\022\014\n\004time\030\002 \001(\004\"\273\001\n\022" +
+      "TextMessageRequest\022\021\n\tsessionId\030\001 \001(\t\022\014\n" +
+      "\004from\030\002 \001(\t\022\n\n\002to\030\003 \001(\t\022\017\n\007groupId\030\004 \001(\t" +
+      "\022\024\n\014fromNickname\030\005 \001(\t\022\017\n\007headUrl\030\006 \001(\t\022" +
+      "\017\n\007content\030\007 \001(\t\022\017\n\007isGroup\030\010 \001(\010\022\020\n\010isR" +
+      "oamed\030\t \001(\010\022\014\n\004time\030\n \001(\004\"n\n\rFriendReque" +
+      "st\022\014\n\004from\030\001 \001(\t\022\n\n\002to\030\002 \001(\t\022\024\n\014fromNick" +
+      "name\030\003 \001(\t\022\017\n\007headUrl\030\004 \001(\t\022\016\n\006reason\030\005 " +
+      "\001(\t\022\014\n\004time\030\006 \001(\004\"7\n\017MessageResponse\022$\n\006" +
+      "status\030\001 \001(\0162\024.proto.MessageStatus\"1\n\017Co" +
+      "nnectResponse\022\021\n\tsessionId\030\001 \001(\t\022\013\n\003key\030" +
+      "\002 \001(\t\"\035\n\016FriendResponse\022\013\n\003res\030\001 \001(\010\"\200\003\n" +
+      "\021AggregatedMessage\022\'\n\013commandType\030\001 \001(\0162" +
+      "\022.proto.CommandType\022\014\n\004code\030\002 \001(\005\022\013\n\003msg" +
+      "\030\003 \001(\t\022)\n\nconnectReq\030\004 \001(\0132\025.proto.Conne" +
+      "ctRequest\022+\n\013connectResp\030\005 \001(\0132\026.proto.C" +
+      "onnectResponse\022-\n\ntextMsgReq\030\006 \001(\0132\031.pro" +
+      "to.TextMessageRequest\022+\n\013messageResp\030\007 \001" +
+      "(\0132\026.proto.MessageResponse\022\'\n\tfriendReq\030" +
+      "\010 \001(\0132\024.proto.FriendRequest\022)\n\nfriendRes" +
+      "p\030\t \001(\0132\025.proto.FriendResponse\022\021\n\tisForw" +
+      "ard\030\n \001(\010\022\014\n\004time\030\013 \001(\004*\202\002\n\013CommandType\022" +
+      "\023\n\017CONNECT_REQUEST\020\000\022\024\n\020CONNECT_RESPONSE" +
+      "\020\001\022\022\n\016LOGOUT_REQUEST\020\002\022\023\n\017LOGOUT_RESPONS" +
+      "E\020\003\022\025\n\021KEEPALIVE_REQUEST\020\004\022\026\n\022KEEPALIVE_" +
+      "RESPONSE\020\005\022\030\n\024MESSAGE_TEXT_REQUEST\020\006\022\031\n\025" +
+      "MESSAGE_TEXT_RESPONSE\020\007\022\022\n\016FRIEND_REQUES" +
+      "T\020\010\022\023\n\017FRIEND_RESPONSE\020\t\022\022\n\016MESSAGE_SYST" +
+      "EM\020\n*5\n\rMessageStatus\022\014\n\010RECEIVED\020\000\022\010\n\004R" +
+      "EAD\020\001\022\014\n\010REJECTED\020\002B!\n\021org.vico.im.proto" +
+      "B\014ProtoMessageb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -5889,25 +9172,37 @@ public final class ProtoMessage {
     internal_static_proto_TextMessageRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_proto_TextMessageRequest_descriptor,
-        new java.lang.String[] { "SessionId", "From", "To", "Content", "IsGroup", "IsForward", });
-    internal_static_proto_MessageResponse_descriptor =
+        new java.lang.String[] { "SessionId", "From", "To", "GroupId", "FromNickname", "HeadUrl", "Content", "IsGroup", "IsRoamed", "Time", });
+    internal_static_proto_FriendRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_proto_FriendRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_proto_FriendRequest_descriptor,
+        new java.lang.String[] { "From", "To", "FromNickname", "HeadUrl", "Reason", "Time", });
+    internal_static_proto_MessageResponse_descriptor =
+      getDescriptor().getMessageTypes().get(3);
     internal_static_proto_MessageResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_proto_MessageResponse_descriptor,
         new java.lang.String[] { "Status", });
     internal_static_proto_ConnectResponse_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_proto_ConnectResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_proto_ConnectResponse_descriptor,
         new java.lang.String[] { "SessionId", "Key", });
+    internal_static_proto_FriendResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_proto_FriendResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_proto_FriendResponse_descriptor,
+        new java.lang.String[] { "Res", });
     internal_static_proto_AggregatedMessage_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_proto_AggregatedMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_proto_AggregatedMessage_descriptor,
-        new java.lang.String[] { "CommandType", "Code", "Msg", "ConnectReq", "TextMsgReq", "ConnectResp", "MessageResp", "Time", });
+        new java.lang.String[] { "CommandType", "Code", "Msg", "ConnectReq", "ConnectResp", "TextMsgReq", "MessageResp", "FriendReq", "FriendResp", "IsForward", "Time", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

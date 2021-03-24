@@ -7,7 +7,7 @@ import org.vico.im.proto.ProtoMessage;
 
 import java.util.concurrent.Future;
 
-@Async
 public interface ImProcessor {
     Future<Object> execute(ChannelHandlerContext ctx, ProtoMessage.AggregatedMessage aggregatedMessage);
+    void forwardDeal(ProtoMessage.AggregatedMessage message);
 }

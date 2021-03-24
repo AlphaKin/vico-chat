@@ -29,4 +29,26 @@ public class UserController {
         return new Transfer(StatusCode.FAILED).build();
     }
 
+    @PostMapping(value = "/user")
+    public String getUser(@RequestParam("userId") Long userId){
+        User user = userMapper.selectUserById(userId);
+        if(CommonUtil.checkEmpty(user)){
+            return new Transfer(StatusCode.SUCCESS)
+                    .param("user", user)
+                    .build();
+        }
+        return new Transfer(StatusCode.FAILED).build();
+    }
+
+    @PostMapping(value = "/getUsersByUserName")
+    public String getUser(@RequestParam("userName") String userName){
+        List<User> users = userMapper.selectUsersByUserName(userName);
+        if(CommonUtil.checkEmpty(users)){
+            return new Transfer(StatusCode.SUCCESS)
+                    .param("users", users)
+                    .build();
+        }
+        return new Transfer(StatusCode.FAILED).build();
+    }
+
 }

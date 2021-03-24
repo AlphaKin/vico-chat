@@ -1,7 +1,7 @@
 <template>
     <div id="left-bar">
         <div class="head">
-            <el-avatar v-show="isAvailable" :size="40" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2280478089,3772795422&fm=26&gp=0.jpg"></el-avatar>
+            <el-avatar v-show="isAvailable" :size="40" :src="require('../../assets/pic/userhead/' + this.$store.state.userInfo.userHead + '.png')"></el-avatar>
             <el-avatar v-show="!isAvailable" :size="40" :src="require('../../assets/pic/nonet.png')"></el-avatar>
         </div>
         <div class="option-item-wrapper" v-for="(item, index) in items" :key="index">
@@ -13,7 +13,7 @@
             <i class="fa fa-navicon"></i>
         </div>
         <div v-show="isShowNav" class="nav-other">
-            <div class="nav-item">
+            <div class="nav-item" @click="changeRightPlane('personal-view')">
                 <i class="fa fa-user-circle"></i> &nbsp;个人中心
             </div>
             <div class="nav-item" @click="changeRightPlane('notify-center')">
@@ -91,26 +91,26 @@
             },
 
             logout(){
-                const { remote } = require('electron');
-                let window = remote.getCurrentWindow();
-                window.setSize(660, 480);
-                this.$router.push({ path:'/'})
-                // this.$IM.disconnect();
                 // const { remote } = require('electron');
                 // let window = remote.getCurrentWindow();
-                // this.$req.post('/auth/logout', {userName: this.$store.state.userInfo.userName}).token().apply()
-                //     .then((data) => {
-                //         // window.setPosition(window.getPosition()[0] + 150, window.getPosition()[1] + 90);
-                //         window.setSize(660, 480);
-                //         this.$router.push({ path:'/'})
-                //     })
-                //     .catch((data) => {
-                //         window.setSize(660, 480);
-                //         this.$notify.error({
-                //             title: '请求错误',
-                //             message: data.msg
-                //         });
-                //     });
+                // window.setSize(660, 480);
+                // this.$router.push({ path:'/'})
+
+                this.$IM.disconnect();
+                const { remote } = require('electron');
+                let window = remote.getCurrentWindow();
+                this.$req.post('/auth/logout', {userName: this.$store.state.userInfo.userName}).token().apply()
+                    .then((data) => {
+                        // window.setPosition(window.getPosition()[0] + 150, window.getPosition()[1] + 90);
+                        window.setSize(660, 480);
+                        this.$router.push({ path:'/'})
+                    })
+                    .catch((data) => {
+                        this.$notify.error({
+                            title: '请求错误',
+                            message: data.msg
+                        });
+                    });
             }
         }
     }

@@ -20,7 +20,7 @@
     from `group`
     where grp_id in (
         select grp_id
-        from gourp_relation
+        from group_relation
         where user_id = #{param1,jdbcType=BIGINT}
     )
   </select>
@@ -41,7 +41,7 @@
     <!--@mbg.generated-->
     insert into group (grp_name, grp_intro, grp_create_time, 
       grp_own_id)
-    values (#{grpName,jdbcType=VARCHAR}, #{grpIntro,jdbcType=VARCHAR}, #{grpCreateTime,jdbcType=TIMESTAMP}, 
+  values (#{grpName,jdbcType=VARCHAR}, #{grpIntro,jdbcType=VARCHAR}, #{grpCreateTime,jdbcType=TIMESTAMP},
       #{grpOwnId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" keyColumn="grp_id" keyProperty="grpId" parameterType="org.vico.restful.pojo.Group" useGeneratedKeys="true">

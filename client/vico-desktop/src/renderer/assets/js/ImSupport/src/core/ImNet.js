@@ -6,7 +6,8 @@ class ImNet{
             error: new Set(),
             close: new Set(),
             connect: new Set(),
-            text_msg: new Set()
+            text_msg: new Set(),
+            friend_req: new Set()
         };
         this._store = store;
     }
@@ -86,11 +87,17 @@ class ImNet{
                     
                     let data = ImMessagePb.AggregatedMessage.deserializeBinary(buf);
                     switch(data.getCommandtype()){
+                        // 连接数据
                         case ImMessagePb.CommandType.CONNECT_RESPONSE:
                             execEvent('connect', { data: data });
                             break;
+                        // 消息数据
                         case ImMessagePb.CommandType.MESSAGE_TEXT_REQUEST:
                             execEvent('text_msg', { data: data });
+                            break;
+                        // 好友请求
+                        case ImMessagePb.CommandType.FRIEND_REQUEST:
+                            execEvent('friend_req', { data: data });
                             break;
                         default:
                             console.log("发来未知消息");

@@ -41,4 +41,6 @@ public class User {
     @TableField("user_intro")
     private String userIntro;
 
+    @TableField("user_head")
+    private String userHead;
 }

@@ -73,7 +73,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
     @Override
     public Transfer logout(String userId) {
-        long res = redisTemplate.opsForHash().delete("TOKENS", userId);
+        redisTemplate.opsForHash().delete("TOKENS", userId);
         return new Transfer(StatusCode.SUCCESS);
     }
 

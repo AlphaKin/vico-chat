@@ -21,4 +21,12 @@
            or
               id in ( select user_a_id as friendId from friend_relation where user_b_id = #{param1} )
     </select>
+
+    <select id="selectUserById" parameterType="Long" resultType="org.vico.restful.pojo.User">
+        select * from user where user.id = #{ userId }
+    </select>
+
+    <select id="selectUsersByUserName" parameterType="String" resultType="org.vico.restful.pojo.User">
+        select * from user where user.user_name like concat('%', #{ userName }, '%')
+    </select>
 </mapper>

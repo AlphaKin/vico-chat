@@ -4,7 +4,7 @@
             <i class="fa fa-times" @click="switchDisplay(false)"></i>
         </div>
         <div class="header-wrapoer">
-            <el-avatar :size="100" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2280478089,3772795422&fm=26&gp=0.jpg"></el-avatar>
+            <el-avatar :size="100" :src="require('../../assets/pic/userhead/' + data.userHead + '.png')"></el-avatar>
             <h4>{{data.userNickName}}&nbsp;<i v-if="data.userSex == 0" class="fa fa-venus female" /><i v-if="data.userSex == 1" class="fa fa-mars male" /></h4>
         </div>
         <div class="body-wrapper">
@@ -16,12 +16,26 @@
             </table>
         </div>
         <div class="footer-wrapper">
-            <button @click="openChatWin()">发消息</button>
-            <button>添加好友</button>
+            <button @click="openChatWin()" v-if="isFriend">发消息</button>
+            <button @click="dialogVisible = true" v-if="!isFriend">添加好友</button>
+
+            <el-dialog
+                title="请求添加好友"
+                :visible.sync="dialogVisible"
+                width="30%"
+                :modal=false
+                :before-close="handleClose">
+                <input placeholder="填写申请备注" v-model="friendReqMessage"/>
+                <span slot="footer" class="dialog-footer">
+                    <el-button @click="dialogVisible = false">取 消</el-button>
+                    <button @click="sendFriendReq()">确 定</button>
+                </span>
+            </el-dialog>
         </div>
     </div>
 </template>
 <script>
+import friendBarVue from './friendBar.vue';
 export default {
     props:{
         switchDisplay:{
@@ -33,17 +47,22 @@ export default {
     },
     data(){
         return {
-
+            dialogVisible: false,
+            friendReqMessage: ''
         }
     },
     methods:{
         openChatWin(){
             this.$parent.showRightPlane('chat-view', this.data);
+        },
+        sendFriendReq(){
+            console.log('发送添加好友请求 - ' + friendReqMessage);
+            dialogVisible = false
+            // this.$IM.
         }
     },
     computed:{
         showInfo(){
-            console.log(this.data);
             let info = {
                 VICO号: this.data.userName,
                 邮箱: this.data.mail
@@ -52,6 +71,9 @@ export default {
                 if(!info[key]) info[key] = '暂无'
             })
             return info;
+        },
+        isFriend(){
+            return this.$parent.findAim(this.data.id, false) != null;
         }
     }
 }

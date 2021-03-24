@@ -12,9 +12,42 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const mainConfig = require('./webpack.main.config')
 const rendererConfig = require('./webpack.renderer.config')
 
+const net = require('net')
+
 let electronProcess = null
 let manualRestart = false
 let hotMiddleware
+
+function portIsOccupied(port) {
+
+  const server = net.createServer().listen(port)
+  
+  return new Promise((resolve, reject) => {
+  
+    server.on('listening', () => {
+      console.log(`the server is runnint on port ${port}`)
+      server.close()
+      // 使用注入进程环境变量的方式进行状态共享
+      process.env.DEV_PORT = port
+      process.env.PROD_PORT = port
+      // 返回可用端口
+      resolve(port)
+    })
+
+    server.on('error', (err) => {
+      if (err.code === 'EADDRINUSE') {
+        //注意这句，如占用端口号+1
+        resolve(portIsOccupied(port + 1))
+        console.log(`this port ${port} is occupied.try another.`)
+      } else {
+        reject(err)
+      }
+    })
+    
+  })
+
+}
+
 
 function logStats (proc, data) {
   let log = ''
@@ -88,7 +121,10 @@ function startRenderer () {
       }
     )
 
-    server.listen(9080)
+    // server.listen(9080)
+    portIsOccupied(9080).then(port => {
+      server.listen(port)
+    })
   })
 }
 

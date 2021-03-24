@@ -1,6 +1,6 @@
 <template>
     <div id="empty-view">
-        <img :src="require('../../assets/pic/nocontent.png')"></img>
+        <img :src="require('../../assets/pic/nocontent.png')"/>
         <h4>Welcome to vico</h4>
     </div>
 </template>

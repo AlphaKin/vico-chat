@@ -3,9 +3,10 @@
         <!-- 甲方消息 -->
         <el-container v-show="data.itemtype == 'msg-oth'" class="wrapper">
             <el-aside class="head-wrapper" width="45px">
-                <el-avatar class="head" style="float: right; margin-top: 5px;" :size="32" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4163356956,4069646919&fm=11&gp=0.jpg"></el-avatar>
+                <el-avatar class="head" style="float: right; margin-top: 5px;" :size="32" :src="require('../../assets/pic/userhead/' + data.userHead + '.png')"></el-avatar>
             </el-aside>
             <el-main class="bubble-wrapper">
+                <div class="bubble-nickname">{{data.nickName}}</div>
                 <div class="bubble-left" :class="{'bubble-active':isExtensionShow}" @click="showExtension()" v-html="data.msg"></div>
                 <el-badge v-show="data.isnew" is-dot style="margin-left:-5px; margin-top: -5px;"></el-badge>
                 <div class="extension-wrapper" v-show="isExtensionShow">
@@ -23,7 +24,7 @@
                 </div>
             </el-main>
             <el-aside class="head-wrapper" width="45px">
-                <el-avatar class="head" style=" margin-top: 5px;" :size="32" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=4163356956,4069646919&fm=11&gp=0.jpg"></el-avatar>
+                <el-avatar class="head" style=" margin-top: 5px;" :size="32" :src="require('../../assets/pic/userhead/' + this.$store.state.userInfo.userHead + '.png')"></el-avatar>
             </el-aside>
         </el-container>
 
@@ -139,6 +140,11 @@ export default {
 
                 .bubble-active{
                     border: solid 1px $--color-primary;
+                }
+
+                .bubble-nickname{
+                    font-size: 10px;
+                    margin-bottom: 4px;
                 }
 
 

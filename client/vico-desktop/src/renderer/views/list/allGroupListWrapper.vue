@@ -40,6 +40,8 @@ export default {
             this.showGroupInfoPlane(true, groupInfo);
         },
         groupListReq(){
+            if(this.$store.state.common.uiMode) return;
+            
             let userId = this.$store.state.userInfo.userId;
             this.$req.post('/restful/groupList', {userId: userId}).apply()
                 .then((data) => {
@@ -51,28 +53,30 @@ export default {
                         item.isGroup = true
                         return true
                     })
-                    this.$store.commit('updateGroupList', JSON.parse(JSON.stringify(this.groupList)))
 
-                    this.groupList.forEach((group) => {
-                        if(localStorage.getItem(group.id + '_g_lst')){
-                            try{
-                                this.$db.find({ aim: group.id, isgroup: true }, (err, res) => {
-                                    if(err) { console.log(err); return; }
-                                    res = res.sort((a, b) => {
-                                        return a.time - b.time
-                                    })
-                                    console.log('群聊天记录: ' + res.length);
-                                    res.forEach((item) => {
-                                        console.log(item.time);
-                                        group.lastTime = item.time
-                                        this.$parent.$parent.updateSession(group, item.content, true, item.from == userId, true)
-                                    })
-                                })
-                            }catch(err){
-                                console.log(err);
-                            }
-                        }
-                    })
+                    this.$store.commit('updateGroupList', JSON.parse(JSON.stringify(this.groupList)));
+                    this.$store.commit('updateReadRespAvailable', true);
+                    // 读取本地数据
+                    // this.groupList.forEach((group) => {
+                    //     if(localStorage.getItem(group.id + '_g_lst')){
+                    //         try{
+                    //             this.$db.find({ aim: group.id, isgroup: true }, (err, res) => {
+                    //                 if(err) { console.log(err); return; }
+                    //                 res = res.sort((a, b) => {
+                    //                     return a.time - b.time
+                    //                 })
+                    //                 console.log('群聊天记录: ' + res.length);
+                    //                 res.forEach((item) => {
+                    //                     console.log(item.time);
+                    //                     group.lastTime = item.time
+                    //                     this.$parent.$parent.updateSession(group, item.content, true, item.from == userId, true)
+                    //                 })
+                    //             })
+                    //         }catch(err){
+                    //             console.log(err);
+                    //         }
+                    //     }
+                    // })
                 })
                 .catch((data) => {
                     this.$notify({ type:'warning', title: '错误', message: '获取群组信息失败' })

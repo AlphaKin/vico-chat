@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import org.vico.auth.annotation.Token;
 import org.vico.auth.pojo.User;
 import org.vico.auth.service.AuthorizationService;
-import org.vico.auth.service.ImRelatedService;
-import lombok.val;
 import org.vico.auth.utils.Transfer;
 import org.vico.common.constant.StatusCode;
 

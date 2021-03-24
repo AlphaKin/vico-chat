@@ -18,7 +18,11 @@ enum CommandType{
 
   MESSAGE_TEXT_REQUEST    = 6; //消息 req
   MESSAGE_TEXT_RESPONSE   = 7; //消息 res
-  MESSAGE_SYSTEM          = 8; //系统消息
+
+  FRIEND_REQUEST          = 8; //好友 req
+  FRIEND_RESPONSE         = 9; //好友 res
+
+  MESSAGE_SYSTEM          = 10; //系统消息
 }
 
 //消息状态
@@ -38,14 +42,26 @@ message ConnectRequest {
 }
 //文字消息请求
 message TextMessageRequest {
-  string sessionId               = 1;  //sessionId
-  string from                    = 2;  //发送者ID
-  string to                      = 3;  //接收者ID
-  string content                 = 4;  //消息内容
-  bool isGroup                   = 5;  //是否为群消息
-  bool isForward                 = 6;  //是否被转发
+  string sessionId                = 1;  //sessionId
+  string from                     = 2;  //发送者ID
+  string to                       = 3;  //接收者ID
+  string groupId                  = 4;  //群ID
+  string fromNickname             = 5;  //发送者昵称
+  string headUrl                  = 6;  //发送者头像
+  string content                  = 7;  //消息内容
+  bool isGroup                    = 8;  //是否为群消息
+  bool isRoamed                   = 9;  //是否为漫游
+  uint64 time                     = 10;  //时间
 }
-
+//好友请求
+message FriendRequest {
+  string from                     = 1;  //请求用户ID
+  string to                       = 2;  //目标用户ID
+  string fromNickname             = 3;  //发送者昵称
+  string headUrl                  = 4;  //发送者头像
+  string reason                   = 5;  //请求理由
+  uint64 time                     = 6;  //时间
+}
 
 //##############################################################
 
@@ -59,23 +75,29 @@ message ConnectResponse {
   string sessionId                   = 1;  //sessionId
   string key                         = 2; // secret key
 }
+//好友请求响应
+message FriendResponse {
+  bool res                           = 1; // 结果
+}
 
 //##############################################################
-
-
 
 
 // 聚合消息
 message AggregatedMessage {
   CommandType commandType       = 1; // 类型
-  int32 code                    = 2; //状态码
-  string msg                    = 3; //提示
+  int32 code                    = 2; // 状态码
+  string msg                    = 3; // 提示
 
-  ConnectRequest connectReq     = 5; // 连接消息
+  ConnectRequest connectReq     = 4; // 连接消息
+  ConnectResponse connectResp   = 5; // 连接响应
+
   TextMessageRequest textMsgReq = 6; // 文字消息
+  MessageResponse messageResp   = 7; // 消息响应
 
-  ConnectResponse connectResp   = 7; // 连接响应
-  MessageResponse messageResp   = 8; // 消息响应
+  FriendRequest friendReq       = 8; // 好友请求
+  FriendResponse friendResp     = 9; // 好友响应
 
-  uint64 time                   = 9; //时间
+  bool isForward                = 10; //是否被转发
+  uint64 time                   = 11; //时间
 }

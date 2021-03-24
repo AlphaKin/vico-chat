@@ -14,9 +14,9 @@
 </script>
 
 <style>
-  body{
+  /* body{
     font-family: PingFang;
-  }
+  } */
   #app .drag-area{
     position: fixed;
     top: 0px;

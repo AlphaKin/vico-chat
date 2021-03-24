@@ -25,7 +25,7 @@ new Vue({
 
 // http请求
 Vue.req = Vue.prototype.$req = new HttpRequest.Request('http://localhost:9001');
-
+console.log(Vue.req);
 // IM客户端
 Vue.IM = Vue.prototype.$IM = new ImSupport.ImClient([
   'Message'

@@ -1,10 +1,12 @@
 <template>
     <div id="chat-view">
         <div class="header-wrapper">
-            <el-avatar class="head" :size="30" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2142857875,120857813&fm=11&gp=0.jpg"></el-avatar>
+            <el-avatar v-if="data.userInfo != null" class="head" :size="30" :src="require('../../assets/pic/userhead/' + data.head + '.png')"></el-avatar>
+            <el-avatar v-if="data.groupInfo != null" class="head" :size="30" :src="require('../../assets/pic/groupHead.jpg')"></el-avatar>
             <div class="tip"></div>
             <div class="info-wrapper">
-                <h4>{{data.userInfo.userNickName}}<i class="fa fa-pagelines" style="color:green;"></i></h4>
+                <h4 v-if="data.userInfo != null" >{{data.userInfo.userNickName}}<i class="fa fa-pagelines" style="color:green;"></i></h4>
+                <h4 v-if="data.groupInfo != null" >{{data.groupInfo.groupName}}<i class="fa fa-pagelines" style="color:green;"></i></h4>
             </div>
             <div class="func-wrapper">
                 
@@ -28,7 +30,11 @@
 import chatBar from '../common/chatBar'
 import chatEditBar from '../common/chatEditBar'
 export default {
-    props:[ 'data' ],
+    props:{
+        data:{
+            head: 0
+        }
+    },
     components:{
         'chat-bar': chatBar,
         'chat-edit-bar': chatEditBar
